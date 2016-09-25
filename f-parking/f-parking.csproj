@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AAFBF887-1306-4249-A638-4277DE687247}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>f_parking</RootNamespace>
+    <AssemblyName>f-parking</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.16.1.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\toCustomerTemplate.txt" />
+    <Content Include="App_Data\toAdminTemplate.txt" />
+    <Content Include="common\img\footer_mail.png" />
+    <Content Include="common\include\footer.inc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="common\include\footer_honban.inc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="common\include\header.inc" />
+    <Content Include="common\include\header_honban.inc" />
+    <Content Include="company\img\contact_title_s.png" />
+    <Content Include="company\img\history_photo.jpg" />
+    <Content Include="company\img\history_photo_01.jpg" />
+    <Content Include="company\img\history_photo_02.jpg" />
+    <Content Include="company\img\history_title.png" />
+    <Content Include="company\img\main_photo.jpg" />
+    <Content Include="company\img\main_photo_s.jpg" />
+    <Content Include="company\img\main_title.png" />
+    <Content Include="company\img\main_title_s.png" />
+    <Content Include="company\img\profile_photo.jpg" />
+    <Content Include="company\img\tenant_photo.jpg" />
+    <Content Include="company\img\tenant_secom.jpg" />
+    <Content Include="company\img\tenant_title.png" />
+    <Content Include="company\index.html" />
+    <Content Include="contact\confirm.aspx" />
+    <Content Include="contact\end.html" />
+    <Content Include="contact\index.aspx" />
+    <Content Include="garage\img\bnr_secom.png" />
+    <Content Include="garage\img\facility_icon_access.png" />
+    <Content Include="garage\img\facility_icon_place.png" />
+    <Content Include="garage\img\facility_icon_privacy.png" />
+    <Content Include="garage\img\facility_icon_security.png" />
+    <Content Include="garage\img\facility_title.png" />
+    <Content Include="garage\img\flow_tel.png" />
+    <Content Include="garage\img\flow_title.png" />
+    <Content Include="garage\img\icon_arrow_s.png" />
+    <Content Include="garage\img\icon_check.png" />
+    <Content Include="garage\img\icon_circle_main.png" />
+    <Content Include="garage\img\main_photo.jpg" />
+    <Content Include="garage\img\main_photo_s.jpg" />
+    <Content Include="garage\img\main_title.png" />
+    <Content Include="garage\img\main_title_s.png" />
+    <Content Include="garage\img\monthly_fee_title.png" />
+    <Content Include="garage\img\photo01.jpg" />
+    <Content Include="garage\img\photo01_s.jpg" />
+    <Content Include="garage\img\photo02.jpg" />
+    <Content Include="garage\img\photo02_s.jpg" />
+    <Content Include="garage\img\photo03.jpg" />
+    <Content Include="garage\img\photo03_s.jpg" />
+    <Content Include="garage\img\photo04.jpg" />
+    <Content Include="garage\img\photo04_s.jpg" />
+    <Content Include="garage\img\text_365.png" />
+    <Content Include="garage\img\text_room.png" />
+    <Content Include="garage\index.html" />
+    <Content Include="packages.config" />
+    <Content Include="parking\pdf\monthly.pdf" />
+    <None Include="Properties\PublishProfiles\develop.f-parking.co.jp.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="common\css\baseStyle.css" />
+    <Content Include="common\img\access_title.png" />
+    <Content Include="common\img\access_title_s.png" />
+    <Content Include="common\img\address_title.png" />
+    <Content Include="common\img\address_title_s.png" />
+    <Content Include="common\img\contact_tel.png" />
+    <Content Include="common\img\contact_tel_s.png" />
+    <Content Include="common\img\contact_title.png" />
+    <Content Include="common\img\contact_title_s.png" />
+    <Content Include="common\img\copyright.png" />
+    <Content Include="common\img\footer_bg.jpg" />
+    <Content Include="common\img\footer_bg_s.jpg" />
+    <Content Include="common\img\header_tel.png" />
+    <Content Include="common\img\logo.png" />
+    <Content Include="common\img\logo_s.png" />
+    <Content Include="common\img\map_icon.png" />
+    <Content Include="common\img\menu_access_s.png" />
+    <Content Include="common\img\menu_bike_garage.png" />
+    <Content Include="common\img\menu_community_room.png" />
+    <Content Include="common\img\menu_company.png" />
+    <Content Include="common\img\menu_contact.png" />
+    <Content Include="common\img\menu_contact_s.png" />
+    <Content Include="common\img\menu_icon.png" />
+    <Content Include="common\img\menu_parking.png" />
+    <Content Include="common\img\pageup.png" />
+    <Content Include="common\include\analytics.php" />
+    <Content Include="common\js\assembly.js" />
+    <Content Include="common\js\assemblyFoot.js" />
+    <Content Include="common\js\jquery.bxslider.css" />
+    <Content Include="common\js\jquery.bxslider.min.js" />
+    <Content Include="common\js\jquery.matchHeight.js" />
+    <Content Include="common\js\swiper.min.css" />
+    <Content Include="common\js\swiper.min.js" />
+    <Content Include="contact\img\icon_arrow.png" />
+    <Content Include="contact\img\icon_arrow_s.png" />
+    <Content Include="contact\img\mail.png" />
+    <Content Include="contact\img\mail_s.png" />
+    <Content Include="contact\img\main_photo.jpg" />
+    <Content Include="contact\img\main_photo_s.jpg" />
+    <Content Include="contact\img\main_title.png" />
+    <Content Include="contact\img\main_title_s.png" />
+    <Content Include="Content\js\common.js" />
+    <Content Include="Global.asax" />
+    <Content Include="img\location_image.png" />
+    <Content Include="img\location_image_s.png" />
+    <Content Include="img\location_photo01.jpg" />
+    <Content Include="img\location_photo01_s.jpg" />
+    <Content Include="img\location_photo02.jpg" />
+    <Content Include="img\location_photo02_s.jpg" />
+    <Content Include="img\location_text.png" />
+    <Content Include="img\location_text_s.png" />
+    <Content Include="img\location_title.png" />
+    <Content Include="img\location_title_s.png" />
+    <Content Include="img\mainvisual_01.jpg" />
+    <Content Include="img\mainvisual_01_s.jpg" />
+    <Content Include="img\mainvisual_text.png" />
+    <Content Include="img\mainvisual_text_s.png" />
+    <Content Include="img\mv_bike_photo.jpg" />
+    <Content Include="img\mv_bike_photo_s.jpg" />
+    <Content Include="img\mv_bike_text.png" />
+    <Content Include="img\mv_bike_text_s.png" />
+    <Content Include="img\mv_community_photo.jpg" />
+    <Content Include="img\mv_community_photo_s.jpg" />
+    <Content Include="img\mv_community_text.png" />
+    <Content Include="img\mv_community_text_s.png" />
+    <Content Include="img\mv_parking_photo.jpg" />
+    <Content Include="img\mv_parking_photo_s.jpg" />
+    <Content Include="img\mv_parking_text.png" />
+    <Content Include="img\mv_parking_text_s.png" />
+    <Content Include="img\mv_text_bg.png" />
+    <Content Include="img\mv_text_bg_s.png" />
+    <Content Include="img\news_bg.png" />
+    <Content Include="img\news_title.png" />
+    <Content Include="img\news_title_bg.jpg" />
+    <Content Include="img\news_title_bg_s.jpg" />
+    <Content Include="img\news_title_s.png" />
+    <Content Include="index.aspx" />
+    <Content Include="parking\img\fee_balloon.png" />
+    <Content Include="parking\img\fee_holiday.png" />
+    <Content Include="parking\img\fee_mail.png" />
+    <Content Include="parking\img\fee_tel.png" />
+    <Content Include="parking\img\fee_title.png" />
+    <Content Include="parking\img\fee_weekday.png" />
+    <Content Include="parking\img\flow_photo_01.jpg" />
+    <Content Include="parking\img\flow_photo_02.jpg" />
+    <Content Include="parking\img\flow_photo_03.jpg" />
+    <Content Include="parking\img\flow_photo_04.jpg" />
+    <Content Include="parking\img\flow_title.png" />
+    <Content Include="parking\img\icon_arrow.png" />
+    <Content Include="parking\img\icon_circle_main.png" />
+    <Content Include="parking\img\icon_circle_sub.png" />
+    <Content Include="parking\img\icon_good_parking.png" />
+    <Content Include="parking\img\icon_pdf.png" />
+    <Content Include="parking\img\info_title.png" />
+    <Content Include="parking\img\main_photo.jpg" />
+    <Content Include="parking\img\main_photo_s.jpg" />
+    <Content Include="parking\img\main_title.png" />
+    <Content Include="parking\img\main_title_s.png" />
+    <Content Include="parking\index.html" />
+    <Content Include="privacy\img\mail.png" />
+    <Content Include="privacy\img\mail_s.png" />
+    <Content Include="privacy\img\main_photo.jpg" />
+    <Content Include="privacy\img\main_photo_s.jpg" />
+    <Content Include="privacy\img\main_title.png" />
+    <Content Include="privacy\img\main_title_s.png" />
+    <Content Include="privacy\index.html" />
+    <Content Include="room\img\copy_photo.jpg" />
+    <Content Include="room\img\copy_photo_s.jpg" />
+    <Content Include="room\img\copy_text.png" />
+    <Content Include="room\img\copy_text_s.png" />
+    <Content Include="room\img\copy_title.png" />
+    <Content Include="room\img\copy_title_s.png" />
+    <Content Include="room\img\main_photo.jpg" />
+    <Content Include="room\img\main_photo_s.jpg" />
+    <Content Include="room\img\main_title.png" />
+    <Content Include="room\img\main_title_s.png" />
+    <Content Include="room\img\room01_floor.png" />
+    <Content Include="room\img\room01_photo01.jpg" />
+    <Content Include="room\img\room01_photo01_s.jpg" />
+    <Content Include="room\img\room01_photo02.jpg" />
+    <Content Include="room\img\room01_photo02_s.jpg" />
+    <Content Include="room\img\room01_photo03.jpg" />
+    <Content Include="room\img\room01_photo03_s.jpg" />
+    <Content Include="room\img\room01_photo04.jpg" />
+    <Content Include="room\img\room01_photo04_s.jpg" />
+    <Content Include="room\img\room01_title.png" />
+    <Content Include="room\img\room01_title_s.png" />
+    <Content Include="room\img\room02_floor.png" />
+    <Content Include="room\img\room02_photo01.jpg" />
+    <Content Include="room\img\room02_photo01_s.jpg" />
+    <Content Include="room\img\room02_photo02.jpg" />
+    <Content Include="room\img\room02_photo02_s.jpg" />
+    <Content Include="room\img\room02_title.png" />
+    <Content Include="room\img\room02_title_s.png" />
+    <Content Include="room\index.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="contact\confirm.aspx.cs">
+      <DependentUpon>confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contact\confirm.aspx.designer.cs">
+      <DependentUpon>confirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="contact\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contact\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\css\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj">
+      <Project>{90e3c823-39ac-4948-bea9-47b885563dfe}</Project>
+      <Name>CommonLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58239</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52879/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,2279 @@
+﻿@charset "utf-8";
+/* -------------------------------------------------------------------------
+	BASE
+========================================================================= */
+* {
+	margin: 0px;
+	padding: 0px;
+	}
+html {
+	font-size: 62.5%;
+	-webkit-text-size-adjust: 100%;
+	}
+body {
+	line-height: 1;
+	margin: 0px;
+	color: #333333;
+	line-height: 190%;
+	font-size: 14px; /*IE8*/
+	font-size: 1.4rem;
+	font-family: meiryo,"メイリオ", ArialMT, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3";
+	background-color: #FFF;
+	}
+h1, h2, h3, h4, h5, h6, p { margin: 0px; }
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { display: block; }
+address { font-style: normal; }
+ul {
+	list-style: none;
+	padding: 0px;
+	}
+li { padding: 0px; }
+input, select { vertical-align: middle; }
+a { color: #06F; }
+a { -webkit-tap-highlight-color:transparent; }
+a:visited { color: #60F; }
+a:hover {
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	}
+a:active { color: #09F; }
+img {
+	max-width: 100%;
+    height: auto;
+	border: none;
+	vertical-align: top;
+	}
+.fxsmall { font-size: 1.0rem; }
+.fsmall { font-size: 1.2rem; }
+.fmedium { font-size: 1.4rem; }
+.flage { font-size: 1.6rem; }
+.fxlage { font-size: 1.8rem; }
+.fAccent { color: #B20000; }
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0px;
+	overflow: hidden;
+	}
+.hide { display: none; }
+.show { display: inline; }
+.hideN { display: none; }
+.showN { display: inline; }
+
+
+/* -------------------------------------------------------------------------
+	HEADER
+========================================================================= */
+#head {
+	width: 100%;
+	max-width: 1200px;
+	height: 210px;
+	margin: 0px auto;
+	padding: 0px;
+	position: relative;
+	}
+#head .logo,
+#head .headBox { position: absolute; }
+#head .logo {
+	width: 25%;
+	max-width: 300px;
+	top: 42px;
+	left: 3.5%;
+	font-size: 0;
+	}
+#head .headBox {
+	width: 44.16%;
+	max-width: 530px;
+	top: 42px;
+	right: 0;
+	}
+#head .hAddressS { display: none; }
+
+#hContact, #hAddress {
+	display: inline-block;
+	vertical-align: top;
+	line-height: 160%;
+	}
+#hContact {
+	width: 49%;
+	max-width: 260px;
+	padding-right: 3.77%;
+	}
+#hContact dt { padding-bottom: 5px; }
+#hContact .tel {
+	width: 100%;
+	max-width: 204px;
+	padding-bottom: 5px;
+	}
+#hContact .time { font-size: 1.2rem; }
+#hAddress {
+	width: 45.28%;
+	max-width: 240px;
+	}
+#hAddress dt { padding-bottom: 10px; }
+
+#pcNavi {
+	width: 100%;
+	position: relative;
+	top: 142px;
+	font-size: 0;
+	}
+#pcNavi li {
+	width: 20%;
+	max-width: 240px;
+	display: inline-block;
+	text-align: center;
+	border-right: 1px solid #E3E3E3;
+	}
+#pcNavi li:nth-child(even) {
+	width: 19.7%;
+	max-width: 238px;
+	}
+#pcNavi li:last-child { border-right: none; }
+#pcNavi li a {
+	display: block;
+	width: 100%;
+	}
+#pcNavi li a:hover {
+	filter: alpha(opacity=100);
+	opacity: 1;
+	}
+#pcNavi li {
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+	position: relative;
+	-webkit-transition-property: color;
+	transition-property: color;
+	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+	}
+#pcNavi li:before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: -5px;
+	left: 0;
+	right: 0;
+	bottom: -5px;
+	background: #F0ECE5;
+	-webkit-transform: scaleY(0);
+	transform: scaleY(0);
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	-webkit-transition-property: transform;
+	transition-property: transform;
+	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	border-radius: 100% 0;
+	}
+#pcNavi li:hover, #pcNavi li:focus,
+#pcNavi li p:active { color: white; }
+#pcNavi li:hover:before,
+#pcNavi li:focus:before,
+#pcNavi li:active:before {
+	-webkit-transform: scaleY(1);
+	transform: scaleY(1);
+	-webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+	transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+	}
+#spNavi { display: none; }
+
+
+/* -------------------------------------------------------------------------
+	FOOTER
+========================================================================= */
+#foot {
+	padding: 4.5% 2% 3%;
+	background: url(../img/footer_bg.jpg) top / contain repeat-x;
+	}
+#foot .container {
+	max-width: 1100px;
+	position: relative;
+	}
+#foot div {
+	display: block;
+	position: absolute;
+	font-size: 1.2rem;
+	}
+#foot .privacyPolicy a {
+	color: #333;
+	text-decoration: none;
+	}
+#foot .copyright {
+	width: 28.54%;
+	max-width: 314px;
+	padding-top: 3px;
+	right: 0;
+	}
+#pageup {
+	position: fixed;
+	width: 6.8%;
+	bottom: 2px;
+	right: 2px;
+	z-index: 50;
+	}
+#pageup a {
+	width: 100%;
+	max-width: 82px;
+	height: auto;
+	max-height: 82px;
+	display: block;
+	}
+
+
+/* -------------------------------------------------------------------------
+	TOP
+========================================================================= */
+#mainBody {
+	width: 100%;
+	position: relative;
+	}
+.container {
+	width: 100%;
+	max-width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+#mainBody .container { max-width: 1200px; }
+
+#mainVisual {
+	width: 100%;
+	height: 50%;
+	max-height: 500px;
+	position: relative;
+	}
+.swiper-slide {
+	height: 50%;
+	max-height: 500px;
+	overflow: hidden;
+	}
+#mainVisual .mv01 {}
+#mainVisual .photo img { width: 100%; }
+#mainVisual .copy {}
+#mainVisual .copy img {
+	position: absolute;
+	top: 144px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	}
+#mainVisual .mv03 {
+	background: #FFF;
+	max-height: 500px;
+	font-size: 0;
+	}
+#mainVisual .mv03 dl {
+	width: 33.33%;
+	display: inline-block;
+	position: relative;
+	}
+#mainVisual .mv03 dt {
+	width: 100%;
+	max-width: 250px;
+	z-index: 10;
+	top: 16.4%;
+	left: 0;
+	right: 0;
+	margin: auto;
+	position: absolute; 
+	text-align: center;
+	background: url(../../img/mv_text_bg.png) top center / contain no-repeat;
+	}
+#mainVisual .mv03 dd { z-index: 1; }
+#mainVisual .mv03 dd img { width: 100%; }
+#mainVisual .mvParkingPhoto {}
+#mainVisual .mvRoomPhoto {}
+#mainVisual .mvGaragePhoto {}
+
+#news {
+	background-color: #F0ECE5;
+	position: relative;
+	}
+#news .container {}
+#news .title {
+	width: 19.8%;
+	max-width: 238px;
+	margin-top: -3.8%;
+	position: absolute;
+	background: url(../../img/news_title_bg.jpg) top left repeat;
+	}
+#news .title img {
+	width: 46.2%;
+	max-width: 110px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	} 
+#news .newsBox { padding: 5px 4.16% 14.5% 23.33%; }
+#news .article {
+	padding-top: 42px;
+	font-size: 1.6rem;
+	}
+#news .date, #news .articleBox {
+	display: inline-block;
+	vertical-align: top;
+	}
+#news .date {
+	width: 12.64%;
+	min-width: 100px;
+	}
+#news .articleBox {
+	width: 86.2%;
+	max-width: 750px;
+	}
+#news .subhead { font-weight: bold; }
+#news .text { font-size: 1.4rem; }
+#news .newsFooter {
+	width: 100%;
+	height: 100%;
+	max-height: 160px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: url(../../img/news_bg.png) bottom / contain repeat-x;
+	}
+
+#location .container {
+	padding: 4.5% 0px 8% 0px;
+	position: relative;
+	max-width: 1100px;
+	}
+#location .subhead {
+	width: 30.8%;
+	max-width: 370px;
+	padding-left: 2.7%;
+	}
+#location .text {
+	width: 43%;
+	max-width: 516px;
+	padding: 3% 0px 3.8% 2.7%;
+	}
+#location .photo {
+	width: 49.6%;
+	max-width: 546px;
+	padding-left: 2.2%;
+	font-size: 0;
+	}
+#location .photo li {
+	width: 46%;
+	max-width: 250px;
+	display: inline-block;
+	margin-right: 2%;
+	}
+#location .image {
+	width: 48.2%;
+	max-width: 530px;
+	position: absolute;
+	top: 8.5%;
+	right: 0;
+	}
+
+#access {
+	height: 99%;
+	padding: 0px 4.16%;
+	background-color: #F0ECE5;
+	}
+#access .container {
+	max-width: 1100px;
+	position: relative;
+	}
+#access .title {
+	width: 16.36%;
+	max-width: 180px;
+	padding: 3.6% 0px 3.3% 0px;
+	}
+#access dl,
+#access .mapText {
+	width: 27.3%;
+	max-width: 300px;
+	}
+#access dl { line-height: 190%; }
+#access dt {
+	height: 2%;
+	line-height: 0;
+	border-bottom: 1px solid #FFF;
+	}
+#access dt img {
+	width: 38%;
+	max-width: 114px;
+	}
+#access dd { padding: 5.5% 0px 4%; }
+#access .adressBox {}
+#access .adressTitle {}
+#access .contactBox { padding: 5% 0px 3.5%; }
+#access .contactTitle {}
+#access .text {}
+#access .tel {}
+#access .mail img {
+	width: 142px;
+	vertical-align: middle;
+	}
+#access .text p { padding-top: 3.5%; }
+#access .map {
+	width: 68.18%;
+	max-width: 750px;
+	height: 84.9%;
+	max-height: 450px;
+	position: absolute;
+	top: 40px;
+	right: 0;
+	background:#FFF;
+	}
+#access .mapText {}
+#access .mapText a {
+	font-size: 1.8rem;
+	color: #333;
+	}
+#mapCanvas { display: block; }
+#mapCanvasS { display: none; }
+
+
+
+/* -------------------------------------------------------------------------
+	ROOM
+========================================================================= */
+#breadcrumbs {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0px auto;
+	padding: 12px 0px 32px;
+	color: #464646;
+	font-size: 1.4rem;
+	line-height: 120%;
+	}
+#breadcrumbs li { display: inline-block; }
+#breadcrumbs li:not(:last-child):after {
+	content: "＞";
+	font-size: 1.2rem;
+	padding: 0 0.4rem 0 1.4rem;
+	}
+#breadcrumbs li a {
+	color: #464646;
+	text-decoration: none;
+	}
+
+#room {}
+.mainTitleBox {
+	width: 100%;
+	height: 200px;
+	position: relative;
+	}
+.mainTitle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	}
+#room .mainTitleBox { background: url(../../room/img/main_photo.jpg) top center / cover no-repeat; }
+.mainTitle {
+	width: 250px;
+	height: 120px;
+	}
+	
+#room .container {}
+#room .copy {}
+#room .copyTitle {
+	height: 225px;
+	text-align: center;
+	background: url(../../room/img/copy_photo.jpg) top center / cover no-repeat;
+	}
+#room .copyTitle img {
+	width: 418px;
+	max-width: 418px;
+	margin-top: 22px;
+	}
+#room .copyText {
+	width: 80%;
+	max-width: 782px;
+	margin: 5% auto 9.2%;
+	}
+#room01 {}
+#room02 {}
+#room .roomContainer {}
+#room .subhead {
+	width: 200px;
+	margin: 0px auto;
+	border-top: 1px solid #35220E;
+	text-align: center;
+	}
+#room .subhead img { padding: 40px 0px 30px; }
+#room .slider {
+    width: 100%;
+	max-width: 1100px;
+    display:block;
+    margin: 0px auto;
+	}
+#room ul.bxsliderMain li,
+#room ul.bxsliderMain li img,
+#room ul.bxsliderMain2 li,
+#room ul.bxsliderMain2 li img {
+    display:block;
+    width: 100%;
+	max-width: 1100px;
+    height: auto;
+	}
+#room ul.bxsliderMain li img,
+#room ul.bxsliderMain2 li img {
+    display:block;
+    width: 100%;
+    height:auto;
+	}
+#room ul.bxsliderThumb li a,
+#room ul.bxsliderThumb li a img,
+#room ul.bxsliderThumb2 li a,
+#room ul.bxsliderThumb2 li a img {
+    display: block;
+    width: 266px;
+    height: auto;
+	}
+#room .roomTextBox {
+	padding: 30px 0px 88px 50px;
+	color: #464646;
+	}
+#room02 .roomTextBox { padding: 30px 0px 102px 50px; }
+#room .roomText, #room .roomData {
+	display: inline-block;
+	vertical-align: top;
+	}
+#room .roomText {
+	width: 400px;
+	margin-top: -8px;
+	padding: 0px 20px 230px 0px;
+	position: relative;
+	font-size: 1.6rem;
+	line-height: 190%;
+	}
+@media all and (-ms-high-contrast:none) {
+*::-ms-backdrop, #room .roomText {
+	padding: 0px 20px 400px 0px;
+	}
+}
+@supports (-ms-ime-align:auto) {
+#room .roomText {
+	padding: 0px 20px 400px 0px;
+	}
+	}
+#room .roomFloor {
+	width: 320px;
+	margin: auto;
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	}
+#room .roomData {
+	width: 560px;
+	border-top: 1px solid #DDD;
+	}
+#room .roomData th,
+#room .roomData td { border-bottom: 1px solid #DDD; }
+#room .roomData th {
+	padding: 16px;
+	font-size: 1.8rem;
+	line-height: 100%;
+	text-align: left;
+	}
+#room .roomData td {
+	padding: 16px 0px 16px 16px;
+	font-size: 1.5rem;
+	line-height: 190%;
+	}
+
+
+/* -------------------------------------------------------------------------
+	CONTACT
+========================================================================= */
+#contact {}
+#contact .mainTitleBox { background: url(../../contact/img/main_photo.jpg) top center / cover no-repeat; }
+#contact .container {
+	max-width: 1000px;
+	padding-bottom: 140px;
+	color: #464646;
+	}
+#contact .formText { padding-bottom: 50px; }
+#contact .formBox {
+	width: 100%;
+	margin-bottom: 32px;
+	border-top: 1px solid #DDDDDD;
+	}
+#contact .formBox dl {
+	width: 100%;
+	font-size: 0;
+	border-bottom: 1px solid #DDDDDD;
+	}
+#contact .formBox dt,
+#contact .formBox dd {
+	display: inline-block;
+	vertical-align: top;
+	}
+#contact .formBox dt {
+	/*width: 22%;*/     /* 2016.09.20 cocosnet*/
+	width: 24%;
+	padding: 20px 25px 20px 60px; 
+	vertical-align: top;
+	font-size: 1.8rem;
+	font-weight: bold;
+	}
+#contact .formBox dd {
+	width: 66%;
+	padding: 20px 0px; 
+	font-size: 1.6rem;
+	}
+
+#contact input, #contact textarea,
+#contact select {
+	font-size: 1.6rem;
+	padding: 5px;
+	border: 1px solid #DDD;
+	color: #464646;
+	}
+
+#contact .radioLabel input[type="radio"]{ display: none; }
+#contact .radioLabel{
+	cursor: pointer;
+	margin-bottom: 5px;
+	letter-spacing: 0;
+	display: inline-block;
+	position: relative;
+	margin-right: 20px;
+	}
+#contact .radioLabel:last-child { margin-bottom: 0px; }
+#contact .radioLabel .lever:before{
+	content: "";
+	border: 1px solid #DDD;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 50%;
+	background: #FFF;
+	}
+#contact .radioLabel input[type="radio"]:checked + .lever:before{
+	opacity: 1;
+	background: #FFF;
+	border-color: #DDD;
+	}
+#contact .radioLabel .lever:after{
+	content: "";
+	opacity: 0;
+ 	position: absolute;
+	top: 50%;
+	left: -10px;
+	width: 20px;
+	height: 20px;
+	margin-top: -10px;
+	background: #FFF;
+	border-radius: 50%;
+	}
+#contact .radioLabel input[type="radio"]:checked + .lever:after{
+	opacity: 1;
+	position: absolute;
+	top: 50%;
+	left: 7px;
+	width: 8px;
+	height: 8px;
+	margin-top: -4px;
+	border-radius: 50%;
+	background: #006DD9;
+	}
+#contact .nameBox, #contact .telBox,
+#contact .mailBox {
+	width: 40%;
+	max-width: 300px;
+	}
+#contact .prefBox {
+	position: relative;
+	display: inline-block;
+	margin-bottom: 15px;
+	background-color: #FFF;
+	}
+#contact .prefList {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	position: relative;
+	z-index: 10;
+	background: none;
+	}
+#contact .prefBox:after {
+	content: "▼";
+	font-size: 1.4rem;
+	color: #464646;
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	z-index: 1;
+	}
+#contact .adressBox, #contact .textBox {
+	width: 80%;
+	max-width: 600px;
+	}
+#contact .submitButton { text-align: center; }
+#contact .submitButton input {
+	padding: 20px 84px 20px 30px;
+	display: inline;
+	cursor: pointer;
+	border-radius: 4px;
+	border: none;
+	color: #FFF;
+	font-size: 2rem;
+	font-weight: bold;
+	line-height: 120%;
+	background: url(../../contact/img/icon_arrow.png) right 30px center no-repeat #35220E;
+	}
+#contact .submitButton input:hover {
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	}
+#contact .mail img {
+	width: 162px;
+	vertical-align: middle;
+	}
+
+
+/* -------------------------------------------------------------------------
+	PRIVACY
+========================================================================= */
+#privacy {}
+#privacy .mainTitleBox { background: url(../../privacy/img/main_photo.jpg) top center / cover no-repeat; }
+#privacy .container {
+	max-width: 1000px;
+	color: #464646;
+	}
+#privacy .mainText {
+	font-size: 1.6rem;
+	line-height: 190%;
+	}
+#privacy .listBox { padding-top: 6%; }
+#privacy .listBox dt {
+	padding: 0px 16px 4px;
+	font-size: 1.8rem;
+	font-weight: bold;
+	line-height: 120%;
+	border-bottom: 1px solid #DDDDDD;
+	}
+#privacy .listBox dd {
+	padding: 1.6% 16px 7%;
+	font-size: 1.6rem;
+	line-height: 200%;
+	}
+#privacy .ordered { list-style: none; }
+#privacy .mail img {
+	width: 162px;
+	vertical-align: middle;
+	}
+
+
+/* -------------------------------------------------------------------------
+	COMPANY
+========================================================================= */
+#company { padding-bottom: 11%; }
+#company .mainTitleBox { background: url(../../company/img/main_photo.jpg) top center / cover no-repeat; }
+#company .container {
+	max-width: 1000px;
+	color: #464646;
+	position: relative;
+	line-height: 160%;
+	}
+#company .listBox {
+	width: 59%;
+	max-width: 590px;
+	border-top: 1px solid #DDDDDD;
+	}
+#company .listBox th, #company .listBox td { border-bottom: 1px solid #DDDDDD; }
+#company .listBox th {
+	padding: 16px 22px 16px 18px;
+	font-size: 1.8rem;
+	text-align: left;
+	vertical-align: top;
+	}
+#company .listBox td {
+	padding: 16px 0px 16px;
+	font-size: 1.6rem;
+	}
+#company .profile .photo {
+	width: 35%;
+	max-width: 350px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	}
+#company .subhead {
+	margin-top: 75px;
+	font-size: 0;
+	border-bottom: 2px solid rgba(53,34,14,0.5);
+	}
+#company .subhead img { margin-bottom: -2px; }
+#company .history .listBox {
+	width: 71%;
+	max-width: 710px;
+	margin-top: 30px;
+	}
+#company .history .listBox th { font-size: 1.6rem; }
+#company .history .listBox td { padding-right: 30px; }
+#company .history .photo {
+	width: 26.6%;
+	max-width: 266px;
+	position: absolute;
+	right: 0;
+	font-size: 1.2rem;
+	line-height: 120%;
+	}
+#company .history .photo:nth-of-type(1) { top: 62px; }
+#company .history .photo:nth-of-type(2) { bottom: 0px; }
+#company .history .caption { padding: 2.5% 0px; }
+#company .history .photo:nth-of-type(1) .caption { text-align: center; }
+
+
+/* -------------------------------------------------------------------------
+	PARKING
+========================================================================= */
+#parking {}
+#parking .mainTitleBox { background: url(../../parking/img/main_photo.jpg) top center / cover no-repeat; }
+#parking .container {
+	max-width: 1000px;
+	color: #464646;
+	font-size: 0;
+	}
+.headline,
+#parking .feeMax { font-size: 0; }
+.headline { border-bottom: 2px solid rgba(53,34,14,0.5); }
+.headline img { margin-bottom: -2px; }
+#parking .feeMax { padding: 22px 0px 36px; }
+#parking .feeMax li {
+	display: inline-block;
+	vertical-align: bottom;
+	}
+#parking .feeMax li:nth-of-type(1) {
+	width: 35.8%;
+	max-width: 358px;
+	margin-left: 0.2%;
+	}
+#parking .feeMax li:nth-of-type(2) {
+	width: 34%;
+	max-width: 340px;
+	margin: 0px 2.2% 0px 7.2%;
+	}
+#parking .feeMax li:nth-of-type(3) {
+	width: 20.6%;
+	max-width: 206px;
+	margin-bottom: 0.7%;
+	}
+#parking .listBox,
+#garage .listBox {
+	width: 100%;
+	text-align: center;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	}
+#parking .listBox th,
+#parking .listBox td {
+	width: 33%;
+	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	}
+#parking .listBox th,
+#parking .listBox.monthly td,
+#parking .subhead02,
+#parking .flowBox { font-size: 1.8rem; }
+#parking .listBox th,
+#garage .listBox th {
+	padding: 14px;
+	line-height: 120%;
+	background-color: #F0ECE5;
+	border-top: 1px solid #FFF;
+	}
+#parking .listBox th:first-of-type,
+#garage .listBox th:first-of-type { border-left: 1px solid #FFF; }
+#parking .listBox td,
+#parking .fee .text { font-size: 1.6rem; }
+#parking .listBox td,
+#garage .listBox td {
+	padding: 10px;
+	line-height: 160%;
+	}
+#parking .subhead,
+#parking .pdfButton { font-size: 2rem; }
+#parking .subhead,
+#garage .subhead {
+	padding-bottom: 12px;
+	line-height: 120%;
+	font-weight: bold;
+	}
+#parking .subhead:before,
+#garage .subhead:before {
+	content: "";
+	display: inline-block;
+	vertical-align: bottom;
+	width: 30px;
+	height: 30px;
+	margin: 0px 6px -2px 0px;
+	background: url(../../parking/img/icon_circle_main.png) center top / contain no-repeat;
+	}
+#parking .fee .subhead { margin-top: 64px; }
+#parking .listBox.monthly td { line-height: 150%; }
+#parking .listBox.monthly td:nth-of-type(2) { width: 25%; }
+#parking .listBox.monthly td:nth-of-type(3) {
+	width: 45%;
+	padding-left: 3%;
+	text-align: left;
+	}
+#parking .application {
+	margin: 30px 0px 14px 30px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #DDDDDD;
+	}
+#parking .subhead02,
+#parking .subhead02:before,
+#parking .fee .text,
+#parking .pdfButton,
+#parking .contactBox,
+#parking .goodParking dt,
+#parking .goodParking dd,
+#parking .flowBox .flowPhoto li { display: inline-block; }
+#parking .subhead02 {
+	padding-right: 10px;
+	line-height: 100%;
+	}
+#parking .subhead02:before {
+	content: "";
+	vertical-align: bottom;
+	width: 22px;
+	height: 22px;
+	margin: 0px 6px -1px 0px;
+	background: url(../../parking/img/icon_circle_sub.png) center top / contain no-repeat;
+	}
+#parking .fee .text { line-height: 120%; }
+#parking .pdfButton {
+	width: 41.2%;
+	max-width: 400px;
+	margin-left: 3.1%;
+	border-radius: 3px;
+	background-color: #35220E;
+	font-weight: bold;
+	line-height: 120%;
+	letter-spacing: 0.2rem;
+	}
+#parking .pdfButton a {
+	width: 72.5%;
+	max-width: 290px;
+	padding: 24px 21% 24px 6.5%;
+	display: block;
+	position: relative;
+	color: #FFF;
+	text-decoration: none;
+	}
+#parking .pdfButton a:after {
+	content: "";
+	width: 10%;
+	height: 46px;
+	position: absolute;
+	top: 12px;
+	right: 24px;
+	background: url(../../parking/img/icon_pdf.png) center top / contain no-repeat;
+	}
+#parking .pdfButton,
+#parking .contactBox { vertical-align: top; }
+#parking .contactBox {
+	padding: 12px 2% 0px 2%;
+	background-color: #F0ECE5;
+	text-align: center;
+	}
+#parking .contactBox dt {
+	padding: 4px;
+	margin-bottom: 12px;
+	border-radius: 2px;
+	background-color: #C5906C;
+	color: #FFF;
+	font-size: 1.4rem;
+	font-weight: bold;
+	line-height: 120%;
+	}
+#parking .contactBox.fax {
+	width: 23%;
+	max-width: 224px;
+	margin-left: 3.3%;
+	border-right: 1px solid #E3E3E3;
+	}
+#parking .contactBox.mail {
+	width: 20.6%;
+	max-width: 200px;
+	border-left: 1px solid #FFF;
+	}
+#parking .contactBox .time {
+	padding-bottom: 4px;
+	font-size: 1.2rem;
+	}
+#parking .information { margin-top: 68px; }
+#parking .information .listBox { margin-top: 30px; }
+#parking .goodParking { margin-top: 14px; }
+#parking .goodParking dt,
+#parking .goodParking dd { vertical-align: middle; }
+#parking .goodParking dt { width: 60px; }
+#parking .goodParking dd {
+	width: 87%;
+	max-width: 916px;
+	padding:  2px 12px 0px;
+	font-size: 1.4rem;
+	line-height: 160%;
+	}
+#parking .flow { margin-top: 90px; }
+#parking .flowBox {
+	width: 100%;
+	height: 220px;
+	position: relative;
+	line-height: 160%;
+	}
+#parking .flowBox .subhead,
+#parking .flowBox .flowText {
+	width: 31.4%;
+	max-width: 314px;
+	}
+#parking .flowBox .flowPhoto {
+	width: 65.8%;
+	max-width: 658px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 0;
+	list-style: none;
+	}
+#parking .flowBox:first-of-type { margin: 28px 0px 26px; }
+#parking .flowBox:last-of-type { margin-bottom: 120px; }
+#parking .flowBox .flowPhoto img { border: 1px solid #35220E; }
+#parking .flowBox .flowPhoto li {
+	width: 45.3%;
+	max-width: 298px;
+	}
+#parking .flowBox .flowPhoto li:first-child {
+	padding-right: 8.9%;
+	background:url(../../parking/img/icon_arrow.png) right 4.4% center / 6.7% no-repeat;
+	}
+
+
+
+/* -------------------------------------------------------------------------
+	GARAGE
+========================================================================= */
+#garage {}
+#garage .mainTitleBox { background: url(../../garage/img/main_photo.jpg) top center / cover no-repeat; }
+#garage .container {
+	max-width: 1000px;
+	color: #464646;
+	font-size: 0;
+	}
+#garage .copy .container {
+	max-width: 1100px;
+	text-align: center;
+	}
+#garage .copyText,
+#garage .listBox td,
+#garage .flow .container > dl,
+#garage .contactBox .mail a { font-size: 1.6rem; }
+#garage .copyTitle {
+	padding-top: 20px;
+	padding-bottom: 24px;
+	display: inline-block;
+	}
+#garage .copyTitle:nth-of-type(1) {
+	width: 44.55%;
+	max-width: 380px;
+	padding-right: 10px;
+	}
+#garage .copyTitle:nth-of-type(2) {
+	width: 47.46%;
+	max-width: 412px;
+	}
+#garage .bx-wrapper { margin: 0 auto 16px; }
+#garage .facility .container { margin-top: 60px; }
+#garage .facilityBox {
+	width: 48%;
+	max-width: 480px;
+	padding: 31px 0px 10px;
+	display: inline-block;
+	vertical-align: top;
+	}
+#garage .facilityBox:nth-of-type(2n+1) { margin-right: 4%; }
+#garage .facilityBox > dd,
+#garage .flow01 .contactBox dt { font-size: 1.4rem; }
+#garage .facilityBox > dd {
+	padding-left: 15%;
+	line-height: 160%;
+	}
+#garage .facilityBox:nth-of-type(2n+2) > dd { padding-left: 17.5%; }
+#garage .facilityBox:nth-of-type(1) li:nth-of-type(1) { padding-right: 43.58%; }
+#garage .facilityBox.security dd { background: url(../../garage/img/facility_icon_security.png) left top / 10.42% no-repeat; }
+#garage .facilityBox.privacy dd { background: url(../../garage/img/facility_icon_privacy.png) left top / 14.6% no-repeat; }
+#garage .facilityBox.access dd { background: url(../../garage/img/facility_icon_access.png) left top / 11.67% no-repeat; }
+#garage .facilityBox.place dd { background: url(../../garage/img/facility_icon_place.png) left 8px top / 11.67% no-repeat; }
+#garage .facilityBox > dd { position: relative; }
+#garage .facilityBox li {
+	padding: 2px 0px 20px 30px;
+	background: url(../../garage/img/icon_check.png) left top no-repeat;
+	}
+#garage .facilityBox li:last-of-type { padding-bottom: 0px; }
+#garage .facility li.secom {
+	width: 37.5%;
+	height: auto;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: none;
+	}
+#garage .listBox th { font-size: 1.8rem; }
+#garage .subhead,
+#garage .flowBox > dt { font-size: 2rem; }
+#garage .subhead { padding-bottom: 18px; }
+#garage .fee .subhead { margin-top: 64px; }
+#garage .monthlyFee .container { margin-top: 70px; }
+#garage .listBox { margin-top: 34px; }
+#garage .listBox th,
+#garage .listBox td {
+	width: 20%;
+	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	}
+#garage .listBox th:nth-of-type(-n+2),
+#garage .listBox td:nth-of-type(-n+2) { width: 30%; }
+#garage .note,
+#garage .contactBox .time { font-size: 1.2rem; }
+#garage .note {
+	padding: 10px 0px 0px;
+	line-height: 160%;
+	}
+#garage .flow .container { margin: 80px auto 60px; }
+#garage .flow .container > dl { line-height: 160%; }
+#garage .flowBox { margin: 4% 0px 0px 5.4%; }
+#garage .flowBox > dt {
+	width: 144px;
+	padding: 9px 20px 7px 54px;
+	line-height: 120%;
+	font-weight: bold;
+	border-radius: 4px;
+	position: relative;
+	}
+#garage .flowBox > dt:before {
+	width: 24px;
+	height: 24px;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 14px;
+	background: #FFF;
+	color: #464646;
+	text-align: center;
+	border-radius: 50%;
+	}
+#garage .flow01 { position: relative; }
+#garage .flow01 > dt { background-color: #F0ECE5; }
+#garage .flow01 > dt:before { content: "1"; }
+#garage .flow02 dt { background-color: #B6ADA2; }
+#garage .flow02 dt:before { content: "2"; }
+#garage .flow03 dt { background-color: #716353; }
+#garage .flow03 dt:before { content: "3"; }
+#garage .flow04 dt { background-color: #35220E; }
+#garage .flow04 dt:before { content: "4"; }
+#garage .flow03 dt, #garage .flow04 dt { color: #FFF; }
+#garage .flowBox > dd { padding: 16px 0px 0px 4px; }
+#garage .flow01 > dd { padding-right: 53%; }
+#garage .flow01 .contactBox {
+	position: absolute;
+	padding: 0px 0px 0px 0px;
+	top: 20px;
+	right: 0;
+	width: 53%;
+	max-width: 500px;
+	font-size: 0;
+	background-color: #F0ECE5;
+	}
+#garage .flow01 .contactBox > dl {
+	padding: 2.4% 3.9% 0px 3.9%;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	}
+#garage .flow01 .contactBox dt {
+	padding: 4px;
+	margin-bottom: 12px;
+	border-radius: 2px;
+	background-color: #C5906C;
+	color: #FFF;
+	font-weight: bold;
+	line-height: 120%;
+	}
+#garage .contactBox .tel {
+	width: 43.6%;
+	max-width: 218px;
+	border-right: 1px solid #E3E3E3;
+	}
+#garage .contactBox .mail {
+	width: 40%;
+	max-width: 200px;
+	border-left: 1px solid #FFF;
+	}
+#garage .contactBox .mail a {
+	padding: 8px 18px 8px 8px;
+	display: block;
+	color: #FFF;
+	line-height: 120%;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 2px;
+	background-color: #35220E;
+	position: relative;
+	}
+#garage .contactBox .mail a:after {
+	content: "";
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 10px;
+	background: url(../../garage/img/icon_arrow_s.png) center top / contain no-repeat;
+	}
+#garage .contactBox .time {
+	padding: 6px 0px 10px;
+	line-height: 120%;
+	}
+
+
+
+/* -------------------------------------------------------------------------
+	SMARTPHONE ONLY
+========================================================================= */
+@media screen and (min-width: 1024px) {}
+
+@media screen and (max-width: 768px) {
+.hide { display: inline; }
+.show { display: none; }
+.hideN { display: none; }
+.showN { display: inline; }
+
+
+/* HEADER -------------------------------------------------------*/
+#head { height: 125px; }
+#head .logo, #head .headBox { position: absolute; }
+#head .logo, #head .hAddressS {
+	width: 225px;
+	max-width: 225px;
+	}
+#head .logo {
+	top: 10%; 
+	left: 4%;
+	font-size: 0;
+	z-index: 999;
+	}
+#head .headBox { display: none; }
+#head .hAddressS {
+	display: inline;
+	position: absolute;
+	top: 38%;
+	left: 4%;
+	font-size: 1rem;
+	line-height: 100%;
+	text-align: right;
+	}
+
+#pcNavi { display: none; }
+#spNavi { display: inline; }
+#spNavi.fixed {
+	padding-top: 0;
+	background: transparent;
+	}
+#spMenuBox {
+	width: 100%;
+	height: 56px;
+	z-index: 555;
+	position: relative;
+	}
+#toggle {
+    display: block;
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 101;
+	background-color: #35220E;
+	}
+#toggle div { position: relative; }
+#toggle span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 70%;
+	margin-left: 15%;
+    background: #FFF;
+    left: 0;
+    -webkit-transition: .35s ease-in-out;
+    -moz-transition: .35s ease-in-out;
+    transition: .35s ease-in-out;
+	}
+#toggle span:nth-child(1) { top: 5px; }
+#toggle span:nth-child(2) { top: 13px; }
+#toggle span:nth-child(3) { top: 21px; }
+#toggle .toggleText {
+	width: 100%;
+	margin: auto;
+    position: absolute;
+	bottom: 4px;
+	display: block;
+	color: #FFF;
+	font-size: 0.65rem;
+	font-weight: bold;
+	line-height: 100%;
+	text-align: center;
+	}
+#spMenu {
+	position: absolute;
+	top: -500px;
+	background: #35220E;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+	}
+#spMenu ul {
+	list-style: none;
+	position: static;
+	right: 0;
+	bottom: 0;
+	font-size: 14px;
+	}
+#spMenu ul li { position: static; }
+#spMenu ul li a {
+	display: block;
+	color: #FFF;
+	text-decoration: none;
+	padding: 5px 0px;
+	}
+#spMenu ul li a:hover { background: rgba(255, 255, 255, 0.5); }
+.open #toggle span:nth-child(1) {
+	top: 13px;
+	-webkit-transform: rotate(315deg);
+	-moz-transform: rotate(315deg);
+	transform: rotate(315deg);
+	}
+.open #toggle span:nth-child(2) {
+	width: 0;
+	left: 50%;
+	}
+.open #toggle span:nth-child(3) {
+	top: 13px;
+	-webkit-transform: rotate(-315deg);
+	-moz-transform: rotate(-315deg);
+	transform: rotate(-315deg);
+	}
+.open #spMenu {
+	-moz-transform: translateY(556px);
+	-webkit-transform: translateY(556px);
+	transform: translateY(556px);
+	}
+
+#spMenuSub {
+	position: absolute;
+	bottom:0px;
+	width: 100%;
+	background-color: #35220E;
+	font-size: 0;
+	line-height: 100%;
+	border-bottom: 2px solid #FFF;
+	}
+#spMenuSub li {
+	width: 50%;
+	display: inline-block;
+	text-align: center;
+	}
+#spMenuSub li:nth-child(1) {
+	width: 49%;
+	border-right: 2px solid #FFF;
+	}
+#spMenuSub li a {
+	width: 100%;
+	display: block;
+	padding: 16px 0px 16px;
+	}
+#spMenuSub li:nth-child(1) img { max-width: 65px; }
+#spMenuSub li:nth-child(2) img { max-width: 103px; }
+#spMenuSub li a:hover { background: rgba(255, 255, 255, 0.2); }
+
+
+/* FOOTER -------------------------------------------------------*/
+#pageup { width: 18%; }
+
+
+/* TOP ----------------------------------------------------------*/
+#mainVisual .copy img {
+	width: 49.47%;
+	max-width: 380px;
+	top: 85px;
+	}
+#mainVisual .mv03 dt {
+	width: 90%;
+	max-width: 250px;
+	top: 8%;
+	}
+
+#news .title {
+	width: 100%;
+	max-width: 768px;
+	max-height: 65px;
+	margin-top: 0;
+	position: absolute;
+	background: url(../../img/news_title_bg_s.jpg) top left repeat;
+	}
+#news .title:after {
+	content: "";
+	display: block;
+	width: 131px;
+	height: 20px;
+	margin: 23px 0px 23px 40px;
+	background: url(../../img/news_title_s.png) top left / contain no-repeat;
+	}
+#news .title img { display: none; } 
+#news .newsBox {
+	position: relative;
+	padding: 50px 40px 14.5% 40px;
+	}
+#news .article {
+	padding-top: 40px;
+	font-size: 1.4rem;
+	}
+#news .date, #news .articleBox { display: inherit; }
+#news .date {
+	width: 12.64%;
+	min-width: 100px;
+	font-size: 1rem;
+	line-height: 100%;
+	}
+#news .articleBox {
+	width: 100%;
+	max-width: 688px;
+	}
+#news .subhead { padding: 4px 0px 6px; }
+#news .text {
+	font-size: 1.2rem;
+	line-height: 190%;
+	}
+
+#location .container { padding: 4.5% 0px 4.5% 0px; }
+#location .subhead {
+	width: 40%;
+	max-width: 370px;
+	padding-left: 40px;
+	}
+#location .text {
+	width: 70%;
+	max-width: 516px;
+	padding: 3% 0px 5.8% 40px;
+	}
+#location .photo {
+	width: 80%;
+	max-width: 500px;
+	padding-left: 0;
+	margin: 16px auto 0px;
+	}
+#location .photo li {
+	width: 49%;
+	max-width: 280px;
+	}
+#location .photo li:nth-child(2) { margin-right: 0; }
+#location .photo li img { width: 100%; }
+#location .image {
+	width: 80%;
+	max-width: 600px;
+	height: 300px;
+	margin: 0px auto;
+	position: static;
+	background: url(../../img/location_image_s.png) top center / contain no-repeat;
+	}
+#location .image img { display: none; }
+
+#access { padding: 0px 40px; }
+#access .container {
+	max-width: 768px;
+	position: relative;
+	}
+#access .title {
+	width: 30%;
+	max-width: 127px;
+	padding: 30px 0px 20px 0px;
+	}
+#access dl, #access .mapText {
+	width: 100%;
+	max-width: 688px;
+	}
+#access dt {
+	height: 25px;
+	line-height: 0;
+	}
+#access .adressTitle { background: url(../img/address_title_s.png) top left / 95px no-repeat; }
+#access .contactTitle { background: url(../img/contact_title_s.png) top left / 95px no-repeat; }
+#access dt img { display: none; }
+#access dd {
+	padding: 14px 0px 8px;
+	font-size: 1.2rem;
+	line-height: 190%;
+	}
+#access .adressBox {}
+#access .adressTitle {}
+#access .contactBox { padding: 20px 0px 30px; }
+#access .contactTitle {}
+#access .text {}
+#access .tel { padding-top: 12px; }
+#access .text p { padding-top: 16px; }
+#access .mail img { width: 119px; }
+#access .map {
+	width: 100%;
+	max-width: 768px;
+	height: 300px;
+	max-height: 300px;
+	position: relative;
+	top: 0;
+	}
+#access .mapText {
+	text-align: right;
+	padding: 10px 0px 0px;
+	}
+#access .mapText a {
+	font-size: 1.5rem;
+	color: #333;
+	}
+
+
+/* ROOM ---------------------------------------------------------*/
+#breadcrumbs li:first-child { padding-left: 20px; }
+.mainTitleBox {
+	width: 100%;
+	height: 200px;
+	position: relative;
+	}
+.mainTitle {
+	width: 200px;
+	height: 80px;
+	margin: 40px auto 0px;
+	}
+.mainTitle img {
+	width: 100%;
+	height: auto;
+	}
+#room .slider {
+    width: 100%;
+	max-width: 1100px;
+    display:block;
+    margin: 0px auto;
+	}
+#room ul.bxsliderMain li,
+#room ul.bxsliderMain li img{
+    display:block;
+    width: 100%;
+	max-width: 1100px;
+    height: auto;
+	}
+#room ul.bxsliderMain li img{
+    display:block;
+    width: 100%;
+    height:auto;
+	}
+.bx-wrapper { margin: 0 auto 10px; }
+.bx-viewport ul#bx-pager,
+.bx-viewport ul#bx-pager2 { margin: 0px auto; }
+#room01 .roomPhotoThumb,
+#room01 .roomPhotoThumb2 { padding: 0px 40px; }
+#room02 .roomPhotoThumb { padding: 0px 30%; }
+#room01 .bx-viewport ul#bx-pager,
+#room01 .bx-viewport ul#bx-pager2 { 
+	width: 100%;
+	margin: 0px auto;
+	}
+.bx-viewport #bx-pager li { max-width: auto; }
+#room ul.bxsliderThumb li a,
+#room ul.bxsliderThumb li a img,
+#room ul.bxsliderThumb2 li a,
+#room ul.bxsliderThumb2 li a img {
+    display: block;
+    width: auto;
+    height: auto;
+	}
+#room .roomTextBox { padding: 20px 40px 85px 40px; }
+#room02 .roomTextBox { padding: 30px 40px 102px 40px; }
+#room .roomText,
+#room .roomData { display: inline; }
+#room .roomText {
+	width: 100%;
+	margin-top: -8px;
+	padding: 0px 20px 0px 0px;
+	position: static;
+	font-size: 1.6rem;
+	line-height: 190%;
+	}
+#room .roomFloor {
+	width: 240px;
+	position: static;
+	float: right;
+	margin: 0px 0px 15px 10px;
+	}
+#room .roomData {
+	width: 100%;
+	clear: both;
+	display: table;
+	margin-top: 20px;
+	}
+
+
+/* CONTACT -------------------------------------------------------*/
+#contact .container {
+	width: auto;
+	padding-bottom: 140px;
+	}
+#contact .formText {
+	font-size: 1.2rem;
+	padding: 0px 40px 30px;
+	}
+#contact .formBox {
+	width: auto;
+	margin-bottom: 32px;
+	border-top: none;
+	}
+#contact .formBox dl {
+	width: auto;
+	font-size: 0;
+	padding: 0px 34px 30px 34px;
+	}
+#contact .formBox dl:not(:last-child) { border-bottom: none; }
+#contact .formBox dl:nth-child(odd) { background-color: #F8F7F3; }
+#contact .formBox dt, #contact .formBox dd {
+	display: block;
+	vertical-align: top;
+	font-size: 1.3rem;
+	}
+#contact .formBox dt {
+	width: 100%;
+	padding: 20px 0px 4px 0px; 
+	}
+#contact .formBox dd {
+	width: 100%;
+	padding: 0px 0px; 
+	}
+#contact input, #contact textarea,
+#contact select { font-size: 1.3rem; }
+#contact .radioLabel {
+	margin-bottom: 14px;
+	margin-right: 0px;
+	}
+#contact .radioLabel:first-child { margin-top: 10px; }
+#contact .radioLabel .lever:before{
+	margin-right: 18px;
+	width: 22px;
+	height: 22px;
+	}
+#contact .radioLabel .lever:after{
+	left: -10px;
+	width: 22px;
+	height: 22px;
+	margin-top: -10px;
+	}
+#contact .radioLabel input[type="radio"]:checked + .lever:after{
+	top: 50%;
+	left: 7px;
+	width: 11px;
+	height: 11px;
+	margin-top: -5px;
+	}
+#contact .nameBox, #contact .telBox,
+#contact .mailBox {
+	width: 80%;
+	max-width: 300px;
+	}
+#contact .prefList {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	position: relative;
+	z-index: 10;
+	background-color: none;
+	}
+#contact .prefBox:after {
+	font-size: 1.4rem;
+	top: 3px;
+	right: 10px;
+	}
+#contact .adressBox, #contact .textBox {
+	width: 80%;
+	max-width: 300px;
+	}
+#contact .textBox { max-width: 600px; }
+#contact .mail img { width: 124px; }
+
+
+/* PRIVACY -------------------------------------------------------*/
+#privacy .mainText { padding: 0px 5%; }
+#privacy .listBox { padding: 9% 5% 0px; }
+#privacy .listBox dd { padding: 1.6% 16px 10%; }
+
+
+/* COMPANY -------------------------------------------------------*/
+#company .profile, #company .history { padding: 0px 40px; }
+#company .history .photo { width: 26%; }
+#company .subhead img {
+	width: 153px;
+	height: auto;
+	margin-bottom: -1px;
+	}
+
+
+/* PARKING -------------------------------------------------------*/
+#parking .fee,
+#parking .information,
+#parking .flow { padding: 0px 40px; }
+#parking .listBox th,
+#parking .listBox.monthly td,
+#parking .subhead02,
+#parking .flowBox { font-size: 1.5rem; }
+#parking .listBox th { line-height: 120%; }
+#parking .listBox.monthly td { line-height: 150%; }
+#parking .listBox td,
+#parking .fee .text { font-size: 1.4rem; }
+#parking .listBox td { line-height: 160%; }
+#parking .subhead, { font-size: 1.8rem; }
+#parking .pdfButton {
+	font-size: 1.5rem;
+	letter-spacing: 0;
+	}
+#parking .pdfButton a { padding: 24px 18% 24px 6.5%; }
+#parking .pdfButton a:after {
+	top: 16px;
+	right: 14px;
+	}
+#parking .flowBox { height: 140px; }
+#parking .goodParking dd { width: 80%; }
+.headline img {
+	width: 153px;
+	height: auto;
+	margin-bottom: -1px;
+	}
+
+
+/* GARAGE -------------------------------------------------------*/
+#garage .facility,
+#garage .monthlyFee,
+#garage .flow { padding: 0px 40px; }
+#garage .copyText,
+#garage .listBox td,
+#garage .flow .container > dl,
+#garage .contactBox .mail a { font-size: 1.4rem; }
+#garage .listBox th { font-size: 1.5rem; }
+#garage .facilityBox > dd,
+#garage .flow01 .contactBox dt { font-size: 1.2rem; }
+#garage .subhead,
+#garage .flowBox > dt { font-size: 1.8rem; }
+#garage .note,
+#garage .contactBox .time { font-size: 1rem; }
+#garage .facilityBox:nth-of-type(1) li:nth-of-type(1) {
+	padding-right: 0px;
+	padding-bottom: 0px;
+	}
+#garage .facility li.secom {
+	width: 80%;
+	position: static;
+	}
+#garage .flowBox { margin: 6% 0px 0px 5.4%; }
+#garage .flow01 > dd {
+	padding-right: 0px;
+	padding-bottom: 10px;
+	}
+#garage .flow01 .contactBox {
+	position: static;
+	margin-bottom: 10px;
+	width: 80%;
+	}
+}
+
+
+@media screen and (max-width: 480px) {
+.hideN { display: inline; }
+.showN { display: none; }
+
+
+/* HEADER -------------------------------------------------------*/
+#head .logo, #head .hAddressS {
+	width: 58%;
+	max-width: 225px;
+	}
+
+
+/* FOOTER -------------------------------------------------------*/
+#foot {
+	padding: 42px 2% 30px;
+	background: url(../img/footer_bg_s.jpg) top / contain repeat-x;
+	}
+#foot .container {}
+#foot div {
+	position: static;
+	margin: 0px auto;
+	font-size: 1.1rem;
+	text-align: center;
+	}
+#foot .privacyPolicy a {
+	text-decoration: underline;
+	}
+#foot .copyright {
+	width: 212px;
+	max-width: 212px;
+	padding-top: 12px;
+	}
+
+
+/* TOP ----------------------------------------------------------*/
+#mainVisual {
+	height: 100%;
+	max-height: 376px;
+	position: relative;
+	}
+.swiper-slide {
+	height: 100%;
+	max-height: 376px;
+	}
+#mainVisual .photo {
+	width: 100%;
+	min-height: 376px;
+	background:url(../../img/mainvisual_01_s.jpg) top center / cover no-repeat;
+	}
+#mainVisual .photo img {
+	width: 100%;
+	display: none;
+	}
+#mainVisual .copy img {
+	width: 65%;
+	max-width: 300px;
+	top: 90px;
+	}
+#mainVisual .mv03 { max-height: 376px; }
+#mainVisual .mv03 dl {
+	width: 100%;
+	height: 125px;
+	max-height: 125px;
+	display: block;
+	border-bottom: 1px solid #FFF;
+	}
+#mainVisual .mv03 dl:last-child {}
+#mainVisual .mv03 dt {
+	width: 280px;
+	max-width: 280px;
+	height: 100px;
+	z-index: 10;
+	top: 10px;
+	background: url(../../img/mv_text_bg_s.png) top center / contain no-repeat;
+	}
+#mainVisual dt img, #mainVisual dd img { display: none; }
+#mainVisual .mvParkingPhoto dt { background: url(../../img/mv_parking_text_s.png) top center / contain no-repeat, url(../../img/mv_text_bg_s.png) top center / contain no-repeat; }
+#mainVisual .mvRoomPhoto dt { background: url(../../img/mv_community_text_s.png) top center / contain no-repeat, url(../../img/mv_text_bg_s.png) top center / contain no-repeat; }
+#mainVisual .mvGaragePhoto dt { background: url(../../img/mv_bike_text_s.png) top center / contain no-repeat, url(../../img/mv_text_bg_s.png) top center / contain no-repeat;}
+#mainVisual dl.mvParkingPhoto { background: url(../../img/mv_parking_photo_s.jpg) top center no-repeat; }
+#mainVisual dl.mvRoomPhoto { background: url(../../img/mv_community_photo_s.jpg) top center no-repeat; }
+#mainVisual dl.mvGaragePhoto { background: url(../../img/mv_bike_photo_s.jpg) top center no-repeat; }
+
+#news .newsBox { padding: 50px 40px 62px 40px; }
+#news .newsFooter { max-height: 62px; }
+
+#location .container { padding: 40px 0px 32px 0px; }
+#location .subhead {
+	width: 66.3%;
+	max-width: 292px;
+	padding-left: 40px;
+	}
+#location .text {
+	width: 64.3%;
+	max-width: 283px;
+	height: 140px;
+	margin: 18px 0px 25px 40px;
+	padding: 0px 0px 0px 0px;
+	background: url(../../img/location_text_s.png) top left / 100% no-repeat;
+	}
+#location .text img { display: none; }
+#location .photo {
+	width: 99%;
+	max-width: 380px;
+	}
+#location .photo li {
+	width: 49.2%;
+	max-width: 187px;
+	margin-right: 1%;
+	}
+#location .image {
+	width: 94%;
+	max-width: 365px;
+	height: 231px;
+	margin: 0px auto;
+	position: static;
+	background: url(../../img/location_image_s.png) top center / contain no-repeat;
+	}
+#location .image img { display: none; }
+#access .title { width: 127px; }
+#access .map {
+	height: 225px;
+	max-height: 225px;
+	}
+#access .tel { width: 224px; }
+#mapCanvas { display: none; }
+#mapCanvasS { display: block; }
+
+
+/* ROOM ---------------------------------------------------------*/
+#breadcrumbs {
+	padding: 14px 0px 14px;
+	font-size: 1rem;
+	line-height: 120%;
+	}
+#breadcrumbs li:not(:last-child):after { font-size: 0.9rem; }
+.mainTitleBox {
+	width: 100%;
+	height: 126px;
+	position: relative;
+	}
+.mainTitle {
+	width: 150px;
+	height: 60px;
+	margin: 20px auto 0px;
+	}
+#room .mainTitleBox { background: url(../../room/img/main_photo_s.jpg) top center / cover no-repeat; }
+#room .copyTitle {
+	height: 200px;
+	background: url(../../room/img/copy_photo_s.jpg) top center / cover no-repeat;
+	}
+#room .copyTitle img {
+	width: 323px;
+	max-width: 323px;
+	margin-top: 6px;
+	}
+#room .copyText {
+	width: 68%;
+	max-width: 301px;
+	padding-bottom: 130%;
+	margin: 26px auto 60px;
+	background: url(../../room/img/copy_text_s.png) top center / contain no-repeat;
+	}
+#room .copyText img { display: none; }
+#room .subhead { width: 123px; }
+#room .subhead img { padding: 40px 0px 30px; }
+#room02 .roomTextBox { padding: 30px 40px 60px 40px; }
+#room02 .roomPhotoThumb { margin-bottom: -12px }
+#room .roomText,
+#room .roomData { display: inline; }
+#room .roomText {
+	padding: 0px 0px 0px 0px;
+	font-size: 1.2rem;
+	line-height: 190%;
+	}
+#room .roomFloor {
+	width: 140px;
+	margin: 0px 0px 10px 20px;
+	}
+#room .roomData {
+	width: 100%;
+	clear: both;
+	display: table;
+	margin-top: 20px;
+	}
+#room .roomData th {
+	width: 10%;
+	padding: 8px;
+	font-size: 1.2rem;
+	line-height: 100%;
+	text-align: left;
+	}
+#room .roomData td {
+	padding: 8px 0px 8px 4px;
+	font-size: 1.2rem;
+	line-height: 190%;
+	}
+#room .roomData th .fsmall {　font-size: 1rem;　}
+
+
+/* CONTACT -------------------------------------------------------*/
+#contact .mainTitleBox { background: url(../../contact/img/main_photo_s.jpg) top center / cover no-repeat; }
+#contact .nameBox, #contact .telBox,
+#contact .mailBox, #contact .adressBox {
+	width: 70%;
+	max-width: 300px;
+	}
+#contact .textBox {
+	width: 96%;
+	max-width: 500px;
+	}
+#contact .submitButton input {
+	padding: 15px 44px 15px 15px;
+	border-radius: 4px;
+	font-size: 1.3rem;
+	letter-spacing: 0.1rem;
+	background: url(../../contact/img/icon_arrow_s.png) right 15px center / 7% no-repeat #35220E;
+	}
+
+
+/* PRIVACY -------------------------------------------------------*/
+#privacy .mainTitleBox { background: url(../../privacy/img/main_photo_s.jpg) top center / cover no-repeat; }
+#privacy .mainText {
+	font-size: 1.3rem;
+	line-height: 190%;
+	}
+#privacy .listBox dt {
+	font-size: 1.6rem;
+	line-height: 120%;
+	}
+#privacy .listBox dd {
+	padding: 1.6% 16px 12%;
+	font-size: 1.3rem;
+	line-height: 200%;
+	}
+#privacy .ordered li {
+	text-indent: -4.7rem;
+	margin-left: 4.7rem;
+	}
+#privacy .mail img { width: 124px; }
+
+
+/* COMPANY -------------------------------------------------------*/
+#company .profile, #company .history { padding: 0px 20px; }
+#company .listBox { width: 100%; }
+#company .listBox th {
+	padding: 10px 16px 10px 12px;
+	font-size: 1.5rem;
+	text-align: left;
+	vertical-align: top;
+	}
+#company .listBox td {
+	padding: 10px 0px 10px;
+	font-size: 1.3rem;
+	}
+#company .profile .photo {
+	width: 250px;
+	max-width: 250px;
+	position: static;
+	margin: 0px auto 20px;
+	}
+#company .subhead {
+	margin-top: 55px;
+	border-bottom: 2px solid rgba(53,34,14,0.5);
+	}
+#company .subhead img {
+	width: 133px;
+	height: 30px;
+	margin-bottom: -1px;
+	}
+#company .history .listBox {
+	width: 100%;
+	margin-top: 20px;
+	}
+#company .history .listBox th { font-size: 1.3rem; }
+#company .history .listBox td { padding-right: 0px; }
+#company .history .photo {
+	width: 48%;
+	max-width: 200px;
+	position: static;
+	font-size: 1rem;
+	display: inline-block;
+	}
+#company .history .photo:nth-of-type(2) {
+	padding-left: 2%;
+	text-align: center;
+	}
+
+
+/* PARKING -------------------------------------------------------*/
+#parking .fee,
+#parking .information,
+#parking .flow { padding: 0px 20px; }
+#parking .listBox th,
+#parking .listBox.monthly td,
+#parking .subhead02,
+#parking .flowBox { font-size: 1.2rem; }
+#parking .listBox th { line-height: 120%; }
+#parking .listBox.monthly td { line-height: 150%; }
+#parking .listBox td,
+#parking .fee .text { font-size: 1.2rem; }
+#parking .listBox td { line-height: 160%; }
+#parking .subhead { font-size: 1.5rem; }
+.headline {
+	margin-top: 10px;
+	border-bottom: 2px solid rgba(53,34,14,0.5);
+	}
+.headline img {
+	width: 133px;
+	height: 30px;
+	margin-bottom: -1px;
+	}
+#parking .feeMax {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 22px 0px;
+	}
+#parking .feeMax li {
+	display: block;
+	vertical-align: bottom;
+	}
+#parking .feeMax li:nth-of-type(1) {
+	width: 52.4%;
+	margin: 0px 0px 10px;
+	order: 0;
+	}
+#parking .feeMax li:nth-of-type(2) {
+	width: 48%;
+	margin: 0px 0px 0px 0px;
+	order: 2;
+	}
+#parking .feeMax li:nth-of-type(3) {
+	width: 38%;
+	margin-left: 4%;
+	order: 1;
+	}
+#parking .listBox th { padding: 14px 5px; }
+#parking .listBox td { padding: 10px; }
+#parking .subhead { padding-bottom: 10px; }
+#parking .subhead:before,
+#garage .subhead:before {
+	width: 23px;
+	height: 23px;
+	margin: 0px 6px -2px 0px;
+	}
+#parking .fee .subhead { margin-top: 34px; }
+#parking .subhead02 { padding-right: 10px; }
+#parking .subhead02:before {
+	width: 18px;
+	height: 18px;
+	margin: 0px 6px -1px 0px;
+	}
+#parking .pdfButton {
+	width: 90%;
+	display: inherit;
+	margin: 0px 0px 14px 30px;
+	font-size: 1.5rem;
+	letter-spacing: 0;
+	text-align: center;
+	}
+#parking .pdfButton a:after {
+	top: 14px;
+	right: 14px;
+	}
+#parking .contactBox { padding: 12px 3% 2% 3%; }
+#parking .contactBox dt {
+	padding: 4px;
+	margin-bottom: 12px;
+	border-radius: 2px;
+	font-size: 1.2rem;
+	line-height: 120%;
+	}
+#parking .contactBox.fax {
+	width: 39%;
+	margin-left: 30px;
+	border-right: 1px solid #E3E3E3;
+	}
+#parking .contactBox.mail {
+	width: 38%;
+	border-left: 1px solid #FFF;
+	}
+#parking .contactBox .time {
+	padding-bottom: 4px;
+	font-size: 0.9rem;
+	line-height: 120%;
+	}
+#parking .goodParking dt { width: 13.6%; }
+#parking .goodParking dd {
+	width: 78%;
+	font-size: 1rem;
+	line-height: 160%;
+	}
+#parking .information .listBox { margin-top: 20px; }
+#parking .flow { margin-top: 50px; }
+#parking .flowBox {
+	width: 100%;
+	height: auto;
+	}
+#parking .flowBox .subhead,
+#parking .flowBox .flowText {
+	width: 100%;
+	max-width: 440px;
+	}
+#parking .flowBox .flowPhoto {
+	width: 100%;
+	margin-top: 10px;
+	max-width: 440px;
+	position: static;
+	}
+#parking .flowBox:first-of-type { margin: 18px 0px 26px; }
+#parking .flowBox:last-of-type { margin-bottom: 60px; }
+
+
+/* GARAGE -------------------------------------------------------*/
+#garage .facility,
+#garage .monthlyFee,
+#garage .flow { padding: 0px 20px; }
+#garage .copyText,
+#garage .listBox td,
+#garage .flow .container > dl,
+#garage .contactBox .mail a { font-size: 1.2rem; }
+#garage .listBox th { font-size: 1.2rem; }
+#garage .facilityBox > dd,
+#garage .flow01 .contactBox dt { font-size: 1.1rem; }
+#garage .subhead,
+#garage .flowBox > dt { font-size: 1.4rem; }
+#garage .note,
+#garage .contactBox .time { font-size: 1rem; }
+#garage .listBox th { padding: 14px 5px; }
+#garage .listBox td { padding: 10px 5px; }
+#garage .facilityBox {
+	width: 100%;
+	padding: 20px 0px 10px;
+	display: inherit;
+	vertical-align: top;
+	}
+#garage .facilityBox > dd { padding-left: 17.5%; }
+#garage .facilityBox.security dd { background: url(../../garage/img/facility_icon_security.png) left 8px top / 10.42% no-repeat; } /*50px*/
+#garage .facilityBox.privacy dd { background: url(../../garage/img/facility_icon_privacy.png) left top / 14.6% no-repeat; } /*70px*/
+#garage .facilityBox.access dd { background: url(../../garage/img/facility_icon_access.png) left 8px top / 11.67% no-repeat; } /*56px*/
+#garage .facilityBox.place dd { background: url(../../garage/img/facility_icon_place.png) left 8px top / 11.67% no-repeat; } /*56px*/
+#garage .monthlyFee .container,
+#garage .flow .container { margin-top: 50px; }
+#garage .facilityBox.security li:nth-of-type(1) { padding-bottom: 5px; }
+#garage .flowBox { margin: 6% 0px 0px 0px; }
+#garage .flowBox > dt { width: 100px; }
+#garage .listBox { margin-top: 24px; }
+#garage .flowBox > dt:before {
+	width: 22px;
+	height: 22px;
+	line-height: 170%;
+	}
+#garage .flowBox > dd { padding: 10px 0px 5px 4px; }
+#garage .flow01 .contactBox {
+	position: static;
+	margin-bottom: 10px;
+	width: 100%;
+	}
+#garage .contactBox .mail a:after {
+	content: "";
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	right: 10px;
+	background: url(../../garage/img/icon_arrow_s.png) center top / contain no-repeat;
+	}
+}

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "f-parking", "f-parking\f-parking.csproj", "{AAFBF887-1306-4249-A638-4277DE687247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{90E3C823-39AC-4948-BEA9-47B885563DFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Administration", "Administration\Administration.csproj", "{66E86142-259B-437E-8E26-6D7B6513E02D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAFBF887-1306-4249-A638-4277DE687247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFBF887-1306-4249-A638-4277DE687247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFBF887-1306-4249-A638-4277DE687247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFBF887-1306-4249-A638-4277DE687247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E3C823-39AC-4948-BEA9-47B885563DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E3C823-39AC-4948-BEA9-47B885563DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E3C823-39AC-4948-BEA9-47B885563DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E3C823-39AC-4948-BEA9-47B885563DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E86142-259B-437E-8E26-6D7B6513E02D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E86142-259B-437E-8E26-6D7B6513E02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E86142-259B-437E-8E26-6D7B6513E02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E86142-259B-437E-8E26-6D7B6513E02D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
