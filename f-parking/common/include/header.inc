@@ -45,7 +45,7 @@
 <li class="room"><a href="/room/">貸会議室</a></li>
 <li class="garage"><a href="/garage/">バイクガレージ</a></li>
 <li class="company"><a href="/company/">会社概要</a></li>
-<li class="contact"><a href="/contact/">お問い合わせ</a></li>
+<li class="contact"><a href="/contact/index.aspx">お問い合わせ</a></li>
 <li class="contact"><a href="/index.aspx">トップ</a></li>
 </ul>
 </div>
@@ -53,7 +53,7 @@
 
 <ul id="spMenuSub">
 <li><a href="#access"><img src="/common/img/menu_access_s.png" alt="アクセス" width="130" height="34" /></a></li>
-<li><a href="/contact/"><img src="/common/img/menu_contact_s.png" alt="お問い合わせ" /></a></li>
+<li><a href="/contact/index.aspx"><img src="/common/img/menu_contact_s.png" alt="お問い合わせ" /></a></li>
 </ul>
 </nav>
 <!--/spNavi-->

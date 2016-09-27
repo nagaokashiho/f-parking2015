@@ -84,11 +84,7 @@
     <Content Include="common\include\footer.inc">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="common\include\footer_honban.inc">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="common\include\header.inc" />
-    <Content Include="common\include\header_honban.inc" />
     <Content Include="company\img\contact_title_s.png" />
     <Content Include="company\img\history_photo.jpg" />
     <Content Include="company\img\history_photo_01.jpg" />
@@ -105,6 +101,8 @@
     <Content Include="company\index.html" />
     <Content Include="contact\confirm.aspx" />
     <Content Include="contact\end.html" />
+    <Content Include="contact\img\icon_arrow2.png" />
+    <Content Include="contact\img\icon_arrow2_s.png" />
     <Content Include="contact\index.aspx" />
     <Content Include="garage\img\bnr_secom.png" />
     <Content Include="garage\img\facility_icon_access.png" />
@@ -136,6 +134,7 @@
     <Content Include="packages.config" />
     <Content Include="parking\pdf\monthly.pdf" />
     <None Include="Properties\PublishProfiles\develop.f-parking.co.jp.pubxml" />
+    <None Include="Properties\PublishProfiles\f-parking.co.jp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

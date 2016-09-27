@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* -------------------------------------------------------------------------
 	BASE
 ========================================================================= */
@@ -623,15 +623,14 @@ img {
 	vertical-align: top;
 	}
 #contact .formBox dt {
-	/*width: 22%;*/     /* 2016.09.20 cocosnet*/
-	width: 24%;
+	width: 25%;
 	padding: 20px 25px 20px 60px; 
 	vertical-align: top;
 	font-size: 1.8rem;
 	font-weight: bold;
 	}
 #contact .formBox dd {
-	width: 66%;
+	width: 64%;
 	padding: 20px 0px; 
 	font-size: 1.6rem;
 	}
@@ -738,6 +737,11 @@ img {
 	line-height: 120%;
 	background: url(../../contact/img/icon_arrow.png) right 30px center no-repeat #35220E;
 	}
+#contact .submitButton input#btnReturn {
+	padding: 20px 30px 20px 84px;
+	background: url(../../contact/img/icon_arrow2.png) left 30px center no-repeat #35220E;
+	}
+
 #contact .submitButton input:hover {
 	filter: alpha(opacity=80);
 	opacity: 0.8;
@@ -2027,6 +2031,10 @@ img {
 	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	background: url(../../contact/img/icon_arrow_s.png) right 15px center / 7% no-repeat #35220E;
+	}
+#contact .submitButton input#btnReturn {
+	padding: 15px 15px 15px 44px;
+	background: url(../../contact/img/icon_arrow2_s.png) left 15px center / 19% no-repeat #35220E;
 	}
 
 

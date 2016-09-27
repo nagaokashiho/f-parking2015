@@ -55,7 +55,7 @@ document.write('<a href=JavaScript:mail_to("","")><span class="mail"><img src="/
 
 <section id="foot">
 <div class="container">
-<div class="privacyPolicy"><a href="/demo/privacy/">プライバシーポリシー</a></div>
+<div class="privacyPolicy"><a href="/privacy/">プライバシーポリシー</a></div>
 <div class="copyright"><img src="/common/img/copyright.png" alt="Copyright (C) Tada Rinsan Co., Ltd.　All Rights Reserved." /></div>
 </div>
 </section>
@@ -63,4 +63,4 @@ document.write('<a href=JavaScript:mail_to("","")><span class="mail"><img src="/
 </footer>
 
 <script type="text/javascript" src="/common/js/assemblyFoot.js"></script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBZNNOy3dWPFPLXlHsa-ia7U0iFH89Qp6A"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZNNOy3dWPFPLXlHsa-ia7U0iFH89Qp6A"></script>
