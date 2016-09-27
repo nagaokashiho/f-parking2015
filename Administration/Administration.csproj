@@ -379,6 +379,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\css\" />
+    <Folder Include="Scripts\js\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609210722187_AddDispName.resx">
