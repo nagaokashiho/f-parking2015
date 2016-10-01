@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <div class="container">
             <a runat="server" href="~/WhatsNews/index.aspx" class="btn btn-primary btn-lg">Whta's New 管理 &raquo;</a>
-            <a runat="server" href="~/Rooms/index.aspx" class="btn btn-primary btn-lg">貸し会議室　管理 &raquo;</a>
+            <a runat="server" href="~/Rooms/index.aspx" class="btn btn-primary btn-lg">貸会議室　管理 &raquo;</a>
         </div>
     </div>
 

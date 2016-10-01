@@ -117,6 +117,9 @@ namespace Administration.WhatsNews
 
         }
 
+        /// <summary>
+        /// 新規項目をクリア
+        /// </summary>
         protected void initDisp()
         {
             // 新規項目をクリア

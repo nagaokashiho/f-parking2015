@@ -18,7 +18,7 @@
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" EnableScriptGlobalization="True" EnablePartialRendering="true">
             <Scripts>
                 <%--ScriptManager のバンドル スクリプトの詳細については、http://go.microsoft.com/fwlink/?LinkID=301884 を参照してください --%>
                 <%--Framework スクリプト--%>
@@ -39,20 +39,8 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <%-- BundleConfig.cs に設定 --%>
-        <%: Scripts.Render("~/bundles//bootstrap-datepicker") %>
-
-        <%-- DatePicker --%>
-        <script type="text/javascript">
-            $(function () {
-                $('.datepicker').datepicker({
-                    autoclose: 'true',
-                    format: 'yyyy/mm/dd',
-                    language: 'ja',
-                    todayHighlight: true
-                });
-            })
-        </script>
+        <%-- BundleConfig.cs の内容を取り込む --%>
+        <%: Scripts.Render("~/bundles/Site") %>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">

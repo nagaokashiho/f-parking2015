@@ -52,6 +52,9 @@ namespace Administration.Models
         }
     }
 
+    /// <summary>
+    /// What's New テーブル用クラス
+    /// </summary>
     public class WhatsNew
     {
         public int id { get; set; }
@@ -67,6 +70,63 @@ namespace Administration.Models
         public int OpenDays { get; set; }
     }
 
+    /// <summary>
+    /// 会議室マスタ用クラス
+    /// </summary>
+    public class Room
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string RyakuName { get; set; }
+    }
+
+    /// <summary>
+    /// 予約テーブル用クラス
+    /// </summary>
+    public class Reservation
+    {
+        public int Id { get; set; }
+        public string RoomId { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+        public string Comment { get; set; }
+        public string UserId { get; set; }
+        public bool DeleteFlag { get; set; }
+        public string AddUserId { get; set; }
+        public string EditUserId { get; set; }
+        public DateTime AddDateTime { get; set; }
+        public DateTime LastEditDateTime { get; set; }
+    }
+
+    /// <summary>
+    /// 予約表示用クラス（一覧）
+    /// </summary>
+    public class ReservationList
+    {
+        public string RoomId;
+        public string RoomName;
+        public string RoomRyakuName;
+        public Reservation[] Reservations;
+    }
+    /// <summary>
+    /// 予約表示用クラス（会議室）
+    /// </summary>
+    public class ReservationRoom
+    {
+        public DateTime ReservationDate;
+        public Reservation[] Reservations;
+    }
+    
+    /// <summary>
+    /// エラー情報用クラス
+    /// </summary>
+    public class ErrorInfo
+    {
+        public string Sql;
+        public string RetMessage;
+        public string RetStackTrace;
+        public string RetString;
+    }
 }
 
 #region ヘルパー

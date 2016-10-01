@@ -40,12 +40,17 @@ input[type="select"] {
 /* 追加 */
 input[type="date"],
 input[type="number"]{
-    max-width: 150px;
+    max-width: 110px;
 }
 
 input[type="url"],
 textarea{
     max-width: 400px;
+}
+
+input[type="time"]{
+    max-width: 90px;
+}
 }
 
 .txt-blue{
@@ -56,3 +61,12 @@ th, td{
     padding: 5px;
 }
 
+/* datepicker用 */
+.date-holiday .ui-state-default {
+    background-image:none;
+    background-color:#FF9999;
+}
+.date-saturday .ui-state-default {
+    background-image:none;
+    background-color:#66CCFF;
+}

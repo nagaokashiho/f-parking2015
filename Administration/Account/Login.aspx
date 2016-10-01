@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
+                            <div class="checkbox" style="margin-left:20px;">
                                 <asp:CheckBox runat="server" ID="RememberMe" />
                                 <asp:Label runat="server" AssociatedControlID="RememberMe">このアカウントを記憶する</asp:Label>
                             </div>

@@ -1,0 +1,263 @@
+﻿
+/****************************************************
+    貸し会議室管理用
+****************************************************/
+
+.tab-pane{
+    margin:5px 0;
+}
+
+/********** タブ中身 **********/
+.booking_main
+{
+	overflow : hidden;
+}
+
+/********** スケジュール表の枠 **********/
+.divTable
+{
+    margin :10px 7px;
+    width : 880px;         /* 880 = タイトル列(160px) + (1列の幅(30px) * (60m / 1列の時間(15m)) * 6h) */
+    line-height : 1.2;
+    overflow:hidden;
+}
+.divLeft {
+    float:left;
+	width:160px;
+}
+.divRight {
+    /*float:left;*/
+	width:720px;
+	overflow-x:scroll;
+	position:relative;
+}
+ 
+/********** スケジュール表 **********/
+.tblTitle, .tblBooking
+{
+    border-collapse : collapse;
+    border : 0px;
+    background-color : #7fffd4;
+}
+
+.tblTitle tr, .tblBooking tr
+{
+    padding : 0px;
+}
+
+.tblTitle td, .tblBooking td
+{
+    padding : 0px;
+}
+
+/** 列の表示／非表示 **/
+col.businessHours
+{
+    visibility : visible;
+}
+col.nonBusinessHours
+{
+    visibility : collapse;
+}
+
+/*** 左上の角のセル ***/
+td.corner
+{
+    width : 160px;
+    height : 39px;      /* タイトル行の高さ(20px) * 行数(2) - 1 */
+    border-right : 1px solid #000000;
+    border-top : 1px solid #000000;
+    border-left : 1px solid #000000;
+    border-bottom : 1px solid #000000;
+}
+
+div.div_corner
+{
+    width : 158px;      /* タイトル列の幅(160px) - 2px */
+    height : 39px;      /* タイトル行の高さ(20px) * 行数(2) - 2 */
+    background-color : #ECE9D8;
+    cursor : default;
+}
+
+/*** タイトル行の１行目 ***/
+td.title_row1
+{
+    width : 120px;      /* 列の幅(30px) * (60m / 1列の時間(15m)) */
+    height : 19px;      /* タイトル行の高さ(20px) - 1px */
+    border-top : 1px solid #000000;
+    border-bottom : 1px solid #000000;
+    border-right : 1px solid #ACA899;
+    overflow : hidden;
+    text-align : center;
+    background-color : #ECE9D8;
+    font-family : Tahoma;
+    font-size : 10pt;
+    -khtml-user-select : none;
+    -moz-user-select : none;
+    cursor : default;
+}
+
+div.div_row1
+{
+    height : 17px;      /* タイトル行の高さ(20px) - 3px */
+    width : 119px;      /* 列の幅(30px) * (60m / 1列の時間(15m)) - 1px */
+    overflow : hidden;
+}
+
+/*** タイトル行の２行目 ***/
+td.title_row2
+{
+    width : 30px;       /* 列の幅(30px) */
+    height : 19px;      /* タイトル行の高さ(20px) - 1px */
+    border-bottom : 1px solid #000000;
+    overflow : hidden;
+    text-align : center;
+    background-color : #ECE9D8;
+    font-family : Tahoma;
+    font-size : 10pt;
+    -khtml-user-select : none;
+    -moz-user-select : none;
+    cursor : default;
+}
+
+div.div_row2
+{
+    height : 18px;      /* タイトル行の高さ(20px) - 2px */
+    width : 29px;       /* 列の幅(30px) - 1px */
+    overflow : hidden;
+    /*color : Gray;*/
+}
+
+/*** テーブルの最終列の右端の線 ***/
+td.col_end
+{
+    border-right : 1px solid #000000;
+}
+
+/*** 列の右側の線 ***/
+td.col_other
+{
+    border-right : 1px solid #ACA899;
+}
+
+td.col_other2
+{
+    border-right : 1px dashed #ACA899;
+}
+
+/*** タイトル列 ***/
+td.title_col
+{
+    width : 160px;       /* タイトル列の幅(160px) */
+    border-right : 1px solid #000000;
+    border-left : 1px solid #000000;
+    border-bottom : 1px solid #000000;
+    background-color : #ECE9D8;
+    font-family : Tahoma;
+    font-size : 10pt;
+    color : #000000;
+    cursor : default;
+}
+
+div.div_title_col
+{
+    margin-left : 8px;
+    height : 39px;          /* 行の高さ(40px) - 1px */
+    line-height : 39px;     /* 行の高さ(40px) - 1px */
+    overflow : hidden;
+}
+
+/*** データ列の先頭（イベントブロック設定用） ***/
+td.data_col1
+{
+    width : 1px;
+    border-bottom : 1px solid #000000;
+    vertical-align : top;
+}
+
+div.div_data_col1_none
+{
+    height : 39px;          /* 行の高さ(40px) - 1px */
+    position : relative ;
+    width : 1px;
+    overflow : hidden;
+}
+
+div.div_data_col1
+{
+    height : 39px;          /* 行の高さ(40px) - 1px */
+    position : relative;
+    width : 1px;
+    overflow : visible;
+}
+
+/*** イベントブロック ***/
+div.event
+{
+    position : absolute;
+    height : 39px;          /* イベントブロックの高さ = 行の高さ(40px) - 1px */
+    border : 1px solid #000000;
+    /*background-color : #FFFFFF;*/
+    white-space : nowrap;
+    overflow : hidden;
+    font-family : Tahoma;
+    font-size : 11px;
+    display : block;
+    padding-left : 1px;
+}
+
+/*** データ列（タイムテーブル）先頭列 ***/
+td.data_col2
+{
+    border-bottom : 1px solid #000000;
+    border-right: 1px dashed #ACA899;
+    width : 29px;           /* 列の幅(30px) - 1px */
+    cursor : pointer;
+}
+  
+div.div_data_col2
+{
+    display : block;
+    width : 28px;           /* 列の幅(29px) - 1px */
+    height : 39px;          /* 行の高さ(40px) - 1px */
+}
+
+/*** データ列（タイムテーブル）２列目以降 ***/
+td.data_col_other
+{
+    border-bottom : 1px solid #000000;
+    width : 30px;           /* 列の幅(30px) */
+    
+    /*background-color : #FFFFFF;   2012.11.27 */
+    /*cursor : pointer;             2012.12.06*/
+}
+
+div.div_data_col_other
+{
+    display : block;
+    width : 29px;           /* 列の幅(30px) - 1px */
+    height : 39px;          /* 行の高さ(40px) - 1px */
+}
+
+
+/*** 使用用途入力ダイアログ ***/
+div#dialog-yoto { text-align:left; }
+div#dialog-yoto input { display:block; }
+div#dialog-yoto input.text { margin-bottom:12px; width:95%; padding: .4em; background-color:#ffffff; }
+div#dialog-yoto fieldset { padding:0; border:0; margin-top:0; } /* 2015.01.16 margin-top:25px → 0 */
+div#dialog-yoto .ui-dialog .ui-state-error { padding: .3em; }
+div#dialog-yoto .validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+/*** 編集ダイアログ ***/
+div#dialog-edit { text-align:left; }
+div#dialog-edit label, div#dialog-edit input { display:block; }
+div#dialog-edit input.text { margin-bottom:12px; width:95%; padding: .4em; background-color:#ffffff; }
+div#dialog-edit fieldset { padding:0; border:0; margin-top:0; } /* 2015.01.16 margin-top:25px → 0 */
+div#dialog-edit .ui-dialog .ui-state-error { padding: .3em; }
+div#dialog-edit .validateTips { border: 1px solid transparent; padding: 0.3em; }
+div#dialog-edit select { margin-bottom:12px; }
+
+/*** 2015.01.16 追加 ***/
+/*** 注釈のフォント ***/
+.red {color:Red; }
+.smaller {font-size:12px; }

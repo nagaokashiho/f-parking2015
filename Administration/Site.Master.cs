@@ -81,6 +81,10 @@ namespace Administration
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
+        /// <summary>
+        /// ログイン中のユーザー名を取得する
+        /// </summary>
+        /// <returns></returns>
         protected string GetDispUserName()
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
