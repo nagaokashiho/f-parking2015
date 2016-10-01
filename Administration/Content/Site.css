@@ -52,3 +52,7 @@ textarea{
     color:blue;
 }
 
+th, td{
+    padding: 5px;
+}
+

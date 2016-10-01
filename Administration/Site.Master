@@ -12,6 +12,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
+    <%-- Bundle.config の内容を取り込む --%>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
@@ -38,8 +39,10 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <%: Scripts.Render("~/bundles/bootstrap") %>
-        <%: Styles.Render("/Content/css/bootstrap-datepicker") %>
+        <%-- BundleConfig.cs に設定 --%>
+        <%: Scripts.Render("~/bundles//bootstrap-datepicker") %>
+
+        <%-- DatePicker --%>
         <script type="text/javascript">
             $(function () {
                 $('.datepicker').datepicker({

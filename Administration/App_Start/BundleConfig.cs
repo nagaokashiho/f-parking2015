@@ -34,13 +34,10 @@ namespace Administration
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
-            // Datepicker 用に追加　*****************************************
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            // datepicker
+            bundles.Add(new ScriptBundle("~/bundles//bootstrap-datepicker").Include(
                         "~/Scripts/bootstrap-datepicker.js",
                         "~/Scripts/locales/bootstrap-datepicker.ja.min.js"));
-            bundles.Add(new StyleBundle("~/Content/css/bootstrap-datepicker").Include(
-                     "~/Content/bootstrap-datepicker.css"));
-            // Datepicker 用に追加　*****************************************
 
 
             ScriptManager.ScriptResourceMapping.AddDefinition(

@@ -12,7 +12,7 @@
         <div class="form-horizontal">
             <h4>ユーザーを管理します。</h4>
             <hr />
-            <div class="form-group">
+            <div class="container">
                 <asp:GridView ID="UserGridView" runat="server" AutoGenerateColumns="False"
                     ItemType="Administration.Models.ApplicationUser" DataKeyNames="Id"
                     SelectMethod="SelectUser" UpdateMethod="UpdateUser" DeleteMethod="DeleteUser"
@@ -64,7 +64,7 @@
                                     Text='<%# BindItem.DispUserName %>' />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="管理者" ItemStyle-Width="50">
+                        <asp:TemplateField HeaderText="管理者" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="IsAdmin" runat="server" Enabled="false" />
                             </ItemTemplate>

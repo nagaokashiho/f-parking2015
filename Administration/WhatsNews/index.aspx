@@ -12,7 +12,7 @@
         <div class="form-horizontal">
             <h4>What's New を管理します。</h4>
             <hr />
-            <div class="form-group">
+            <div class="container">
                 <asp:GridView ID="NewsGridView" runat="server" AutoGenerateColumns="False"
                     ItemType="Administration.Models.WhatsNew" DataKeyNames="id"
                     SelectMethod="SelectNews" UpdateMethod="UpdateNews" DeleteMethod="DeleteNews"
@@ -45,7 +45,7 @@
                                     CssClass="text-danger" Display="Dynamic" ErrorMessage="掲載日付は必須です。" />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="No" ItemStyle-Width="40">
+                        <asp:TemplateField HeaderText="No" ItemStyle-Width="40" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <%#: Item.No %>
                             </ItemTemplate>
@@ -87,7 +87,7 @@
                                     Text='<%# BindItem.Url %>' />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="公開フラグ" ItemStyle-Width="50">
+                        <asp:TemplateField HeaderText="公開フラグ" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="chkOpenFlag" runat="server" Checked='<%# Item.OpenFlag %>' Enabled="false" />
                             </ItemTemplate>
@@ -95,7 +95,7 @@
                                 <asp:CheckBox ID="chkOpenFlag" runat="server" Checked='<%# BindItem.OpenFlag %>'/>
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="公開日数" ItemStyle-Width="40">
+                        <asp:TemplateField HeaderText="公開日数" ItemStyle-Width="40" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <%#: Item.OpenDays %>
                             </ItemTemplate>

@@ -15,27 +15,27 @@
         <div class="form-horizontal">
             <h4>貸し会議室を管理します。</h4>
             <hr />
-            <div class="form-group">
+            <div class="container">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tabList">一　覧</a></li>
-                    <li><a href="#tabRoom">会議室</a></li>
+                    <li class="active"><a href="#tabList" class="nav-link" data-toggle="tab">一　覧</a></li>
+                    <li><a href="#tabRoom" class="nav-link" data-toggle="tab">会議室</a></li>
                 </ul>
                 <div id="reserve" class="tab-content">
-                    <div id="tabList" class="tab-pane fade in active" runat="server">
-                        <div id="reserve_day1" class="reserve_day">
-<%--                            <table border="0" cellspacing="0" cellpadding="0" width="900">
+                    <div id="tabList" class="tab-pane fade in active">
+                        一覧タブです。
+<%--                        <div id="reserve_day1" class="reserve_day">
+                            <table border="0" cellspacing="0" cellpadding="0" width="900">
                                 <tr>
                                     <td width="70px">表示日付：</td>
                                     <td width="140px"><input id="txt_dispDate1" class="txt_Date" name="txt_dispDate1" type="text" runat="server" /><a onclick="onclick_Calendar(1);"><img id="img_calendar1" src="../img/calendar.jpg" alt="" /></a></td>
-<%--                                                        <asp:Button runat="server" OnClick="LogIn" Text="ログイン" CssClass="btn btn-default" />--%>
                                     <td width="55px"><asp:ImageButton id="btn_reload1" name="btn_reload" runat="server" ImageUrl="img/replay_off.jpg" width="45" height="45" Text="再表示"  OnClientClick="dispLoading(1);" /></td>
                                     <td width="100px"><asp:ImageButton id="btnStart1" name="btnStart" runat="server" ImageUrl="img/start2_off.jpg" width="95" height="35" Text="設定開始" OnClientClick="onclick_add_List(1); return false; " /></td>   <!-- "return false;" は、IE11以降対応のため！ -->
                                     <td width="100px"><asp:ImageButton id="btnEnd1" name="btnEnd" runat="server" ImageUrl="img/end2_off.jpg" width="95" height="35" Text="設定終了" style="visibility:hidden;" /></td>
                                     <td width="100px"><asp:ImageButton id="btnCancel1" name="btnCancel" runat="server" ImageUrl="img/cancel_off.jpg" width="95" height="35" Text="キャンセル" OnClientClick="onclick_add_List(3); return false; " style="visibility:hidden;" /></td>   <!-- "return false;" は、IE11以降対応のため！ -->
                                 </tr>
-                            </table>--%>
+                            </table>
                                 
-                        </div>
+                        </div>--%>
 <%--                        <div id="booking_main1" class="booking_main">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
@@ -69,8 +69,9 @@
                             <asp:Button id="btnDummy1" name="btnDummy" runat="server" Text="トリガ用ダミーボタン" style="visibility:hidden;" />
                         </div>--%>
                     </div>
-<%--                    <div id="tab_shisetsu" class="tab_member" runat="server">
-                        <div id="reserve_day2" class="reserve_day">
+                    <div id="tabRoom" class="tab-pane fade">
+                        会議室タブです。
+<%--                        <div id="reserve_day2" class="reserve_day">
                             <table border="0" cellspacing="0" cellpadding="0" width="900">
                                 <tr style="height:30px">
                                     <td width="70px"> 施　　設：</td>
@@ -86,8 +87,8 @@
                                     <td><input id="txt_dispDate2" class="txt_Date" name="txt_dispDate" type="text" runat="server" /><a onclick="onclick_Calendar(2);"><img id="img_calendar2" src="../img/calendar.jpg" alt="" /></a></td>
                                 </tr>
                             </table>
-                        </div>
-                        <div id="booking_main2" class="booking_main">
+                        </div>--%>
+<%--                        <div id="booking_main2" class="booking_main">
                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
                                     <div id="divTable2" class="divTable">
@@ -118,8 +119,8 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <asp:Button id="btnDummy2" name="btnDummy" runat="server" Text="トリガ用ダミーボタン" style="visibility:hidden;" />
-                        </div>
-                    </div>--%>
+                        </div>--%>
+                    </div>
                 </div>
             </div>
         </div>
