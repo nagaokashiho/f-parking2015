@@ -4,9 +4,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
-    <p class="text-danger">
-        <asp:Literal runat="server" ID="ErrorMessage" ViewStateMode="Disabled" />
-    </p>
+    <p class="text-danger"><asp:Literal runat="server" ID="ErrorMessage" ViewStateMode="Disabled" /></p>
 
     <section id="userForm">
         <div class="form-horizontal">

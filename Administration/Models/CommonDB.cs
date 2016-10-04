@@ -34,12 +34,8 @@ namespace Administration.Models
         /// <param name="message"></param>
         /// <param name="errorInfo"></param>
         /// <returns></returns>
-        public bool fncGetData_Reservations_Date(ref Reservation[] reservations, string startDateTime, string endDateTime, string sisetsuId, string userID, ref string message, ref ErrorInfo errorInfo)
+        public bool fncGetData_Reservations_Date(ref List<Reservation> reservations, string startDateTime, string endDateTime, string sisetsuId, string userID, ref string message, ref ErrorInfo errorInfo)
         {
-            int iCnt = 0;
-            int intRecCounts = 0;
-            DataRow drDtRow = null;
-
             //SQL設定
             System.Text.StringBuilder strSQL = new System.Text.StringBuilder();
 
@@ -47,7 +43,7 @@ namespace Administration.Models
             strSQL.AppendLine("FROM ");
             strSQL.AppendLine("Reservations ");
             strSQL.AppendLine("WHERE ");
-            strSQL.AppendLine("Reservations.DeleteFlag = 0 ");
+            strSQL.AppendLine("Reservations.DeleteFlag = 'False' ");
 
             //「期間開始日時」が指定されている場合
             if (!string.IsNullOrEmpty(startDateTime))
@@ -79,38 +75,32 @@ namespace Administration.Models
 
             strSQL.AppendLine("ORDER BY Reservations.RoomId ");
 
-
             //========================== SQL実行 ===============================
             DataSet dsDtSet = GetDataSet(strSQL.ToString(), ref errorInfo);
             //==================================================================
 
             try
             {
-                //「データ件数」を設定
-                intRecCounts = dsDtSet.Tables[0].Rows.Count;
-
                 //データが存在したか？
-                if (intRecCounts > 0)
+                if (dsDtSet.Tables[0].Rows.Count > 0)
                 {
-                    //データ件数分
-                    for (iCnt = 0; iCnt < intRecCounts; iCnt++)
+                    foreach(DataRow drDtRow in dsDtSet.Tables[0].Rows)
                     {
-                        //結果を参照
-                        drDtRow = dsDtSet.Tables[0].Rows[iCnt];
-                        //構造体に画面情報を格納
-                        Array.Resize(ref reservations, iCnt + 1);
+                        reservations.Add(new Reservation()
+                        {
+                            Id = (int)fncChangeNull_To_Numeric(drDtRow["Id"]),
+                            RoomId = fncChangeNull_To_String(drDtRow["RoomId"]),
+                            StartDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["StartDateTime"]),
+                            EndDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["EndDateTime"]),
+                            Comment = fncChangeNull_To_String(drDtRow["Comment"]),
+                            UserId = fncChangeNull_To_String(drDtRow["UserId"]),
+                            DeleteFlag = (bool)fncChangeNull_To_Bit(drDtRow["DeleteFlag"]),
+                            AddUserId = fncChangeNull_To_String(drDtRow["AddUserId"]),
+                            EditUserId = fncChangeNull_To_String(drDtRow["EditUserId"]),
+                            AddDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["AddDateTime"]),
+                            LastEditDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["LastEditDateTime"])
+                        });
 
-                        reservations[iCnt].Id = (int)fncChangeNull_To_Numeric(drDtRow["Id"]);
-                        reservations[iCnt].RoomId = fncChangeNull_To_String(drDtRow["RoomId"]);
-                        reservations[iCnt].StartDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["StartDateTime"]);
-                        reservations[iCnt].EndDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["EndDateTime"]);
-                        reservations[iCnt].Comment = fncChangeNull_To_String(drDtRow["Comment"]);
-                        reservations[iCnt].UserId = fncChangeNull_To_String(drDtRow["UserId"]);
-                        reservations[iCnt].DeleteFlag = (bool)fncChangeNull_To_Bit(drDtRow["DeleteFlag"]);
-                        reservations[iCnt].AddUserId = fncChangeNull_To_String(drDtRow["AddUserId"]);
-                        reservations[iCnt].EditUserId = fncChangeNull_To_String(drDtRow["EditUserId"]);
-                        reservations[iCnt].AddDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["AddDateTime"]);
-                        reservations[iCnt].LastEditDateTime = (DateTime)fncChangeNull_To_Date(drDtRow["LastEditDateTime"]);
                     }
                     //戻り値設定
                     return true;
@@ -131,6 +121,131 @@ namespace Administration.Models
             }
         }
 
+        /// <summary>
+        /// 【予約テーブル】『Reservations』に指定範囲内に既に予約データが登録されているかチェックする。
+        /// </summary>
+        /// <param name="startDate">検索開始日付</param>
+        /// <param name="startTime">検索開始時間</param>
+        /// <param name="endDate">検索終了日付</param>
+        /// <param name="endTime">検索終了時間</param>
+        /// <param name="sisetsuId">施設コード</param>
+        /// <param name="intOutYoyakuID">検索から除外する「予約ID」</param>
+        /// <param name="strMsg">エラーメッセージ</param>
+        /// <param name="errorInfo">エラー情報用構造体</param>
+        /// <returns>True = 該当データあり, False = 該当データなし</returns>
+        public bool fncCheck_YoyakuData_TimeRange_UMU(string startDate, string startTime, string endDate, string endTime, string sisetsuId, int intOutYoyakuID, ref string strMsg, ref ErrorInfo errorInfo)
+        {
+            //SQL設定
+            System.Text.StringBuilder strSQL = new System.Text.StringBuilder();
+
+            strSQL.AppendLine("SELECT * ");
+            strSQL.AppendLine("FROM ");
+            strSQL.AppendLine("Reservations ");
+            strSQL.AppendLine("WHERE ");
+            strSQL.AppendLine("(");
+
+            //今回指定の「開始時刻」とDB「予約開始日時」が同じデータが既に登録されている
+            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) = '" + startTime + "') ");
+            strSQL.AppendLine("OR ");
+            //今回指定の「終了時刻」とDB「予約終了日時」が同じデータが既に登録されている
+            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) = '" + endTime + "') ");
+            strSQL.AppendLine("OR ");
+
+            //DB「予約開始日時」に、今回指定の「開始時刻」よりが大きく、今回指定の「終了時刻」より小さいデータが既に登録されている
+            //※DB「予約開始日時」をまたぐか？
+            strSQL.AppendLine("(");
+            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) > '" + startTime + "') ");
+            strSQL.AppendLine("AND ");
+            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) < '" + endTime + "') ");
+            strSQL.AppendLine(") ");
+
+            strSQL.AppendLine("OR ");
+
+            //DB「予約終了日時」に、今回指定の「開始時刻」よりが大きく、今回指定の「終了時刻」より小さいデータが既に登録されている
+            //※DB「予約終了日時」をまたぐか？
+            strSQL.AppendLine("(");
+            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) > '" + startTime + "') ");
+            strSQL.AppendLine("AND ");
+            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) < '" + endTime + "') ");
+            strSQL.AppendLine(") ");
+
+            strSQL.AppendLine("OR ");
+
+            //DB「予約開始日時」が、今回指定の「開始時刻」より大きく、しかも、DB「予約終了日時」が、今回指定の「終了時刻」より小さいデータが既に登録されている
+            //※DB「予約終了日時」を完全に含んでしまう？
+            strSQL.AppendLine("(");
+            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) > '" + startTime + "') ");
+            strSQL.AppendLine("AND ");
+            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) < '" + endTime + "') ");
+            strSQL.AppendLine(") ");
+
+            strSQL.AppendLine("OR ");
+
+            //DB「予約開始日時」が、今回指定の「開始時刻」より小さく、しかも、DB「予約終了日時」が、今回指定の「終了時刻」より大きいデータが既に登録されている
+            //※DB「予約終了日時」に完全に含まれてしまう？
+            strSQL.AppendLine("(");
+            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) < '" + startTime + "') ");
+            strSQL.AppendLine("AND ");
+            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) > '" + endTime + "') ");
+            strSQL.AppendLine(") ");
+
+            strSQL.AppendLine(") ");
+
+            //「会議室Id」が指定されているか？
+            if (!string.IsNullOrEmpty(sisetsuId))
+            {
+                strSQL.AppendLine("AND ");
+                strSQL.AppendLine("RoomId = '" + sisetsuId + "' ");
+            }
+
+            //検索から除外する「予約ID」が指定されているか？
+            if (intOutYoyakuID > 0)
+            {
+                strSQL.AppendLine("AND ");
+                strSQL.AppendLine("Id <> " + intOutYoyakuID.ToString() + " ");
+            }
+
+            strSQL.AppendLine("AND ");
+            strSQL.AppendLine("DeleteFlag = 'False' ");
+
+            //「施設コード」が指定されているか？
+            if (!string.IsNullOrEmpty(sisetsuId))
+            {
+                strSQL.AppendLine("ORDER BY StartDateTime ");
+            }
+            else
+            {
+                strSQL.AppendLine("ORDER BY RoomId, StartDateTime ");
+            }
+
+            //========================== SQL実行 ===============================
+            DataSet dsDtSet = GetDataSet(strSQL.ToString(), ref errorInfo);
+            //==================================================================
+
+            try
+            {
+                if (dsDtSet.Tables[0].Rows.Count > 0)
+                {
+                    //戻り値設定
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                errorInfo.Sql = strSQL.ToString();              //エラー発生SQL内容
+                errorInfo.RetMessage = ex.Message;              //エラーメッセージ
+                errorInfo.RetStackTrace = ex.StackTrace;        //メソッドが呼び出された順番
+                errorInfo.RetString = ex.ToString();            //例外の内容
+                return false;
+            }
+
+        }
+
+ 
         /// <summary>
         /// DataSetを取得する。
         /// </summary>

@@ -61,12 +61,20 @@ th, td{
     padding: 5px;
 }
 
-/* datepicker用 */
-.date-holiday .ui-state-default {
-    background-image:none;
-    background-color:#FF9999;
+/* bootstrap datepicker用 */
+td.date-holiday {
+    color:orange;
 }
-.date-saturday .ui-state-default {
-    background-image:none;
-    background-color:#66CCFF;
+td.date-sunday {
+    color:red;
 }
+td.date-saturday {
+    color:blue;
+}
+
+/* bootstrap popover用 */
+.popover {
+    max-width: 500px; 
+
+}
+

@@ -7,6 +7,33 @@
     margin:5px 0;
 }
 
+table{
+    width:100%;
+}
+
+/* モーダルダイアログ用 */
+.modal-header{
+    border-radius: 5px 5px 0px 0px;
+    background-color: #0a0eba;
+    color: #eee;
+    font-size:18px;
+}
+.modal-body{
+    background-color: #ffffff;
+    color: #000;    
+}
+.modal-footer{
+    border-radius: 0px 0px 5px 5px;
+    background-color: #eee;
+    color: #666;    
+}
+.modal-dialog-center {
+    padding-top: 10%;
+}
+#txtYoto, #txtYotoEdit, #txtUse{
+    max-width:570px;
+}
+
 /********** タブ中身 **********/
 .booking_main
 {
@@ -90,7 +117,7 @@ td.title_row1
     overflow : hidden;
     text-align : center;
     background-color : #ECE9D8;
-    font-family : Tahoma;
+    /*font-family : Tahoma;*/
     font-size : 10pt;
     -khtml-user-select : none;
     -moz-user-select : none;
@@ -99,7 +126,7 @@ td.title_row1
 
 div.div_row1
 {
-    height : 17px;      /* タイトル行の高さ(20px) - 3px */
+    height : 19px;      /* タイトル行の高さ(20px) - 3px */
     width : 119px;      /* 列の幅(30px) * (60m / 1列の時間(15m)) - 1px */
     overflow : hidden;
 }
@@ -113,7 +140,7 @@ td.title_row2
     overflow : hidden;
     text-align : center;
     background-color : #ECE9D8;
-    font-family : Tahoma;
+    /*font-family : Tahoma;*/
     font-size : 10pt;
     -khtml-user-select : none;
     -moz-user-select : none;
@@ -122,7 +149,7 @@ td.title_row2
 
 div.div_row2
 {
-    height : 18px;      /* タイトル行の高さ(20px) - 2px */
+    height : 19px;      /* タイトル行の高さ(20px) - 2px */
     width : 29px;       /* 列の幅(30px) - 1px */
     overflow : hidden;
     /*color : Gray;*/
@@ -153,7 +180,7 @@ td.title_col
     border-left : 1px solid #000000;
     border-bottom : 1px solid #000000;
     background-color : #ECE9D8;
-    font-family : Tahoma;
+    /*font-family : Tahoma;*/
     font-size : 10pt;
     color : #000000;
     cursor : default;
@@ -200,7 +227,7 @@ div.event
     /*background-color : #FFFFFF;*/
     white-space : nowrap;
     overflow : hidden;
-    font-family : Tahoma;
+    /*font-family : Tahoma;*/
     font-size : 11px;
     display : block;
     padding-left : 1px;

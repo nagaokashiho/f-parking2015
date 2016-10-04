@@ -36,16 +36,19 @@ namespace Administration
 
             // サイト共通（datepicker, timepickerなど）
             bundles.Add(new ScriptBundle("~/bundles/Site").Include(
+                        "~/Scripts/jquery-ui.js",
+                        "~/Scripts/jquery.blockUI.js",
                         "~/Scripts/bootstrap-datepicker.js",
                         "~/Scripts/locales/bootstrap-datepicker.ja.min.js",
                         "~/Scripts/bootstrap-timepicker.js",
+                        "~/Scripts/bootstrap-select.js",
                         "~/Scripts/Site.js",
                         "~/Scripts/HolidayChk.js"));
 
-            // 貸し会議室管理用（selectなど）
+            // 貸し会議室管理用
             bundles.Add(new ScriptBundle("~/bundles/room").Include(
-                        "~/Scripts/bootstrap-select.js",
-                        "~/Scripts/room.js"));
+                        "~/Scripts/room.js",
+                        "~/Scripts/rgbcolor.js"));
 
 
             ScriptManager.ScriptResourceMapping.AddDefinition(

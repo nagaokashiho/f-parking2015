@@ -22,27 +22,12 @@ function pageLoad() {
     Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(pageLoaded);
 }
 
-function onclick_chkManualMode() {
-    if (document.getElementById("chkManualMode").checked) {
-        document.getElementById("reserve_bg2").style.display = "block";
-    } else {
-        document.getElementById("reserve_bg2").style.display = "none";
-    }
-}
-
-// bootstrap-select
-$(window).on('load', function () {
-    $('.selectpicker').selectpicker({
-        'selectedText': 'cat'
-    });
-});
-
 function pageLoaded(sender, args) {
 
     // スクロールバーを設定する
     //    setScrollBar();
     table_scroll_List();                // 一覧タブ
-    table_scroll_Shisetsu();            // 施設タブ
+    table_scroll_Shisetsu();            // 会議室タブ
 
     // 入力エラーでない場合のみ、初期化する
     if (document.getElementById("hid_addMode1").value == "") {
@@ -87,6 +72,9 @@ function pageLoaded(sender, args) {
         // 閲覧モードの場合は、処理を抜ける
         var editMode = document.getElementById("hid_editMode1").value;
         if (editMode.toLowerCase() == "false") return false;
+
+        // popoverを閉じる
+        $('[data-toggle="popover"]').popover("hide");
 
         // ヘッダ行が2行あるので、3行目（row=2）からがデータ行となる
         if ((row > 1)) {
@@ -138,24 +126,29 @@ function pageLoaded(sender, args) {
                     // 自分が予約したデータのみ修正可能
                     var c = new RGBColor(tbl.rows[row].cells[col].style.backgroundColor);
                     if (c.toHex().toUpperCase() == '#0000FF') {
-                        // 背景色を変更しないので、クリックしたセルの位置だけ保存する
+                         // 背景色を変更しないので、クリックしたセルの位置だけ保存する
                         document.getElementById("hid_clickRow1").value = row;
                         document.getElementById("hid_clickColStart1").value = col;
                         document.getElementById("hid_clickColEnd1").value = col;
 
-                        var tips = tbl.rows[row].cells[col].title;
-                        tips = tips.replace(/\r\n?/g, "\n");
-                        var tip = tips.split("\n");
-                        document.getElementById("name").value = (tip[0] == undefined) ? "" : tip[0];
+                        //var tips = tbl.rows[row].cells[col].title;
+                        //tips = tips.replace(/\r\n?/g, "\n");
+                        //var tip = tips.split("\n");
+                        //document.getElementById("txtYotoEdit").value = (tip[0] == undefined) ? "" : tip[0];
 
-                        var time = (tip[1] == undefined) ? "" : tip[1];
-                        selected_option("time_from", time.substr(1, 2));
-                        selected_option("minutes_from", time.substr(4, 2));
-                        selected_option("time_to", time.substr(9, 2));
-                        selected_option("minutes_to", time.substr(12, 2));
+                        //var time = (tip[1] == undefined) ? "" : tip[1];
+                        //document.getElementById("txtFrom").value = time.substr(1, 5);
+                        //document.getElementById("txtTo").value = time.substr(9, 5);
 
-                        document.getElementById("edit_yoto").value = (tip[2] == undefined) ? "" : tip[2];
-                        $("#dialog-edit").dialog("open");
+                        var from = tbl.rows[row].cells[col].getAttribute("hide-start");
+                        var to = tbl.rows[row].cells[col].getAttribute("hide-end");
+                        $('#selRoomEdit').selectpicker('val', tbl.rows[row].cells[col].getAttribute("hide-roomId"));
+                        $("#txtDate").datepicker("setDate", from.substr(0, 10));
+                        $("#txtFrom").timepicker("setTime", from.substr(11, 5));
+                        $("#txtTo").timepicker("setTime", to.substr(11, 5));
+                        document.getElementById("txtYotoEdit").value = tbl.rows[row].cells[col].getAttribute("hide-comment");
+
+                        $("#dialogEdit").modal();
                         return false;
                     }
                     break;
@@ -163,7 +156,7 @@ function pageLoaded(sender, args) {
         }
     });
 
-    // テーブルのセルをクリックしたときの処理（施設）
+    // テーブルのセルをクリックしたときの処理（会議室）
     $("#tblBooking2 td").click(function (event) {
         // currentTarget のindex()で列番号を取得
         var col = $(event.currentTarget).index();
@@ -177,6 +170,9 @@ function pageLoaded(sender, args) {
         // 閲覧モードの場合は、処理を抜ける
         var editMode = document.getElementById("hid_editMode2").value;
         if (editMode.toLowerCase() == "false") return false;
+
+        // popoverを閉じる
+        $('[data-toggle="popover"]').popover("hide");
 
         // ヘッダ行が2行あるので、3行目（row=2）からがデータ行となる
         if ((row > 1)) {
@@ -236,16 +232,13 @@ function pageLoaded(sender, args) {
                         var tips = tbl.rows[row].cells[col].title;
                         tips = tips.replace(/\r\n?/g, "\n");
                         var tip = tips.split("\n");
-                        document.getElementById("name").value = (tip[0] == undefined) ? "" : tip[0];
+                        document.getElementById("txtYotoEdit").value = (tip[0] == undefined) ? "" : tip[0];
 
                         var time = (tip[1] == undefined) ? "" : tip[1];
-                        selected_option("time_from", time.substr(1, 2));
-                        selected_option("minutes_from", time.substr(4, 2));
-                        selected_option("time_to", time.substr(9, 2));
-                        selected_option("minutes_to", time.substr(12, 2));
+                        document.getElementById("txtFrom").value = time.substr(1, 5);
+                        document.getElementById("txtTo").value = time.substr(9, 5);
 
-                        document.getElementById("edit_yoto").value = (tip[2] == undefined) ? "" : tip[2];
-                        $("#dialog-edit").dialog("open");
+                        $("#dialogEdit").modal();
                         return false;
                     }
                     break;
@@ -254,18 +247,7 @@ function pageLoaded(sender, args) {
     });
 
     // 『Loading...』消去
-    //$.unblockUI();
-}
-
-// ドロップダウンを選択状態にする
-function selected_option(control_id, control_value) {
-    var pulldown_option = document.getElementById(control_id).getElementsByTagName('option');
-    for (i = 0; i < pulldown_option.length; i++) {
-        if (pulldown_option[i].value == control_value) {
-            pulldown_option[i].selected = true;
-            break;
-        }
-    }
+    $.unblockUI();
 }
 
 // スクロールバーを設定する（一覧タブ）
@@ -304,7 +286,7 @@ function table_scroll_List() {
     document.getElementById("hid_scrollLeft1").value = scrollLeft;
 }
 
-// スクロールバーを設定する（施設タブ）
+// スクロールバーを設定する（会議室タブ）
 // ただし、非表示のテーブルのスクロール位置は設定できない
 function table_scroll_Shisetsu() {
     var div = document.getElementById("divRight2");
@@ -343,9 +325,9 @@ function table_scroll_Shisetsu() {
 function dispLoading(tabNo) {
     // 『Loading...』表示
     $.blockUI({
-        message: '<div><img src="../img/ajax-loader.gif"></div>'
+        message: '<div><img src="/Images/ajax-loader.gif"></div>'
     });
-    // スクロールバーの位置をクリアする
+    //スクロールバーの位置をクリアする
     if (tabNo == 1) {
         document.getElementById("hid_scrollLeft1").value = "";
     }
@@ -355,7 +337,7 @@ function dispLoading(tabNo) {
 }
 
 
-// 施設予約追加のためのボタンのイベント処理（一覧）
+// 会議室予約追加のためのボタンのイベント処理（一覧）
 function onclick_add_List(mode) {
 
     // スクロールバーの位置を保存する
@@ -397,7 +379,7 @@ function onclick_add_List(mode) {
     window.event.returnValue = false;
 }
 
-// 施設予約追加のためのボタンのイベント処理（施設）
+// 会議室予約追加のためのボタンのイベント処理（会議室）
 function onclick_add_Shisetsu(mode) {
 
     // スクロールバーの位置を保存する
@@ -450,7 +432,7 @@ function setScrollLeft_List() {
     document.getElementById("hid_scrollLeft1").value = div.scrollLeft;
 }
 
-// スクロールバーの位置を保存する（施設）
+// スクロールバーの位置を保存する（会議室）
 function setScrollLeft_Shisetsu() {
     var div = document.getElementById("divRight2");
     document.getElementById("hid_scrollLeft2").value = div.scrollLeft;
@@ -478,7 +460,7 @@ function initButton_List() {
     document.getElementById("hid_yoto1").value = "";
 }
 
-// ボタンを初期表示にする（施設）
+// ボタンを初期表示にする（会議室）
 function initButton_Shisetsu() {
     var editMode = document.getElementById("hid_editMode2").value;
     if (editMode.toLowerCase() == "false") {
@@ -515,7 +497,7 @@ function changeBackColor_List(row, colStart, colEnd, color) {
     document.getElementById("hid_clickColEnd1").value = colEnd;
 }
 
-// 指定されたセルの背景色を変更する（施設）
+// 指定されたセルの背景色を変更する（会議室）
 function changeBackColor_Shisetsu(row, colStart, colEnd, color) {
     var tab = document.getElementById("tblBooking2");
     for (col = parseInt(colStart) ; col <= parseInt(colEnd) ; col++) {
@@ -526,43 +508,44 @@ function changeBackColor_Shisetsu(row, colStart, colEnd, color) {
     document.getElementById("hid_clickColEnd2").value = colEnd;
 }
 
-// 更新のときの入力エラーの処理（再表示）（一覧）
+// 更新のときの入力エラーの処理（再表示）
 function showEditDialogWithError(tf, mf, tt, mt, yoto, msg) {
-    if (document.getElementById("hid_selected_tab").value == "1") {
-        var row = document.getElementById("hid_clickRow1").value;
-        var col = document.getElementById("hid_clickColStart1").value;
-        var tbl = document.getElementById("tblBooking1");
-    } else {
-        var row = document.getElementById("hid_clickRow2").value;
-        var col = document.getElementById("hid_clickColStart2").value;
-        var tbl = document.getElementById("tblBooking2");
-    }
+    // 登録者名を表示しないのでコメントアウト
+    //if (document.getElementById("hid_selected_tab").value == "1") {
+    //    var row = document.getElementById("hid_clickRow1").value;
+    //    var col = document.getElementById("hid_clickColStart1").value;
+    //    var tbl = document.getElementById("tblBooking1");
+    //} else {
+    //    var row = document.getElementById("hid_clickRow2").value;
+    //    var col = document.getElementById("hid_clickColStart2").value;
+    //    var tbl = document.getElementById("tblBooking2");
+    //}
 
-    var tips = tbl.rows[row].cells[col].title;
-    tips = tips.replace(/\r\n?/g, "\n");
-    var tip = tips.split("\n");
-    document.getElementById("name").value = (tip[0] == undefined) ? "" : tip[0];
+    //var tips = tbl.rows[row].cells[col].title;
+    //tips = tips.replace(/\r\n?/g, "\n");
+    //var tip = tips.split("\n");
+    //document.getElementById("name").value = (tip[0] == undefined) ? "" : tip[0];
 
-    selected_option("time_from", tf);
-    selected_option("minutes_from", mf);
-    selected_option("time_to", tt);
-    selected_option("minutes_to", mt);
-
-    document.getElementById("edit_yoto").value = yoto;
-    $("#time_from").addClass("ui-state-error");
+    document.getElementById("txtFrom").value = tf + ":" + mf;
+    document.getElementById("txtTo").value = tt + ":" + mt;
+    document.getElementById("txtYotoEdit").value = yoto;
+    $("#txtFrom").addClass("ui-state-error");
     updateTips(msg);
 
-    $("#dialog-edit").dialog("open");
+    $("#dialogEdit").modal();
 }
 
+// 編集ダイアログ用
 function updateTips(t) {
     var tips = $(".validateTips");
-    tips
-            .text(t)
-            .addClass("ui-state-highlight");
-    setTimeout(function () {
-        tips.removeClass("ui-state-highlight", 1500);
-    }, 500);
+    tips.text(t);
+    // 消す時の動きが滑らかでないので、ハイライトは付けない　2016.10.03
+    //tips
+    //        .text(t)
+    //        .addClass("ui-state-highlight");
+    //setTimeout(function () {      
+    //    tips.removeClass("ui-state-highlight", 1500);
+    //}, 500);
 }
 
 function checkLength(o, n, min, max) {
@@ -575,207 +558,316 @@ function checkLength(o, n, min, max) {
     }
 }
 
-// 使用用途入力ダイアログ
-//$(function () {
-//    var yoto = $("#txtYoto"),
-//        allFields = $([]).add(yoto);
+ //使用用途入力ダイアログ
+$(function () {
+    var yoto = $("#txtYoto"),
+        allFields = $([]).add(yoto);
 
-//    /*
-//        function updateTips(t) {
-//            tips
-//                .text(t)
-//                .addClass("ui-state-highlight");
-//            setTimeout(function () {
-//                tips.removeClass("ui-state-highlight", 1500);
-//            }, 500);
-//        }
-    
-//        function checkLength(o, n, min, max) {
-//            if ($(o).val().length > max || $(o).val().length < min) {
-//                $(o).addClass("ui-state-error");
-//                updateTips(n + " は " + min + "文字以上" + max + "文字以下で入力してください");
-//                return false;
-//            } else {
-//                return true;
-//            }
-//        }
-//    */
+    // ダイアログを閉じる時の処理
+    $("#dialogYoto").on("hide.bs.modal", function (e) {
+        allFields.removeClass("ui-state-error");
+    });
 
-//    $("#dialog-yoto").dialog({
-//        autoOpen: false,
-//        modal: true,
-//        resizable: false,
-//        width: 380,     // 2015.01.16 追加
-//        buttons: {
-//            "設定": function () {
-//                var bValid = true;
-//                allFields.removeClass("ui-state-error");
+    // ダイアログ内のキャンセルボタンをクリックされたとき
+    $("#btnCancelYoto").click(function () {
+        // 使用用途入力ダイアログを閉じる
+        $("#dialogYoto").modal("hide");
+        return false;
+    });
 
-//                bValid = bValid && checkLength(txtYoto, "使用用途", 0, 20);
-//                if (bValid) {
-//                    document.getElementById("hid_yoto1").value = $("#txtYoto").val();
-//                    document.getElementById("hid_yoto2").value = $("#txtYoto").val();
-//                    $(this).dialog("close");
-//                    // サーバに処理を渡す
-//                    if (document.getElementById("hid_add_tab").value == "1") {
-//                        onclick_add_List(2);
-//                    }
-//                    else {
-//                        onclick_add_Shisetsu(2);
-//                    }
-//                }
-//            },
-//            "キャンセル": function () {
-//                $(this).dialog("close");
-//            }
-//        },
-//        close: function () {
-//            allFields.val("").removeClass("ui-state-error");
-//        }
-//    });
+    // ダイアログ内の設定ボタンをクリックされたとき
+    $("#btnSaveYoto").click(function () {
+        var bValid = true;
+        allFields.removeClass("ui-state-error");
 
-//    $("#btnEnd1").click(function () {
-//        document.getElementById("hid_add_tab").value = "1";
-//        $("#dialog-yoto").dialog("open");
-//        return false;
-//    });
+        bValid = bValid && checkLength("#txtYoto", "使用用途", 0, 50);
+        if (bValid) {
+            document.getElementById("hid_yoto1").value = $("#txtYoto").val();
+            document.getElementById("hid_yoto2").value = $("#txtYoto").val();
+            $("#dialogYoto").modal("hide");
+             // サーバに処理を渡す
+            if (document.getElementById("hid_add_tab").value == "1") {
+                onclick_add_List(2);
+            }
+            else {
+                onclick_add_Shisetsu(2);
+            }
+        }
+    });
 
-//    $("#btnEnd2").click(function () {
-//        document.getElementById("hid_add_tab").value = "2";
-//        $("#dialog-yoto").dialog("open");
-//        return false;
-//    });
+    $("#btnEnd1").click(function () {
+        // 使用用途入力ダイアログを表示する
+        document.getElementById("hid_add_tab").value = "1";
+        $("#dialogYoto").modal();
+        return false;
+    });
 
-//});
+    $("#btnEnd2").click(function () {
+        // 使用用途入力ダイアログを表示する
+        document.getElementById("hid_add_tab").value = "2";
+        $("#dialogYoto").modal();
+        return false;
+    });
+
+});
 
 // 編集ダイアログ
-//$(function () {
-//    var yoto = $("#edit_yoto"),
-//        time = $("#time_from"),
-//        minit = $("#minutes_to"),
-//        allFields = $([]).add(yoto).add(time).add(minit);
+$(function () {
+    var yoto = $("#txtYotoEdit"),
+        from = $("#txtFrom"),
+        to = $("#txtTo"),
+        allFields = $([]).add(yoto).add(from).add(to);
 
-//    /*
-//        function updateTips(t) {
-//            tips
-//                .text(t)
-//                .addClass("ui-state-highlight");
-//            setTimeout(function () {
-//                tips.removeClass("ui-state-highlight", 1500);
-//            }, 500);
-//        }
+    // ダイアログを閉じる時の処理
+    $("#dialogEdit").on("hide.bs.modal", function (e) {
+        updateTips("");
+        //allFields.val("").removeClass("ui-state-error");      どちらでもOK  2016.10.03
+        allFields.removeClass("ui-state-error");
+    });
+
+    // ダイアログ内の削除ボタンをクリックされたとき
+    $("#btnDeleteEdit").click(function () {
+        var ret = confirm("会議室予約を削除してよろしいですか？");
+        if (ret == true) {
+            $("#dialogEdit").modal("hide");
+            // サーバに処理を渡す
+            if (document.getElementById("hid_selected_tab").value == "1") {
+                onclick_add_List(4);
+            }
+            else {
+                onclick_add_Shisetsu(4);
+            }
+        }
+    });
+
+    // ダイアログ内のキャンセルボタンをクリックされたとき
+    $("#btnCancelEdit").click(function () {
+        document.getElementById("hid_clickRow1").value = "";
+        document.getElementById("hid_clickColStart1").value = "";
+        document.getElementById("hid_clickColEnd1").value = "";
+        document.getElementById("hid_clickRow2").value = "";
+        document.getElementById("hid_clickColStart2").value = "";
+        document.getElementById("hid_clickColEnd2").value = "";
+        // 編集ダイアログを閉じる
+        $("#dialogEdit").modal("hide");
+        return false;
+    });
     
-//        function checkLength(o, n, min, max) {
-//            if ($(o).val().length > max || $(o).val().length < min) {
-//                $(o).addClass("ui-state-error");
-//                updateTips(n + " は " + min + "文字以上" + max + "文字以下で入力してください");
-//                return false;
-//            } else {
-//                return true;
-//            }
-//        }
-//    */
+    // ダイアログ内の更新ボタンをクリックされたとき
+    $("#btnSaveEdit").click(function () {
+        var bValid = true;
+        allFields.removeClass("ui-state-error");
 
-//    function checkInputData() {
-//        var from = getSelected("time_from") + getSelected("minutes_from");
-//        var to = getSelected("time_to") + getSelected("minutes_to");
-//        if (from >= to) {
-//            $("#time_from").addClass("ui-state-error");
-//            updateTips("予約時間を正しく入力してください");
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
+        var from = ("0" + document.getElementById("txtFrom").value.trim()).substr(-5, 5);
+        var to = ("0" + document.getElementById("txtTo").value.trim()).substr(-5, 5);
+        document.getElementById("txtFrom").value = from
+        document.getElementById("txtTo").value = to
+        // 開始時刻と終了時刻のチェックは外しておく 2016.10.03
+        //bValid = bValid && checkStartTime();
+        //bValid = bValid && checkEndTime();
+        bValid = bValid && checkInputData();
+        bValid = bValid && checkLength("#txtYotoEdit", "使用用途", 0, 50);
+        if (bValid) {
+            // サーバに処理を渡す
+            if (document.getElementById("hid_selected_tab").value == "1") {
+                document.getElementById("hid_time_from1").value = from.substr(0, 2);
+                document.getElementById("hid_minutes_from1").value = from.substr(3, 2);
+                document.getElementById("hid_time_to1").value = to.substr(0, 2);
+                document.getElementById("hid_minutes_to1").value = to.substr(3, 2);
+                document.getElementById("hid_yoto1").value = $("#txtYotoEdit").val();
+                $("#dialogEdit").modal("hide");
+                onclick_add_List(5);
+            }
+            else {
+                document.getElementById("hid_time_from2").value = from.substr(0, 2);
+                document.getElementById("hid_minutes_from2").value = from.substr(3, 2);
+                document.getElementById("hid_time_to2").value = to.substr(0, 2);
+                document.getElementById("hid_minutes_to2").value = to.substr(3, 2);
+                document.getElementById("hid_yoto2").value = $("#txtYotoEdit").val();
+                $("#dialogEdit").modal("hide");
+                onclick_add_Shisetsu(5);
+            }
+        }
+    });
 
-//    function checkEndTime() {
-//        var t = getSelected("time_to");
-//        var m = getSelected("minutes_to");
-//        if (t == '21') {
-//            if (m != '00') {
-//                $("#minutes_to").addClass("ui-state-error");
-//                updateTips("終了時刻は 21:00 までで設定してください");
-//                return false;
-//            } else {
-//                return true;
-//            }
-//        } else {
-//            return true;
-//        }
-//    }
+    function checkInputData() {
+        var ret = true;
+        var from = document.getElementById("txtFrom").value;
+        var to = document.getElementById("txtTo").value;
 
-//    function getSelected(control_id) {
-//        var retValue = '';
-//        var pulldown_option = document.getElementById(control_id).getElementsByTagName('option');
-//        for (i = 0; i < pulldown_option.length; i++) {
-//            if (pulldown_option[i].selected) {
-//                retValue = pulldown_option[i].value;
-//                break;
-//            }
-//        }
-//        return retValue;
-//    }
+        // 日付として正しいかチェックする
+        var target = document.getElementById("txtDate").value.trim();
+        document.getElementById("txtDate").value = target;
+        if (!ckDate(target)) {
+            $("#txtDate").addClass("ui-state-error");
+            updateTips("予約日付を正しく入力してください");
+            ret = false;
+        }
 
-//    $("#dialog-edit").dialog({
-//        autoOpen: false,
-//        modal: true,
-//        resizable: false,
-//        width: 380,     // 2015.01.16 追加
-//        buttons: {
-//            "削除": function () {
-//                var ret = confirm("施設予約を削除してよろしいですか？");
-//                if (ret == true) {
-//                    $(this).dialog("close");
-//                    // サーバに処理を渡す
-//                    if (document.getElementById("hid_selected_tab").value == "1") {
-//                        onclick_add_List(4);
-//                    }
-//                    else {
-//                        onclick_add_Shisetsu(4);
-//                    }
-//                }
-//            },
-//            "更新": function () {
-//                var bValid = true;
-//                allFields.removeClass("ui-state-error");
-//                bValid = bValid && checkEndTime();
-//                bValid = bValid && checkInputData();
-//                bValid = bValid && checkLength(edit_yoto, "使用用途", 0, 20);
-//                if (bValid) {
-//                    // サーバに処理を渡す
-//                    if (document.getElementById("hid_selected_tab").value == "1") {
-//                        document.getElementById("hid_time_from1").value = getSelected("time_from");
-//                        document.getElementById("hid_minutes_from1").value = getSelected("minutes_from");
-//                        document.getElementById("hid_time_to1").value = getSelected("time_to");
-//                        document.getElementById("hid_minutes_to1").value = getSelected("minutes_to");
-//                        document.getElementById("hid_yoto1").value = $("#edit_yoto").val();
-//                        $(this).dialog("close");
-//                        onclick_add_List(5);
-//                    }
-//                    else {
-//                        document.getElementById("hid_time_from2").value = getSelected("time_from");
-//                        document.getElementById("hid_minutes_from2").value = getSelected("minutes_from");
-//                        document.getElementById("hid_time_to2").value = getSelected("time_to");
-//                        document.getElementById("hid_minutes_to2").value = getSelected("minutes_to");
-//                        document.getElementById("hid_yoto2").value = $("#edit_yoto").val();
-//                        $(this).dialog("close");
-//                        onclick_add_Shisetsu(5);
-//                    }
-//                }
-//            },
-//            "キャンセル": function () {
-//                document.getElementById("hid_clickRow1").value = "";
-//                document.getElementById("hid_clickColStart1").value = "";
-//                document.getElementById("hid_clickColEnd1").value = "";
-//                document.getElementById("hid_clickRow2").value = "";
-//                document.getElementById("hid_clickColStart2").value = "";
-//                document.getElementById("hid_clickColEnd2").value = "";
-//                $(this).dialog("close");
-//            }
-//        },
-//        close: function () {
-//            updateTips("");
-//            allFields.val("").removeClass("ui-state-error");
-//        }
-//    });
-//});
+        // 時刻として正しいかチェックする
+        if (!ckTime(from)) {
+            $("#txtFrom").addClass("ui-state-error");
+            updateTips("予約開始時刻を正しく入力してください");
+            ret = false;
+        }
+        if (!ckTime(to)) {
+            $("#txtTo").addClass("ui-state-error");
+            updateTips("予約終了時刻を正しく入力してください");
+            ret = false;
+        }
+        if (!ret) {
+            return ret;
+        }
+        // 時刻の大小関係をチェックする
+        if (from >= to) {
+            $("#txtTo").addClass("ui-state-error");
+            updateTips("予約時間を正しく入力してください");
+            ret = false;
+        }
+        return ret;
+    }
+
+    function checkStartTime() {
+        var from = document.getElementById("txtFrom").value;
+        if (from < '08:00') {
+            $("#txtFrom").addClass("ui-state-error");
+            updateTips("開始時刻は 08:00 から設定してください");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkEndTime() {
+        var to = document.getElementById("txtTo").value;
+        if (to > '21:30') {
+            $("#txtTo").addClass("ui-state-error");
+            updateTips("終了時刻は 21:30 までで設定してください");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+});
+
+// マニュアルモード
+// マニュアルモード表示のチェックボックスが変更されたとき
+function onclick_chkManualMode() {
+    if (document.getElementById("chkManualMode").checked) {
+        document.getElementById("reserve_bg2").style.display = "block";
+    } else {
+        document.getElementById("reserve_bg2").style.display = "none";
+    }
+}
+// マニュアルモードの設定完了ボタンをクリックされたときの処理
+function btnComplete_OnClick() {
+    var target = $("#txtBookTimeTo"),
+        yoto = $("#txtUse"),
+        from = $("#txtBookTimeFrom"),
+        to = $("#txtTo"),
+        allFields = $([]).add(target).add(from).add(to).add(yoto);
+
+    var bValid = true;
+    updateTips2("");
+    allFields.removeClass("ui-state-error");
+    bValid = bValid && checkInputDataManual();
+    return bValid;
+}
+// 入力チェック
+function checkInputDataManual() {
+    var ret1 = true;
+    var ret2 = true;
+
+    // 日付として正しいかチェックする
+    var target = document.getElementById("txtBookDate").value.trim();
+    document.getElementById("txtBookDate").value = target;
+    if (!ckDate(target)) {
+        $("#txtBookDate").addClass("ui-state-error");
+        updateTips2("予約日付を正しく入力してください");
+        ret1 = false;
+    }
+
+    // 時刻として正しいかチェックする
+    var from = ("0" + document.getElementById("txtBookTimeFrom").value.trim()).substr(-5, 5);
+    var to = ("0" + document.getElementById("txtBookTimeTo").value.trim()).substr(-5, 5);
+    document.getElementById("txtBookTimeFrom").value = from
+    document.getElementById("txtBookTimeTo").value = to
+
+    if (!ckTime(from)) {
+        $("#txtBookTimeFrom").addClass("ui-state-error");
+        updateTips2("予約開始時刻を正しく入力してください");
+        ret2 = false;
+    }
+    if (!ckTime(to)) {
+        $("#txtBookTimeTo").addClass("ui-state-error");
+        updateTips2("予約終了時刻を正しく入力してください");
+        ret2 = false;
+    }
+    if (!ret2) {
+        return ret2;
+    }
+    // 時刻の大小関係をチェックする
+    if (from >= to) {
+        $("#txtBookTimeTo").addClass("ui-state-error");
+        updateTips2("予約時間を正しく入力してください");
+        ret2 = false;
+    }
+    return (ret1 && ret2);
+}
+// エラーメッセージを表示する。
+function updateTips2(t) {
+    var tips = $(".validateTips2");
+    if (t != "") {
+        var s = tips.text();
+        t = s + "<br />" + t;
+    }
+    tips.text(t);
+    // 消す時の動きが滑らかでないので、ハイライトは付けない　2016.10.03
+    //tips
+    //        .text(t)
+    //        .addClass("ui-state-highlight");
+    //setTimeout(function () {      
+    //    tips.removeClass("ui-state-highlight", 1500);
+    //}, 500);
+}
+
+// 入力された値が日付でYYYY/MM/DD形式になっているか調べる
+function ckDate(datestr) {
+    // 正規表現による書式チェック
+    if (!datestr.match(/^\d{4}\/\d{2}\/\d{2}$/)) {
+        return false;
+    }
+    var vYear = datestr.substr(0, 4) - 0;
+    var vMonth = datestr.substr(5, 2) - 1; // Javascriptは、0-11で表現
+    var vDay = datestr.substr(8, 2) - 0;
+    // 月,日の妥当性チェック
+    if (vMonth >= 0 && vMonth <= 11 && vDay >= 1 && vDay <= 31) {
+        var vDt = new Date(vYear, vMonth, vDay);
+        if (isNaN(vDt)) {
+            return false;
+        } else if (vDt.getFullYear() == vYear && vDt.getMonth() == vMonth && vDt.getDate() == vDay) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+// 入力された値が時間でHH:MM形式になっているか調べる
+function ckTime(str) {
+    // 正規表現による書式チェック
+    if (!str.match(/^\d{2}\:\d{2}$/)) {
+        return false;
+    }
+    var vHour = str.substr(0, 2) - 0;
+    var vMinutes = str.substr(3, 2) - 0;
+    if (vHour >= 0 && vHour <= 24 && vMinutes >= 0 && vMinutes <= 59) {
+        return true;
+    } else {
+        return false;
+    }
+}
+

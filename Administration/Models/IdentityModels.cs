@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Administration.Models;
+using System.Collections.Generic;
 
 namespace Administration.Models
 {
@@ -103,18 +104,21 @@ namespace Administration.Models
     /// </summary>
     public class ReservationList
     {
-        public string RoomId;
-        public string RoomName;
-        public string RoomRyakuName;
-        public Reservation[] Reservations;
+        public string RoomId { get; set; }
+        public string RoomName { get; set; }
+        public string RoomRyakuName { get; set; }
+        public Reservation[] Reservations { get; set; }
     }
     /// <summary>
     /// 予約表示用クラス（会議室）
     /// </summary>
     public class ReservationRoom
     {
-        public DateTime ReservationDate;
-        public Reservation[] Reservations;
+        public DateTime ReservationDate { get; set; }
+        public string RoomId { get; set; }
+        public string RoomName { get; set; }
+        public string RoomRyakuName { get; set; }
+        public Reservation[] Reservations { get; set; }
     }
     
     /// <summary>
@@ -122,10 +126,10 @@ namespace Administration.Models
     /// </summary>
     public class ErrorInfo
     {
-        public string Sql;
-        public string RetMessage;
-        public string RetStackTrace;
-        public string RetString;
+        public string Sql { get; set; }
+        public string RetMessage { get; set; }
+        public string RetStackTrace { get; set; }
+        public string RetString { get; set; }
     }
 }
 

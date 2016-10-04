@@ -22,6 +22,33 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
+        /// li1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li1;
+        
+        /// <summary>
+        /// li2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li2;
+        
+        /// <summary>
+        /// tabList コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabList;
+        
+        /// <summary>
         /// txtDispDate1 コントロール。
         /// </summary>
         /// <remarks>
@@ -202,13 +229,22 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.Button btnDummy1;
         
         /// <summary>
-        /// selSisetsu2 コントロール。
+        /// tabRoom コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList selSisetsu2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabRoom;
+        
+        /// <summary>
+        /// selRoom2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selRoom2;
         
         /// <summary>
         /// txtDispDate2 コントロール。
@@ -418,22 +454,22 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reserve_bg2;
         
         /// <summary>
-        /// selSisetsu コントロール。
+        /// selRoom コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList selSisetsu;
+        protected global::System.Web.UI.WebControls.DropDownList selRoom;
         
         /// <summary>
-        /// txtBookDateStart コントロール。
+        /// txtBookDate コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBookDateStart;
+        protected global::System.Web.UI.WebControls.TextBox txtBookDate;
         
         /// <summary>
         /// txtBookTimeFrom コントロール。
@@ -463,13 +499,13 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.TextBox txtUse;
         
         /// <summary>
-        /// btnComple コントロール。
+        /// btnComplete コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnComple;
+        protected global::System.Web.UI.WebControls.Button btnComplete;
         
         /// <summary>
         /// txtYoto コントロール。
@@ -481,39 +517,57 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.TextBox txtYoto;
         
         /// <summary>
-        /// Hidden1 コントロール。
+        /// hid_add_tab コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hid_add_tab;
         
         /// <summary>
-        /// TextBox1 コントロール。
+        /// selRoomEdit コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList selRoomEdit;
         
         /// <summary>
-        /// TextBox2 コントロール。
+        /// txtDate コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtDate;
         
         /// <summary>
-        /// txtEditYoto コントロール。
+        /// txtFrom コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditYoto;
+        protected global::System.Web.UI.WebControls.TextBox txtFrom;
+        
+        /// <summary>
+        /// txtTo コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTo;
+        
+        /// <summary>
+        /// txtYotoEdit コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtYotoEdit;
     }
 }
