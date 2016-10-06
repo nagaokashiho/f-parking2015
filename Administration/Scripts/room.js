@@ -35,13 +35,13 @@ function pageLoaded(sender, args) {
         initButton_List();
     } else {
         // 入力エラーの場合は、ダイアログを再表示する
-        var ft = document.getElementById("hid_time_from1").value;
-        var fm = document.getElementById("hid_minutes_from1").value;
-        var tt = document.getElementById("hid_time_to1").value;
-        var tm = document.getElementById("hid_minutes_to1").value;
+        var roomid = document.getElementById("hid_roomid1").value;
+        var dt = document.getElementById("hid_date1").value;
+        var from = document.getElementById("hid_time_from1").value;
+        var to = document.getElementById("hid_time_to1").value;
         var yoto = document.getElementById("hid_yoto1").value;
         var msg = "設定した時間範囲内に既に予約が登録されています";
-        showEditDialogWithError(ft, fm, tt, tm, yoto, msg);
+        showEditDialogWithError(roomid, dt, from, to, yoto, msg);
     }
 
     if (document.getElementById("hid_addMode2").value == "") {
@@ -49,13 +49,13 @@ function pageLoaded(sender, args) {
         initButton_Shisetsu();
     } else {
         // 入力エラーの場合は、ダイアログを再表示する
-        var ft = document.getElementById("hid_time_from2").value;
-        var fm = document.getElementById("hid_minutes_from2").value;
-        var tt = document.getElementById("hid_time_to2").value;
-        var tm = document.getElementById("hid_minutes_to2").value;
+        var roomid = document.getElementById("hid_roomid2").value;
+        var dt = document.getElementById("hid_date2").value;
+        var from = document.getElementById("hid_time_from2").value;
+        var to = document.getElementById("hid_time_to2").value;
         var yoto = document.getElementById("hid_yoto2").value;
         var msg = "設定した時間範囲内に既に予約が登録されています";
-        showEditDialogWithError(ft, fm, tt, tm, yoto, msg);
+        showEditDialogWithError(roomid, dt, from, to, yoto, msg);
     }
 
     // テーブルのセルをクリックしたときの処理（一覧）
@@ -140,13 +140,13 @@ function pageLoaded(sender, args) {
                         //document.getElementById("txtFrom").value = time.substr(1, 5);
                         //document.getElementById("txtTo").value = time.substr(9, 5);
 
-                        var from = tbl.rows[row].cells[col].getAttribute("hide-start");
-                        var to = tbl.rows[row].cells[col].getAttribute("hide-end");
-                        $('#selRoomEdit').selectpicker('val', tbl.rows[row].cells[col].getAttribute("hide-roomId"));
+                        var from = tbl.rows[row].cells[col].getAttribute("data-hidestart");
+                        var to = tbl.rows[row].cells[col].getAttribute("data-hideend");
+                        $('#selRoomEdit').selectpicker('val', tbl.rows[row].cells[col].getAttribute("data-hideroomid"));
                         $("#txtDate").datepicker("setDate", from.substr(0, 10));
                         $("#txtFrom").timepicker("setTime", from.substr(11, 5));
                         $("#txtTo").timepicker("setTime", to.substr(11, 5));
-                        document.getElementById("txtYotoEdit").value = tbl.rows[row].cells[col].getAttribute("hide-comment");
+                        document.getElementById("txtYotoEdit").value = tbl.rows[row].cells[col].getAttribute("data-hidecomment");
 
                         $("#dialogEdit").modal();
                         return false;
@@ -509,7 +509,7 @@ function changeBackColor_Shisetsu(row, colStart, colEnd, color) {
 }
 
 // 更新のときの入力エラーの処理（再表示）
-function showEditDialogWithError(tf, mf, tt, mt, yoto, msg) {
+function showEditDialogWithError(roomid, dt, from, to, yoto, msg) {
     // 登録者名を表示しないのでコメントアウト
     //if (document.getElementById("hid_selected_tab").value == "1") {
     //    var row = document.getElementById("hid_clickRow1").value;
@@ -526,26 +526,15 @@ function showEditDialogWithError(tf, mf, tt, mt, yoto, msg) {
     //var tip = tips.split("\n");
     //document.getElementById("name").value = (tip[0] == undefined) ? "" : tip[0];
 
-    document.getElementById("txtFrom").value = tf + ":" + mf;
-    document.getElementById("txtTo").value = tt + ":" + mt;
+    $('#selRoomEdit').selectpicker('val', roomid);
+    $("#txtDate").datepicker("setDate", from.substr(0, 10));
+    $("#txtFrom").timepicker("setTime", from.substr(11, 5));
+    $("#txtTo").timepicker("setTime", to.substr(11, 5));
     document.getElementById("txtYotoEdit").value = yoto;
     $("#txtFrom").addClass("ui-state-error");
     updateTips(msg);
 
     $("#dialogEdit").modal();
-}
-
-// 編集ダイアログ用
-function updateTips(t) {
-    var tips = $(".validateTips");
-    tips.text(t);
-    // 消す時の動きが滑らかでないので、ハイライトは付けない　2016.10.03
-    //tips
-    //        .text(t)
-    //        .addClass("ui-state-highlight");
-    //setTimeout(function () {      
-    //    tips.removeClass("ui-state-highlight", 1500);
-    //}, 500);
 }
 
 function checkLength(o, n, min, max) {
@@ -562,6 +551,15 @@ function checkLength(o, n, min, max) {
 $(function () {
     var yoto = $("#txtYoto"),
         allFields = $([]).add(yoto);
+    
+    // ダイアログを開く時の処理
+    $("#dialogYoto").on("show.bs.modal", function () {
+        // センタリングする
+        $(this).css("display", "block");
+        var dialog = $(this).find(".modal-dialog");
+        var offset = ($(window).innerHeight() - dialog.height()) / 2;
+        dialog.css("margin-top", offset);
+    });
 
     // ダイアログを閉じる時の処理
     $("#dialogYoto").on("hide.bs.modal", function (e) {
@@ -616,7 +614,17 @@ $(function () {
     var yoto = $("#txtYotoEdit"),
         from = $("#txtFrom"),
         to = $("#txtTo"),
-        allFields = $([]).add(yoto).add(from).add(to);
+        dt = ("#txtDate"),
+        allFields = $([]).add(yoto).add(from).add(to).add(dt);
+
+    // ダイアログを開く時の処理
+    $("#dialogEdit").on("show.bs.modal", function () {
+        // センタリングする
+        $(this).css("display", "block");
+        var dialog = $(this).find(".modal-dialog");
+        var offset = ($(window).innerHeight() - dialog.height()) / 2;
+        dialog.css("margin-top", offset);
+    });
 
     // ダイアログを閉じる時の処理
     $("#dialogEdit").on("hide.bs.modal", function (e) {
@@ -658,10 +666,6 @@ $(function () {
         var bValid = true;
         allFields.removeClass("ui-state-error");
 
-        var from = ("0" + document.getElementById("txtFrom").value.trim()).substr(-5, 5);
-        var to = ("0" + document.getElementById("txtTo").value.trim()).substr(-5, 5);
-        document.getElementById("txtFrom").value = from
-        document.getElementById("txtTo").value = to
         // 開始時刻と終了時刻のチェックは外しておく 2016.10.03
         //bValid = bValid && checkStartTime();
         //bValid = bValid && checkEndTime();
@@ -670,19 +674,19 @@ $(function () {
         if (bValid) {
             // サーバに処理を渡す
             if (document.getElementById("hid_selected_tab").value == "1") {
-                document.getElementById("hid_time_from1").value = from.substr(0, 2);
-                document.getElementById("hid_minutes_from1").value = from.substr(3, 2);
-                document.getElementById("hid_time_to1").value = to.substr(0, 2);
-                document.getElementById("hid_minutes_to1").value = to.substr(3, 2);
+                document.getElementById("hid_roomid1").value = document.getElementById("selRoomEdit").value;
+                document.getElementById("hid_date1").value = document.getElementById("txtDate").value;
+                document.getElementById("hid_time_from1").value = document.getElementById("txtFrom").value;
+                document.getElementById("hid_time_to1").value = document.getElementById("txtTo").value;
                 document.getElementById("hid_yoto1").value = $("#txtYotoEdit").val();
                 $("#dialogEdit").modal("hide");
                 onclick_add_List(5);
             }
             else {
-                document.getElementById("hid_time_from2").value = from.substr(0, 2);
-                document.getElementById("hid_minutes_from2").value = from.substr(3, 2);
-                document.getElementById("hid_time_to2").value = to.substr(0, 2);
-                document.getElementById("hid_minutes_to2").value = to.substr(3, 2);
+                document.getElementById("hid_roomid2").value = document.getElementById("selRoomEdit").value;
+                document.getElementById("hid_date2").value = document.getElementById("txtDate").value;
+                document.getElementById("hid_time_from2").value = document.getElementById("txtFrom").value;
+                document.getElementById("hid_time_to2").value = document.getElementById("txtTo").value;
                 document.getElementById("hid_yoto2").value = $("#txtYotoEdit").val();
                 $("#dialogEdit").modal("hide");
                 onclick_add_Shisetsu(5);
@@ -692,8 +696,6 @@ $(function () {
 
     function checkInputData() {
         var ret = true;
-        var from = document.getElementById("txtFrom").value;
-        var to = document.getElementById("txtTo").value;
 
         // 日付として正しいかチェックする
         var target = document.getElementById("txtDate").value.trim();
@@ -705,6 +707,8 @@ $(function () {
         }
 
         // 時刻として正しいかチェックする
+        var from = ("0" + document.getElementById("txtFrom").value.trim()).substr(-5, 5);
+        var to = ("0" + document.getElementById("txtTo").value.trim()).substr(-5, 5);
         if (!ckTime(from)) {
             $("#txtFrom").addClass("ui-state-error");
             updateTips("予約開始時刻を正しく入力してください");
@@ -723,6 +727,10 @@ $(function () {
             $("#txtTo").addClass("ui-state-error");
             updateTips("予約時間を正しく入力してください");
             ret = false;
+        }
+        else {
+            document.getElementById("txtFrom").value = from;
+            document.getElementById("txtTo").value = to;
         }
         return ret;
     }
@@ -746,6 +754,18 @@ $(function () {
             return false;
         } else {
             return true;
+        }
+    }
+
+    // 編集ダイアログ用エラーメッセージを表示する。
+    function updateTips(t) {
+        if (t == "") {
+            // メッセージを全部削除する
+            $('#validateTips').empty();
+        }
+        else {
+            // メッセージを追加する
+            $('#validateTips').append('<li>' + t + '</li>');
         }
     }
 
@@ -791,18 +811,21 @@ function checkInputDataManual() {
     // 時刻として正しいかチェックする
     var from = ("0" + document.getElementById("txtBookTimeFrom").value.trim()).substr(-5, 5);
     var to = ("0" + document.getElementById("txtBookTimeTo").value.trim()).substr(-5, 5);
-    document.getElementById("txtBookTimeFrom").value = from
-    document.getElementById("txtBookTimeTo").value = to
 
     if (!ckTime(from)) {
         $("#txtBookTimeFrom").addClass("ui-state-error");
         updateTips2("予約開始時刻を正しく入力してください");
         ret2 = false;
+    } else {
+        document.getElementById("txtBookTimeFrom").value = from
     }
     if (!ckTime(to)) {
         $("#txtBookTimeTo").addClass("ui-state-error");
         updateTips2("予約終了時刻を正しく入力してください");
         ret2 = false;
+    }
+    else {
+        document.getElementById("txtBookTimeTo").value = to
     }
     if (!ret2) {
         return ret2;
@@ -813,23 +836,47 @@ function checkInputDataManual() {
         updateTips2("予約時間を正しく入力してください");
         ret2 = false;
     }
-    return (ret1 && ret2);
-}
-// エラーメッセージを表示する。
-function updateTips2(t) {
-    var tips = $(".validateTips2");
-    if (t != "") {
-        var s = tips.text();
-        t = s + "<br />" + t;
+    if (!(ret1 && ret2)){
+        return false;
     }
-    tips.text(t);
-    // 消す時の動きが滑らかでないので、ハイライトは付けない　2016.10.03
-    //tips
-    //        .text(t)
-    //        .addClass("ui-state-highlight");
-    //setTimeout(function () {      
-    //    tips.removeClass("ui-state-highlight", 1500);
-    //}, 500);
+    // 既予約状況をチェックする
+    var ret3 = true;
+    var roomId = document.getElementById("selRoom").value
+    $.ajax({
+        async: false,
+        type: 'POST',
+        url: '../WebService.asmx/isReserved',
+        data: '{"roomId":"' + roomId + '", '
+             + '"startDatetime":"' + target + ' ' + from + '", '
+             + '"endDatetime":"' + target + ' ' + to + '", '
+             + '"outYoyakuId":"0"}',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data, textStatus, xhr) {
+            if (data.d) {
+                // データが存在した場合は登録できないのでエラー
+                updateTips2("既に予約されています");
+                ret3 = !data.d;
+            }
+        },
+        error: function (obj, err) {
+            alert(err);
+            ret3 = false;
+        }
+    });
+
+    return (ret1 && ret2 && ret3);
+}
+// マニュアルモード用エラーメッセージを表示する。
+function updateTips2(t) {
+    if (t == "") {
+        // メッセージを全部削除する
+        $('#validateTips2').empty();
+    }
+    else {
+        // メッセージを追加する
+        $('#validateTips2').append('<li>' + t + '</li>');
+    }
 }
 
 // 入力された値が日付でYYYY/MM/DD形式になっているか調べる

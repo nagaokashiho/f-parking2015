@@ -62,3 +62,15 @@ $(function () {
         placement: 'auto',
     });
 });
+
+// UpdatePanelを使用しているため、ポストバック時にPopoberを再登録するためのファンクション
+// Page_Loadで呼ばれる
+function openPopover() {
+    $('[data-toggle="popover"]').popover({
+        container: 'body',
+        trigger: 'hover',
+        html: true,
+        placement: 'auto',
+    });
+    return false;
+}

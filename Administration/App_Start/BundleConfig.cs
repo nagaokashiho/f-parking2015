@@ -42,6 +42,7 @@ namespace Administration
                         "~/Scripts/locales/bootstrap-datepicker.ja.min.js",
                         "~/Scripts/bootstrap-timepicker.js",
                         "~/Scripts/bootstrap-select.js",
+                        "~/Scripts/bootbox.min.js",
                         "~/Scripts/Site.js",
                         "~/Scripts/HolidayChk.js"));
 

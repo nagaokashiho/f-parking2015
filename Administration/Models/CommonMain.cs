@@ -40,18 +40,27 @@ namespace Administration.Models
         //-- 情報 -- 
         public const string CNS_INF_MSG01 = "更新が完了しました";
         public const string CNS_INF_MSG02 = "削除が完了しました";
-        
+
 
         /// <summary>
         /// メッセージボックスを表示する
         /// </summary>
         /// <param name="target"></param>
+        /// <param name="title"></param>
         /// <param name="message"></param>
-        public static void subMessageBox(System.Web.UI.Page target, string message)
+        public static void subMessageBox(System.Web.UI.Page target, string title, string message)
         {
             string strMessageData = message.Replace(Environment.NewLine, "\\n");
 
-            string script = "<script language='javascript'>" + "window.alert('" + strMessageData + "');" + "</script>";
+            //string script = "<script language='javascript'>" + "window.alert('" + strMessageData + "');" + "</script>";
+            string script = "<script language='javascript'>"
+                + "bootbox.alert({"
+                + "title:\"" + title + "\", "
+                + "message:\"" + strMessageData + "\", "
+                + "size:'small', "
+                + "className:\"disp-alert\", "
+                + "});"
+                + "</script>";
 
             //target.Response.Write(script) <--- 背景が真っ白になってしまう！
             target.ClientScript.RegisterStartupScript(target.GetType(), "script_name", script);
@@ -61,13 +70,22 @@ namespace Administration.Models
         /// メッセージボックスを表示する
         /// </summary>
         /// <param name="target"></param>
+        /// <param name="title"></param>
         /// <param name="message"></param>
-        public static void subMessageBox_upd(System.Web.UI.Page target, string message)
+        public static void subMessageBox_upd(System.Web.UI.Page target, string title, string message)
         {
 
             string strMessageData = message.Replace(Environment.NewLine, "\\n");
 
-            string script = "<script language='javascript'>" + "alert('" + strMessageData + "');" + "</script>";
+            //string script = "<script language='javascript'>" + "alert('" + strMessageData + "');" + "</script>";
+            string script = "<script language='javascript'>"
+                + "bootbox.alert({"
+                + "title:\"" + title + "\", "
+                + "message:\"" + strMessageData + "\", "
+                + "size:'small', "
+                + "className:\"disp-alert\", "
+                + "});"
+                + "</script>";
 
             ScriptManager.RegisterClientScriptBlock(target, target.GetType(), "script_name", script, false);
 

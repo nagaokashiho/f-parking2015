@@ -189,6 +189,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Rooms\index.aspx" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap-select.js" />
@@ -340,6 +341,7 @@
     <Content Include="Scripts\rgbcolor.js" />
     <Content Include="Scripts\room.js" />
     <Content Include="Scripts\Site.js" />
+    <Content Include="WebService.asmx" />
     <Content Include="WhatsNews\Web.config" />
     <Content Include="Rooms\Web.config" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
@@ -447,6 +449,10 @@
     </Compile>
     <Compile Include="Rooms\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="WhatsNews\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

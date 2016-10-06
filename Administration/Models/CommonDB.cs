@@ -29,14 +29,14 @@ namespace Administration.Models
         /// <param name="reservations"></param>
         /// <param name="startDateTime"></param>
         /// <param name="endDateTime"></param>
-        /// <param name="sisetsuId"></param>
+        /// <param name="roomId"></param>
         /// <param name="userID"></param>
         /// <param name="message"></param>
         /// <param name="errorInfo"></param>
         /// <returns></returns>
-        public bool fncGetData_Reservations_Date(ref List<Reservation> reservations, string startDateTime, string endDateTime, string sisetsuId, string userID, ref string message, ref ErrorInfo errorInfo)
+        public bool fncGetData_Reservations_Date(ref List<Reservation> reservations, DateTime? startDateTime, DateTime? endDateTime, string roomId, string userID, ref string message, ref ErrorInfo errorInfo)
         {
-            //SQL設定
+            // SQL設定
             System.Text.StringBuilder strSQL = new System.Text.StringBuilder();
 
             strSQL.AppendLine("SELECT Reservations.* ");
@@ -45,28 +45,28 @@ namespace Administration.Models
             strSQL.AppendLine("WHERE ");
             strSQL.AppendLine("Reservations.DeleteFlag = 'False' ");
 
-            //「期間開始日時」が指定されている場合
-            if (!string.IsNullOrEmpty(startDateTime))
-            {
+            // 「期間開始日時」が指定されている場合
+            if (!startDateTime.HasValue)
+                {
                 strSQL.AppendLine("AND ");
                 strSQL.AppendLine("Reservations.StartDateTime >= CAST('" + startDateTime + "' AS DATETIME) ");
             }
 
-            //「期間終了日時」が指定されている場合
-            if (!string.IsNullOrEmpty(startDateTime))
+            // 「期間終了日時」が指定されている場合
+            if (!endDateTime.HasValue)
             {
                 strSQL.AppendLine("AND ");
                 strSQL.AppendLine("Reservations.EndDateTime < CAST('" + endDateTime + "' AS DATETIME) ");
             }
 
-            //「会議室Id」が指定されている場合
-            if (!string.IsNullOrEmpty(sisetsuId))
+            // 「会議室Id」が指定されている場合
+            if (!string.IsNullOrEmpty(roomId))
             {
                 strSQL.AppendLine("AND ");
-                strSQL.AppendLine("Reservations.RoomId = '" + sisetsuId + "' ");
+                strSQL.AppendLine("Reservations.RoomId = '" + roomId + "' ");
             }
 
-            //「予約者Id」が指定されている場合
+            // 「予約者Id」が指定されている場合
             if (!string.IsNullOrEmpty(userID))
             {
                 strSQL.AppendLine("AND ");
@@ -81,7 +81,7 @@ namespace Administration.Models
 
             try
             {
-                //データが存在したか？
+                // データが存在したか？
                 if (dsDtSet.Tables[0].Rows.Count > 0)
                 {
                     foreach(DataRow drDtRow in dsDtSet.Tables[0].Rows)
@@ -102,12 +102,12 @@ namespace Administration.Models
                         });
 
                     }
-                    //戻り値設定
+                    // 戻り値設定
                     return true;
                 }
                 else
                 {
-                    //戻り値設定
+                    // 戻り値設定
                     return false;
                 }
             }
@@ -124,18 +124,16 @@ namespace Administration.Models
         /// <summary>
         /// 【予約テーブル】『Reservations』に指定範囲内に既に予約データが登録されているかチェックする。
         /// </summary>
-        /// <param name="startDate">検索開始日付</param>
-        /// <param name="startTime">検索開始時間</param>
-        /// <param name="endDate">検索終了日付</param>
-        /// <param name="endTime">検索終了時間</param>
-        /// <param name="sisetsuId">施設コード</param>
-        /// <param name="intOutYoyakuID">検索から除外する「予約ID」</param>
+        /// <param name="startDateTime">検索開始日時</param>
+        /// <param name="endDateTime">検索終了日時</param>
+        /// <param name="roomId">会議室ID</param>
+        /// <param name="outYoyakuID">検索から除外する「予約ID」</param>
         /// <param name="strMsg">エラーメッセージ</param>
         /// <param name="errorInfo">エラー情報用構造体</param>
         /// <returns>True = 該当データあり, False = 該当データなし</returns>
-        public bool fncCheck_YoyakuData_TimeRange_UMU(string startDate, string startTime, string endDate, string endTime, string sisetsuId, int intOutYoyakuID, ref string strMsg, ref ErrorInfo errorInfo)
+        public bool fncCheck_YoyakuData_TimeRange_UMU(DateTime startDateTime, DateTime endDateTime, string roomId, int outYoyakuID, ref string strMsg, ref ErrorInfo errorInfo)
         {
-            //SQL設定
+            // SQL設定
             System.Text.StringBuilder strSQL = new System.Text.StringBuilder();
 
             strSQL.AppendLine("SELECT * ");
@@ -144,72 +142,72 @@ namespace Administration.Models
             strSQL.AppendLine("WHERE ");
             strSQL.AppendLine("(");
 
-            //今回指定の「開始時刻」とDB「予約開始日時」が同じデータが既に登録されている
-            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) = '" + startTime + "') ");
+            // 今回指定の「開始時刻」とDB「予約開始日時」が同じデータが既に登録されている
+            strSQL.AppendLine("(StartDateTime = '" + startDateTime.ToString() + "') ");
             strSQL.AppendLine("OR ");
-            //今回指定の「終了時刻」とDB「予約終了日時」が同じデータが既に登録されている
-            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) = '" + endTime + "') ");
+            // 今回指定の「終了時刻」とDB「予約終了日時」が同じデータが既に登録されている
+            strSQL.AppendLine("(EndDateTime = '" + endDateTime.ToString() + "') ");
             strSQL.AppendLine("OR ");
 
-            //DB「予約開始日時」に、今回指定の「開始時刻」よりが大きく、今回指定の「終了時刻」より小さいデータが既に登録されている
-            //※DB「予約開始日時」をまたぐか？
+            // DB「予約開始日時」に、今回指定の「開始日時」より大きく、今回指定の「終了日時」より小さいデータが既に登録されている
+            // ※DB「予約開始日時」をまたぐか？
             strSQL.AppendLine("(");
-            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) > '" + startTime + "') ");
+            strSQL.AppendLine("(StartDateTime > '" + startDateTime.ToString() + "') ");
             strSQL.AppendLine("AND ");
-            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) < '" + endTime + "') ");
+            strSQL.AppendLine("(StartDateTime < '" + endDateTime.ToString() + "') ");
             strSQL.AppendLine(") ");
 
             strSQL.AppendLine("OR ");
 
-            //DB「予約終了日時」に、今回指定の「開始時刻」よりが大きく、今回指定の「終了時刻」より小さいデータが既に登録されている
-            //※DB「予約終了日時」をまたぐか？
+            // DB「予約終了日時」に、今回指定の「開始時刻」より大きく、今回指定の「終了時刻」より小さいデータが既に登録されている
+            // ※DB「予約終了日時」をまたぐか？
             strSQL.AppendLine("(");
-            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) > '" + startTime + "') ");
+            strSQL.AppendLine("(EndDateTime > '" + startDateTime.ToString() + "') ");
             strSQL.AppendLine("AND ");
-            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) < '" + endTime + "') ");
+            strSQL.AppendLine("(EndDateTime < '" + endDateTime.ToString() + "') ");
             strSQL.AppendLine(") ");
 
             strSQL.AppendLine("OR ");
 
-            //DB「予約開始日時」が、今回指定の「開始時刻」より大きく、しかも、DB「予約終了日時」が、今回指定の「終了時刻」より小さいデータが既に登録されている
-            //※DB「予約終了日時」を完全に含んでしまう？
+            // DB「予約開始日時」が、今回指定の「開始時刻」より大きく、しかも、DB「予約終了日時」が、今回指定の「終了時刻」より小さいデータが既に登録されている
+            // ※DB「予約終了日時」を完全に含んでしまう？
             strSQL.AppendLine("(");
-            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) > '" + startTime + "') ");
+            strSQL.AppendLine("(StartDateTime > '" + startDateTime.ToString() + "') ");
             strSQL.AppendLine("AND ");
-            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) < '" + endTime + "') ");
+            strSQL.AppendLine("(EndDateTime < '" + endDateTime.ToString() + "') ");
             strSQL.AppendLine(") ");
 
             strSQL.AppendLine("OR ");
 
-            //DB「予約開始日時」が、今回指定の「開始時刻」より小さく、しかも、DB「予約終了日時」が、今回指定の「終了時刻」より大きいデータが既に登録されている
-            //※DB「予約終了日時」に完全に含まれてしまう？
+            // DB「予約開始日時」が、今回指定の「開始時刻」より小さく、しかも、DB「予約終了日時」が、今回指定の「終了時刻」より大きいデータが既に登録されている
+            // ※DB「予約終了日時」に完全に含まれてしまう？
             strSQL.AppendLine("(");
-            strSQL.AppendLine("(CONVERT(VARCHAR,StartDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,StartDateTime,108) < '" + startTime + "') ");
+            strSQL.AppendLine("(StartDateTime < '" + startDateTime.ToString() + "') ");
             strSQL.AppendLine("AND ");
-            strSQL.AppendLine("(CONVERT(VARCHAR,EndDateTime,111) = '" + startDate + "' AND CONVERT(VARCHAR,EndDateTime,108) > '" + endTime + "') ");
-            strSQL.AppendLine(") ");
+            strSQL.AppendLine("(EndDateTime > '" + endDateTime.ToString() + "') ");
+            strSQL.AppendLine(")");
 
             strSQL.AppendLine(") ");
 
             //「会議室Id」が指定されているか？
-            if (!string.IsNullOrEmpty(sisetsuId))
+            if (!string.IsNullOrEmpty(roomId))
             {
                 strSQL.AppendLine("AND ");
-                strSQL.AppendLine("RoomId = '" + sisetsuId + "' ");
+                strSQL.AppendLine("RoomId = '" + roomId + "' ");
             }
 
             //検索から除外する「予約ID」が指定されているか？
-            if (intOutYoyakuID > 0)
+            if (outYoyakuID > 0)
             {
                 strSQL.AppendLine("AND ");
-                strSQL.AppendLine("Id <> " + intOutYoyakuID.ToString() + " ");
+                strSQL.AppendLine("Id <> " + outYoyakuID.ToString() + " ");
             }
 
             strSQL.AppendLine("AND ");
             strSQL.AppendLine("DeleteFlag = 'False' ");
 
             //「施設コード」が指定されているか？
-            if (!string.IsNullOrEmpty(sisetsuId))
+            if (!string.IsNullOrEmpty(roomId))
             {
                 strSQL.AppendLine("ORDER BY StartDateTime ");
             }

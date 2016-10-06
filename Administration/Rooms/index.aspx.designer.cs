@@ -157,15 +157,6 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.HiddenField hid_clickColEnd1;
         
         /// <summary>
-        /// hid_yoto1 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_yoto1;
-        
-        /// <summary>
         /// hid_editMode1 コントロール。
         /// </summary>
         /// <remarks>
@@ -184,6 +175,24 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.HiddenField hid_scrollLeft1;
         
         /// <summary>
+        /// hid_roomid1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_roomid1;
+        
+        /// <summary>
+        /// hid_date1 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_date1;
+        
+        /// <summary>
         /// hid_time_from1 コントロール。
         /// </summary>
         /// <remarks>
@@ -191,15 +200,6 @@ namespace Administration.Rooms {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_time_from1;
-        
-        /// <summary>
-        /// hid_minutes_from1 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_minutes_from1;
         
         /// <summary>
         /// hid_time_to1 コントロール。
@@ -211,13 +211,13 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.HiddenField hid_time_to1;
         
         /// <summary>
-        /// hid_minutes_to1 コントロール。
+        /// hid_yoto1 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_minutes_to1;
+        protected global::System.Web.UI.WebControls.HiddenField hid_yoto1;
         
         /// <summary>
         /// btnDummy1 コントロール。
@@ -355,15 +355,6 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.HiddenField hid_clickColEnd2;
         
         /// <summary>
-        /// hid_yoto2 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_yoto2;
-        
-        /// <summary>
         /// hid_editMode2 コントロール。
         /// </summary>
         /// <remarks>
@@ -382,6 +373,24 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.HiddenField hid_scrollLeft2;
         
         /// <summary>
+        /// hid_roomid2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_roomid2;
+        
+        /// <summary>
+        /// hid_date2 コントロール。
+        /// </summary>
+        /// <remarks>
+        /// 自動生成されたフィールド。
+        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_date2;
+        
+        /// <summary>
         /// hid_time_from2 コントロール。
         /// </summary>
         /// <remarks>
@@ -389,15 +398,6 @@ namespace Administration.Rooms {
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_time_from2;
-        
-        /// <summary>
-        /// hid_minutes_from2 コントロール。
-        /// </summary>
-        /// <remarks>
-        /// 自動生成されたフィールド。
-        /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_minutes_from2;
         
         /// <summary>
         /// hid_time_to2 コントロール。
@@ -409,13 +409,13 @@ namespace Administration.Rooms {
         protected global::System.Web.UI.WebControls.HiddenField hid_time_to2;
         
         /// <summary>
-        /// hid_minutes_to2 コントロール。
+        /// hid_yoto2 コントロール。
         /// </summary>
         /// <remarks>
         /// 自動生成されたフィールド。
         /// 変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_minutes_to2;
+        protected global::System.Web.UI.WebControls.HiddenField hid_yoto2;
         
         /// <summary>
         /// btnDummy2 コントロール。

@@ -36,18 +36,17 @@ namespace Administration.Rooms
         protected const string CNS_SHISETSU_REQUEST = "#FF0000";    //red
         protected const int CNS_SHISETSU_DATE_CNT = 7;              //会議室タブでの表示行数
 
-        // 施設予約管理時間(Start)
-        protected const int CNS_Facility_TimeStart = 7;             //AM7:00（予約可能時刻は、8:00-）
-                                                                    //予約管理時間(End)
-        protected const int CNS_Facility_TimeEnd = 22;              //PM10:00（予約可能時刻は平日-21:30、土日祝-17:30）
-                                                                    //予約管理単位
-        protected const int CNS_Facility_DivisionTime = 30;         //30分単位
+        protected const int CNS_Facility_TimeStart = 7;             //予約管理時間(Start) AM7:00（予約可能時刻は、8:00-）
+        protected const int CNS_Facility_TimeEnd = 22;              //予約管理時間(End) PM10:00（予約可能時刻は平日-21:30、土日祝-17:30）
+        protected const int CNS_Facility_DivisionTime = 30;         //予約管理単位 30分単位
 
         protected void Page_Load(object sender, EventArgs e)
         {
             // ポストバック時はリターン（何も処理しない）
             if (IsPostBack == true)
             {
+                // UpdatePanelを使用しているため、ポストバック時は、Popooverを再登録する必要がある。
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopover();", true);
                 return;
             }
 
@@ -108,8 +107,9 @@ namespace Administration.Rooms
             // テーブルを作成する
             subCreatetable(target, enumTab.List);
 
-            // テーブルのデータをクリアする
-            subClearTable(enumTab.List);
+            // 上のsubCreatetable()で同様のことをしているので不要 2016.10.06
+            //// テーブルのデータをクリアする
+            //subClearTable(enumTab.List);
 
             if (getMode)
             {
@@ -122,7 +122,6 @@ namespace Administration.Rooms
 
             // セッションにデータを格納する
             Session["targetDateList"] = target.Date;
-
         }
 
         /// <summary>
@@ -132,15 +131,15 @@ namespace Administration.Rooms
         /// <param name="getMode"></param>
         private void subDispBookData_Room(DateTime target, bool getMode)
         {
-
             // 表示日付を設定する
             txtDispDate2.Text = target.ToString("yyyy/MM/dd");
 
             // テーブルを作成する
             subCreatetable(target, enumTab.Room);
 
-            // テーブルのデータをクリアする
-            subClearTable(enumTab.Room);
+            // 上のsubCreatetable()で同様のことをしているので不要 2016.10.06
+            //// テーブルのデータをクリアする
+            //subClearTable(enumTab.Room);
 
             if (getMode)
             {
@@ -154,7 +153,6 @@ namespace Administration.Rooms
             // セッションにデータを格納する
             Session["targetDateRoom"] = target.Date;
             Session["RoomId"] = selRoom2.SelectedValue;
-
         }
 
         /// <summary>
@@ -324,8 +322,16 @@ namespace Administration.Rooms
                     }
                     tc.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_NONE);
                     tc.Text = "<div unselectable=\"on\" class=\"div_data_col_other\" ><!-- --></div>";
-                    tc.ToolTip = string.Empty;
                     tc.Style["cursor"] = "pointer";
+                    tc.Attributes.Remove("data-toggle");
+                    tc.Attributes.Remove("data-title");
+                    tc.Attributes.Remove("data-content");
+                    tc.Attributes.Remove("data-hideroomid");
+                    tc.Attributes.Remove("data-hideroom");
+                    tc.Attributes.Remove("data-hidestart");
+                    tc.Attributes.Remove("data-hideend");
+                    tc.Attributes.Remove("data-hidecomment");
+
                     tr.Cells.Add(tc);
                 }
                 tblBooking.Rows.Add(tr);
@@ -388,8 +394,8 @@ namespace Administration.Rooms
         protected void subGetBookingData_List(DateTime target)
         {
             // 予約テーブルのデータをセッション変数用のワークに設定する
-            DateTime startDate = new DateTime(target.Year, target.Month, target.Day, CNS_Facility_TimeStart, 0, 0);
-            DateTime endDate = new DateTime(target.Year, target.Month, target.Day, CNS_Facility_TimeEnd, 0, 0);
+            DateTime? startDate = new DateTime(target.Year, target.Month, target.Day, CNS_Facility_TimeStart, 0, 0);
+            DateTime? endDate = new DateTime(target.Year, target.Month, target.Day, CNS_Facility_TimeEnd, 0, 0);
             int cellCnt = (CNS_Facility_TimeEnd - CNS_Facility_TimeStart) * (60 / CNS_SHISETSU_CELL_DURATION);
 
             List<Room> rooms = (List<Room>)Session["Rooms"];
@@ -412,7 +418,7 @@ namespace Administration.Rooms
             List<Reservation> reservations = new List<Reservation>();
             string message = "";
             ErrorInfo errorInfo = new ErrorInfo();
-            if (commonDB.fncGetData_Reservations_Date(ref reservations, startDate.ToString(), endDate.ToString(), "", "", ref message, ref errorInfo))
+            if (commonDB.fncGetData_Reservations_Date(ref reservations, startDate, endDate, "", "", ref message, ref errorInfo))
             {
                 Session["ReservationsForList"] = reservations;
             }
@@ -429,8 +435,8 @@ namespace Administration.Rooms
         protected void subGetBookingData_Room(DateTime target)
         {
             // 予約マスタのデータをセッション変数用のワークに設定する
-            DateTime startDate = new DateTime(target.Year, target.Month, target.Day, CNS_Facility_TimeStart, 0, 0);
-            DateTime endDate = new DateTime(target.AddDays(CNS_SHISETSU_DATE_CNT - 1).Year, target.AddDays(CNS_SHISETSU_DATE_CNT - 1).Month, target.AddDays(CNS_SHISETSU_DATE_CNT - 1).Day, CNS_Facility_TimeEnd, 0, 0);
+            DateTime? startDate = new DateTime(target.Year, target.Month, target.Day, CNS_Facility_TimeStart, 0, 0);
+            DateTime? endDate = new DateTime(target.AddDays(CNS_SHISETSU_DATE_CNT - 1).Year, target.AddDays(CNS_SHISETSU_DATE_CNT - 1).Month, target.AddDays(CNS_SHISETSU_DATE_CNT - 1).Day, CNS_Facility_TimeEnd, 0, 0);
             int cellCnt = (CNS_Facility_TimeEnd - CNS_Facility_TimeStart) * (60 / CNS_SHISETSU_CELL_DURATION);
 
             // 対象の会議室情報を取得する
@@ -463,7 +469,7 @@ namespace Administration.Rooms
             List<Reservation> reservations = new List<Reservation>();
             string message = "";
             ErrorInfo errorInfo = new ErrorInfo();
-            if (commonDB.fncGetData_Reservations_Date(ref reservations, startDate.ToString(), endDate.ToString(), selRoom2.SelectedValue, "", ref message, ref errorInfo))
+            if (commonDB.fncGetData_Reservations_Date(ref reservations, startDate, endDate, selRoom2.SelectedValue, "", ref message, ref errorInfo))
             {
                 Session["ReservationsForRoom"] = reservations;
             }
@@ -531,30 +537,31 @@ namespace Administration.Rooms
                             {
                                 reservationLists[j].Reservations[k] = reservations[i];
                                 // テーブルのセルの背景色を変更する
+                                TableCell cell = tblBooking1.Rows[j + 2].Cells[k];
                                 if (LoginUserId == reservations[i].UserId)
                                 {
-                                    tblBooking1.Rows[j + 2].Cells[k].BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
+                                    cell.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
                                 }
                                 else
                                 {
-                                    tblBooking1.Rows[j + 2].Cells[k].BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
-                                    //tblBooking1.Rows[j + 2].Cells[k].BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_OTHER);
+                                    cell.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
+                                    //cell.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_OTHER);
                                 }
                                 // popoverを設定する
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["data-toggle"] = "popover";
+                                cell.Attributes.Add("data-toggle", "popover");
                                 string dt = "【" + reservationLists[j].RoomRyakuName + "】"
                                             + reservations[i].StartDateTime.ToString("yyyy/MM/dd(ddd) HH:mm")
                                             + " - " + reservations[i].EndDateTime.ToString("HH:mm");
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["title"] = dt;
-                                //tblBooking1.Rows[j + 2].Cells[k].Attributes["data-content"] = reservations[i].Comment.Replace(Environment.NewLine, "<br />");
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["data-content"] = reservations[i].Comment.Replace("\n", "<br />");
+                                cell.Attributes.Add("data-title", dt);
+                                //cell.Attributes["data-content"] = reservations[i].Comment.Replace(Environment.NewLine, "<br />");
+                                cell.Attributes.Add("data-content", reservations[i].Comment.Replace("\n", "<br />"));
 
                                 // オリジナルの隠しデータを保存する
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["hide-roomId"] = reservationLists[j].RoomId;
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["hide-room"] = reservationLists[j].RoomRyakuName;
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["hide-start"] = reservations[i].StartDateTime.ToString();
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["hide-end"] = reservations[i].EndDateTime.ToString();
-                                tblBooking1.Rows[j + 2].Cells[k].Attributes["hide-comment"] = reservations[i].Comment;
+                                cell.Attributes.Add("data-hideroomid", reservationLists[j].RoomId);
+                                cell.Attributes.Add("data-hideroom", reservationLists[j].RoomRyakuName);
+                                cell.Attributes.Add("data-hidestart", reservations[i].StartDateTime.ToString());
+                                cell.Attributes.Add("data-hideend", reservations[i].EndDateTime.ToString());
+                                cell.Attributes.Add("data-hidecomment", reservations[i].Comment);
                             }
                         }
                     }
@@ -596,29 +603,30 @@ namespace Administration.Rooms
                             {
                                 reservationRooms[j].Reservations[k] = reservations[i];
                                 // テーブルのセルの背景色を変更する
+                                TableCell cell = tblBooking2.Rows[j + 2].Cells[k];
                                 if (LoginUserId == reservations[i].UserId)
                                 {
-                                    tblBooking2.Rows[j + 2].Cells[k].BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
+                                    cell.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
                                 }
                                 else
                                 {
-                                    tblBooking2.Rows[j + 2].Cells[k].BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
-                                    //tblBooking2.Rows[j + 2].Cells[k].BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_OTHER);
+                                    cell.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_ME);
+                                    //cell.BackColor = ColorTranslator.FromHtml(CNS_SHISETSU_BOOK_OTHER);
                                 }
                                 // popoverを設定する
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["data-toggle"] = "popover";
+                                cell.Attributes.Add("data-toggle", "popover");
                                 string dt = "【" + reservationRooms[j].RoomRyakuName + "】"
                                             + reservations[i].StartDateTime.ToString("yyyy/MM/dd(ddd) HH:mm")
                                             + " - " + reservations[i].EndDateTime.ToString("HH:mm");
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["title"] = dt;
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["data-content"] = reservations[i].Comment;
+                                cell.Attributes.Add("data-title", dt);
+                                cell.Attributes.Add("data-content", reservations[i].Comment.Replace("\n", "<br />"));
 
                                 // オリジナルの隠しデータを保存する
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["hide-roomId"] = reservationRooms[j].RoomId;
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["hide-room"] = reservationRooms[j].RoomRyakuName;
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["hide-start"] = reservations[i].StartDateTime.ToString();
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["hide-end"] = reservations[i].EndDateTime.ToString();
-                                tblBooking2.Rows[j + 2].Cells[k].Attributes["hide-comment"] = reservations[i].Comment;
+                                cell.Attributes.Add("data-hideroomid", reservationRooms[j].RoomId);
+                                cell.Attributes.Add("data-hideroom", reservationRooms[j].RoomRyakuName);
+                                cell.Attributes.Add("data-hidestart", reservations[i].StartDateTime.ToString());
+                                cell.Attributes.Add("data-hideend", reservations[i].EndDateTime.ToString());
+                                cell.Attributes.Add("data-hidecomment", reservations[i].Comment);
                             }
                         }
                     }
@@ -733,7 +741,7 @@ namespace Administration.Rooms
                 // 会議室が未選択？
                 if (selRoom2.SelectedIndex < 0)
                 {
-                    CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + "「会議室」が選択されていません！");
+                    CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + "「会議室」が選択されていません！");
                     // フォーカスを設定
                     SetFocus(selRoom2);
                     return;
@@ -781,7 +789,7 @@ namespace Administration.Rooms
             }
             else
             {
-                CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + "【表示日付】が不正です");
+                CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + "【表示日付】が不正です");
                 // 指定するコントロールにフォーカスをセットする
                 SetFocus(txtDispDate);
             }
@@ -789,7 +797,7 @@ namespace Administration.Rooms
         }
 
         /// <summary>
-        /// 
+        /// マニュアルモード『設定完了』ボタンクリック時の処理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -858,13 +866,10 @@ namespace Administration.Rooms
             //=========== データ登録 ===========
             //施設コード
             string roomId = selRoom.SelectedValue;
-
             //予約開始日時
-            string from = "0" + txtBookTimeFrom.Text.Trim();
-            from = from.Substring(from.Length - 5, 5) + ":00";
+            string from =  txtBookTimeFrom.Text.Trim();
             //予約終了日時
-            string to = "0" + txtBookTimeTo.Text.Trim();
-            to = to.Substring(to.Length - 5, 5) + ":00";
+            string to =  txtBookTimeTo.Text.Trim();
             //指定日（年月日）
             string setDay = txtBookDate.Text;
 
@@ -882,7 +887,7 @@ namespace Administration.Rooms
                 rsv.Comment = txtUse.Text.Trim();
                 AddReservations(rsv);
 
-                CommonMain.subMessageBox(this, "登録が完了しました！");
+                CommonMain.subMessageBox(this, "Infomation", "登録が完了しました！");
 
                 // フォーカスを設定
                 SetFocus(txtBookTimeTo);
@@ -936,7 +941,7 @@ namespace Administration.Rooms
             }
             catch (Exception ex)
             {
-                CommonMain.subMessageBox(this, ex.Message);
+                CommonMain.subMessageBox(this, "Error", ex.Message);
                 //フォーカスを設定
                 SetFocus(txtBookTimeTo);
             }
@@ -1064,7 +1069,7 @@ namespace Administration.Rooms
             }
             else
             {
-                CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + "設定した時間範囲内に既に予約が登録されています！");
+                CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + "設定した時間範囲内に既に予約が登録されています！");
                 // 施設予約データを表示する（新たに読み直さず、以前表示していたデータを再表示する）
                 subDispBookData_List(target, false);
                 // 編集中のセルの背景色を設定する
@@ -1116,7 +1121,7 @@ namespace Administration.Rooms
             }
             else
             {
-                CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + "設定した時間範囲内に既に予約が登録されています！");
+                CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + "設定した時間範囲内に既に予約が登録されています！");
                 // 施設予約データを表示する（新たに読み直さず、以前表示していたデータを再表示する）
                 subDispBookData_Room(target, false);
                 // 編集中のセルの背景色を設定する
@@ -1167,7 +1172,7 @@ namespace Administration.Rooms
             }
             catch(Exception ex)
             {
-                CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + ex.Message);
+                CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + ex.Message);
                 // 予約データを表示する（新たに読み直さず、以前表示していたデータを再表示する）
                 this.subDispBookData_List(target, false);
                 // フォーカスを設定
@@ -1214,7 +1219,7 @@ namespace Administration.Rooms
             }
             catch(Exception ex)
             {
-                CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + ex.Message);
+                CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + ex.Message);
                 // 予約データを表示する（新たに読み直さず、以前表示していたデータを再表示する）
                 subDispBookData_Room(target, false);
                 // フォーカスを設定
@@ -1237,17 +1242,21 @@ namespace Administration.Rooms
             Reservation rsv = reservationLists[row - 2].Reservations[colStart];
 
             // 更新データを設定する
-            DateTime dt = target;
-            DateTime startDatetime = dt.AddHours(double.Parse(hid_time_from1.Value)).AddMinutes(double.Parse(hid_minutes_from1.Value));
-            DateTime endDatetime = dt.AddHours(double.Parse(hid_time_to1.Value)).AddMinutes(double.Parse(hid_minutes_to1.Value));
+            string roomId = hid_roomid1.Value;
+            DateTime dt = DateTime.Parse(hid_date1.Value);
+            DateTime from = DateTime.Parse(hid_time_from1.Value);
+            DateTime to = DateTime.Parse(hid_time_to1.Value);
+            DateTime startDatetime = dt.Add(new TimeSpan(from.Hour, from.Minute, 0));
+            DateTime endDatetime = dt.Add(new TimeSpan(to.Hour, to.Minute, 0));
 
             // 既予約登録チェック
-            if (fncCheckTimeData(rsv.RoomId, startDatetime, endDatetime, rsv.Id))
+            if (fncCheckTimeData(roomId, startDatetime, endDatetime, rsv.Id))
             {
                 try
                 {
                     // 更新対象データ取得
                     var targetRsv = db.Reservations.Find(rsv.Id);
+                    targetRsv.RoomId = roomId;
                     targetRsv.StartDateTime = startDatetime;
                     targetRsv.EndDateTime = endDatetime;
                     targetRsv.Comment = hid_yoto1.Value.Trim();
@@ -1260,14 +1269,15 @@ namespace Administration.Rooms
                     db.SaveChanges();
 
                     // 予約データを表示する
-                    subDispBookData_List(target, true);
+                    subDispBookData_List(dt, true);
                     // javascript用の処理モードを初期化する
                     hid_addMode1.Value = "";
+                    Session["targetDateList"] = dt;
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + ex.Message);
+                    CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + ex.Message);
                     // 施設予約データを表示する（新たに読み直さず、以前表示していたデータを再表示する）
                     subDispBookData_List(target, false);
                     // フォーカスを設定
@@ -1297,16 +1307,20 @@ namespace Administration.Rooms
             Reservation rsv = reservationRooms[row - 2].Reservations[colStart];
 
             // 更新データを設定する
-            DateTime dt = rsv.StartDateTime.Date;
-            DateTime startDatetime = dt.AddHours(double.Parse(hid_time_from2.Value)).AddMinutes(double.Parse(hid_minutes_from2.Value));
-            DateTime endDatetime = dt.AddHours(double.Parse(hid_time_to2.Value)).AddMinutes(double.Parse(hid_minutes_to2.Value));
+            string roomId = hid_roomid2.Value;
+            DateTime dt = DateTime.Parse(hid_date2.Value);
+            DateTime from = DateTime.Parse(hid_time_from2.Value);
+            DateTime to = DateTime.Parse(hid_time_to2.Value);
+            DateTime startDatetime = dt.Add(new TimeSpan(from.Hour, from.Minute, 0));
+            DateTime endDatetime = dt.Add(new TimeSpan(to.Hour, to.Minute, 0));
 
             // 既予約登録チェック
-            if (fncCheckTimeData(rsv.RoomId, startDatetime, endDatetime, rsv.Id))
+            if (fncCheckTimeData(roomId, startDatetime, endDatetime, rsv.Id))
             {
                 try{
                     // 更新対象データ取得
                     var targetRsv = db.Reservations.Find(rsv.Id);
+                    targetRsv.RoomId = roomId;
                     targetRsv.StartDateTime = startDatetime;
                     targetRsv.EndDateTime = endDatetime;
                     targetRsv.Comment = hid_yoto2.Value.Trim();
@@ -1319,14 +1333,15 @@ namespace Administration.Rooms
                     db.SaveChanges();
 
                     // 予約データを表示する
-                    subDispBookData_Room(target, true);
+                    subDispBookData_Room(dt, true);
                     // javascript用の処理モードを初期化する
                     hid_addMode2.Value = "";
+                    Session["targetDateList"] = dt;
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    CommonMain.subMessageBox_upd(this, CommonMain.CNS_ERR_MSGERR + ex.Message);
+                    CommonMain.subMessageBox_upd(this, "Error", CommonMain.CNS_ERR_MSGERR + ex.Message);
                     // 施設予約データを表示する（新たに読み直さず、以前表示していたデータを再表示する）
                     subDispBookData_Room(target, false);
                     // フォーカスを設定
@@ -1360,28 +1375,19 @@ namespace Administration.Rooms
         /// <summary>
         /// 既予約登録チェック
         /// </summary>
-        /// <param name="strParaSisetsuCD"></param>
+        /// <param name="roomId"></param>
         /// <param name="startDatetime"></param>
         /// <param name="endDatetime"></param>
-        /// <param name="intOutYoyakuID"></param>
+        /// <param name="outYoyakuID"></param>
         /// <returns></returns>
-        private bool fncCheckTimeData(string strParaSisetsuCD, DateTime startDatetime, DateTime endDatetime, int intOutYoyakuID = 0)
+        private bool fncCheckTimeData(string roomId, DateTime startDatetime, DateTime endDatetime, int outYoyakuID = 0)
         {
-            //開始日
-            string strStartDate = startDatetime.ToString("yyyy/MM/dd");
-            //開始時間
-            string strStartTime = startDatetime.ToString("hh:mm:ss");
-            //終了日
-            string strEndDate = endDatetime.ToString("yyyy/MM/dd");
-            //終了時間
-            string strEndTime = endDatetime.ToString("hh:mm:ss");
-
-            //【予約テーブル】『Reservations』に指定範囲内に既に予約データが登録されているかチェックする。
+            // 【予約テーブル】『Reservations』に指定範囲内に既に予約データが登録されているかチェックする。
             string message = "";
             ErrorInfo errorInfo = new ErrorInfo();
-            if (commonDB.fncCheck_YoyakuData_TimeRange_UMU(strStartDate, strStartTime, strEndDate, strEndTime, strParaSisetsuCD, intOutYoyakuID, ref message, ref errorInfo))
+            if (commonDB.fncCheck_YoyakuData_TimeRange_UMU(startDatetime, endDatetime, roomId, outYoyakuID, ref message, ref errorInfo))
             {
-                //データが登録されている
+                // データが登録されている
                 return false;
             }
             return true;
@@ -1419,7 +1425,7 @@ namespace Administration.Rooms
             // 会議室が未選択？
             if (selRoom.SelectedIndex < 0)
             {
-                CommonMain.subMessageBox(this, CommonMain.CNS_ERR_MSGERR + "「会議室」が選択されていません！");
+                CommonMain.subMessageBox(this, "Error", CommonMain.CNS_ERR_MSGERR + "「会議室」が選択されていません！");
                 // フォーカスを設定
                 SetFocus(selRoom);
                 return false;
@@ -1429,7 +1435,7 @@ namespace Administration.Rooms
             //---- 予約日付
             if (txtBookDate.Text.Trim() == "")
             {
-                CommonMain.subMessageBox(this, CommonMain.CNS_ERR_MSGERR + "予約日付が未設定です！");
+                CommonMain.subMessageBox(this, "Error", CommonMain.CNS_ERR_MSGERR + "予約日付が未設定です！");
                 // フォーカスを設定
                 SetFocus(txtBookDate);
                 return false;
@@ -1437,7 +1443,7 @@ namespace Administration.Rooms
             //---- 予約開始時刻
             if (txtBookTimeFrom.Text.Trim() == "")
             {
-                CommonMain.subMessageBox(this, CommonMain.CNS_ERR_MSGERR + "予約開始時刻が未設定です！");
+                CommonMain.subMessageBox(this, "Error", CommonMain.CNS_ERR_MSGERR + "予約開始時刻が未設定です！");
                 // フォーカスを設定
                 SetFocus(txtBookTimeFrom);
                 return false;
@@ -1445,7 +1451,7 @@ namespace Administration.Rooms
             //---- 予約終了時刻
             if (txtBookTimeTo.Text.Trim() == "")
             {
-                CommonMain.subMessageBox(this, CommonMain.CNS_ERR_MSGERR + "予約終了時刻が未設定です！");
+                CommonMain.subMessageBox(this, "Error", CommonMain.CNS_ERR_MSGERR + "予約終了時刻が未設定です！");
                 // フォーカスを設定
                 SetFocus(txtBookTimeTo);
                 return false;
@@ -1458,7 +1464,7 @@ namespace Administration.Rooms
             to = to.Substring(to.Length - 5, 5);
             if (from.CompareTo(to) >= 0)
             {
-                CommonMain.subMessageBox(this, CommonMain.CNS_ERR_MSGERR + "予約開始時刻 ＜ 予約終了時刻 で設定してください！");
+                CommonMain.subMessageBox(this, "Error", CommonMain.CNS_ERR_MSGERR + "予約開始時刻 ＜ 予約終了時刻 で設定してください！");
                 // フォーカスを設定
                 SetFocus(txtBookTimeTo);
                 return false;
@@ -1476,20 +1482,17 @@ namespace Administration.Rooms
             string roomId = selRoom.SelectedValue;
 
             // 入力データ取得
-            string from = "0" + txtBookTimeFrom.Text.Trim();
-            string to = "0" + txtBookTimeTo.Text.Trim();
-            string setDay = txtBookDate.Text;
-            string startTime = from.Substring(from.Length - 5, 5) + ":00";
-            string endTime = to.Substring(to.Length - 5, 5) + ":00";
+            DateTime startDateTime = DateTime.Parse(txtBookDate.Text + " " + txtBookTimeFrom.Text.Trim());
+            DateTime endDateTime = DateTime.Parse(txtBookDate.Text + " " + txtBookTimeTo.Text.Trim());
 
-            //【予約テーブル】『Reservations』に指定範囲内に既に予約データが登録されているかチェックする。
+            // 【予約テーブル】『Reservations』に指定範囲内に既に予約データが登録されているかチェックする。
             string message = "";
             ErrorInfo errorInfo = new ErrorInfo();
-            if (commonDB.fncCheck_YoyakuData_TimeRange_UMU(setDay, startTime, setDay, endTime, roomId, 0, ref message, ref errorInfo))
+            if (commonDB.fncCheck_YoyakuData_TimeRange_UMU(startDateTime, endDateTime, roomId, 0, ref message, ref errorInfo))
             {
-                //データが登録されている
-                CommonMain.subMessageBox(this, CommonMain.CNS_ERR_MSGERR + "設定した時間範囲内に既に予約が登録されています！");
-                //フォーカスを設定
+                // データが登録されている
+                CommonMain.subMessageBox(this, "Error", CommonMain.CNS_ERR_MSGERR + "設定した時間範囲内に既に予約が登録されています！");
+                // フォーカスを設定
                 SetFocus(txtBookTimeFrom);
                 return false;
             }

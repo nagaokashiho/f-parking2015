@@ -48,13 +48,13 @@
                                         <asp:HiddenField ID="hid_clickRow1" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_clickColStart1" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_clickColEnd1" runat="server" value="" ClientIDMode="Static" />
-                                        <asp:HiddenField ID="hid_yoto1" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_editMode1" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_scrollLeft1" runat="server" Value="" ClientIDMode="Static" />
+                                        <asp:HiddenField ID="hid_roomid1" runat="server" value="" ClientIDMode="Static" />
+                                        <asp:HiddenField ID="hid_date1" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_time_from1" runat="server" value="" ClientIDMode="Static" />
-                                        <asp:HiddenField ID="hid_minutes_from1" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_time_to1" runat="server" value="" ClientIDMode="Static" />
-                                        <asp:HiddenField ID="hid_minutes_to1" runat="server" value="" ClientIDMode="Static" />
+                                        <asp:HiddenField ID="hid_yoto1" runat="server" value="" ClientIDMode="Static" />
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="btnReload1" />
@@ -94,13 +94,13 @@
                                         <asp:HiddenField ID="hid_clickRow2" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_clickColStart2" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_clickColEnd2" runat="server" value="" ClientIDMode="Static" />
-                                        <asp:HiddenField ID="hid_yoto2" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_editMode2" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_scrollLeft2" runat="server" value="" ClientIDMode="Static" />
+                                        <asp:HiddenField ID="hid_roomid2" runat="server" value="" ClientIDMode="Static" />
+                                        <asp:HiddenField ID="hid_date2" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_time_from2" runat="server" value="" ClientIDMode="Static" />
-                                        <asp:HiddenField ID="hid_minutes_from2" runat="server" value="" ClientIDMode="Static" />
                                         <asp:HiddenField ID="hid_time_to2" runat="server" value="" ClientIDMode="Static" />
-                                        <asp:HiddenField ID="hid_minutes_to2" runat="server" value="" ClientIDMode="Static" />
+                                        <asp:HiddenField ID="hid_yoto2" runat="server" value="" ClientIDMode="Static" />
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="btnReload2" />
@@ -120,7 +120,7 @@
                         <input type="checkbox" id="chkManualMode" onclick="onclick_chkManualMode();" runat="server" ClientIDMode="Static" /><label for="chkManualMode">マニュアルモード表示</label><br />
                     </div>
                     <div id="reserve_bg2" style="display:none; margin-top:20px;" runat="server" ClientIDMode="Static">
-                        <p class="validateTips2 red"></p>
+                        <ul id="validateTips2" class="red"></ul>
                         <table border="0">
                             <tr>
                                 <td colspan="6">
@@ -180,7 +180,7 @@
                     <span id="dialogEditHead">使用状況編集</span>
                 </div>
                 <div class="modal-body">
-                    <p class="validateTips red" data-html="true"></p>
+                    <ul id="validateTips" class="red"></ul>
                     <table border="0">
                         <tr>
                             <td colspan="5">

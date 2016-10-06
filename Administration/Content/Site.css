@@ -78,3 +78,27 @@ td.date-saturday {
 
 }
 
+/* モーダルダイアログ用 */
+.modal-header{
+    border-radius: 5px 5px 0px 0px;
+    background-color: #0a0eba;
+    color: #eee;
+    font-size:18px;
+}
+.modal-body{
+    background-color: #ffffff;
+    color: #000;    
+}
+.modal-footer{
+    border-radius: 0px 0px 5px 5px;
+    background-color: #eee;
+    color: #666;    
+}
+#txtYoto, #txtYotoEdit, #txtUse{
+    max-width:570px;
+}
+
+/* アラート用 */
+.disp-alert{
+    margin-top:15%;
+}

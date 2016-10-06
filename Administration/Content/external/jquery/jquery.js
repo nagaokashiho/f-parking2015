@@ -10569,7 +10569,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 	parsed = buildFragment( [ data ], context, scripts );
 
 	if ( scripts && scripts.length ) {
-		jQuery( scripts ).remove();
+		jQuery( scripts ).empty();
 	}
 
 	return jQuery.merge( [], parsed.childNodes );
