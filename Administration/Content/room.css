@@ -21,19 +21,25 @@ table{
 .divTable
 {
     margin :10px 7px;
-    width : 880px;         /* 880 = タイトル列(160px) + (1列の幅(30px) * (60m / 1列の時間(15m)) * 6h) */
+    max-width:1062px;           /* 1060 = タイトル列(160px) + (1列の幅(30px) * (60m / 1列の時間(30m)) * 15h) + 2px（左右の線分） */
+    /*width : 880px;*/         /* 880 = タイトル列(160px) + (1列の幅(30px) * (60m / 1列の時間(30m)) * 12h) */
     line-height : 1.2;
     overflow:hidden;
 }
 .divLeft {
     float:left;
-	width:160px;
+	width:160px;            /* タイトル列(160px) */
 }
 .divRight {
     /*float:left;*/
-	width:720px;
+	max-width:902px;        /* (1列の幅(30px) * (60m / 1列の時間(30m)) * 15h) + 2px（左右の線分） */
+	/*width:720px;*/
 	overflow-x:scroll;
 	position:relative;
+
+    border-bottom:1px solid #000000;
+    border-left:1px solid #000000;
+    border-right:1px solid #000000;
 }
  
 /********** スケジュール表 **********/
@@ -86,7 +92,7 @@ div.div_corner
 /*** タイトル行の１行目 ***/
 td.title_row1
 {
-    width : 120px;      /* 列の幅(30px) * (60m / 1列の時間(15m)) */
+    width : 60px;       /* 列の幅(30px) * (60m / 1列の時間(30m)) */
     height : 19px;      /* タイトル行の高さ(20px) - 1px */
     border-top : 1px solid #000000;
     border-bottom : 1px solid #000000;
@@ -104,7 +110,7 @@ td.title_row1
 div.div_row1
 {
     height : 19px;      /* タイトル行の高さ(20px) - 3px */
-    width : 119px;      /* 列の幅(30px) * (60m / 1列の時間(15m)) - 1px */
+    width : 59px;       /* 列の幅(30px) * (60m / 1列の時間(30m)) - 1px */
     overflow : hidden;
 }
 
@@ -135,7 +141,7 @@ div.div_row2
 /*** テーブルの最終列の右端の線 ***/
 td.col_end
 {
-    border-right : 1px solid #000000;
+    border-right : 1px solid #ACA899;
 }
 
 /*** 列の右側の線 ***/
@@ -152,7 +158,7 @@ td.col_other2
 /*** タイトル列 ***/
 td.title_col
 {
-    width : 160px;       /* タイトル列の幅(160px) */
+    width : 140px;       /* タイトル列の幅(140px) */
     border-right : 1px solid #000000;
     border-left : 1px solid #000000;
     border-bottom : 1px solid #000000;

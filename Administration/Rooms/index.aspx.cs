@@ -42,20 +42,28 @@ namespace Administration.Rooms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // ポストバック時はリターン（何も処理しない）
             if (IsPostBack == true)
             {
-                // UpdatePanelを使用しているため、ポストバック時は、Popooverを再登録する必要がある。
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopover();", true);
-                return;
+                // ポストバック時に、セッションタイムアウトの場合
+                if (Session.IsNewSession)
+                {
+                    // 再読み込み
+                    Response.Redirect("index.aspx");
+                }
+            }
+            else
+            {
+                // キャッシュを無効化する
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetNoStore();
+
+                // 初期設定をする
+                initDisp();
             }
 
-            // キャッシュを無効化する
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.Cache.SetNoStore();
-
-            // 初期設定をする
-            initDisp();
+            // UpdatePanelを使用しているため、ポストバック時にPopooverを再登録する必要があるため
+            // 常にコードビハインドで設定するようにした。
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopover();", true);
         }
 
         /// <summary>
@@ -107,9 +115,8 @@ namespace Administration.Rooms
             // テーブルを作成する
             subCreatetable(target, enumTab.List);
 
-            // 上のsubCreatetable()で同様のことをしているので不要 2016.10.06
-            //// テーブルのデータをクリアする
-            //subClearTable(enumTab.List);
+            // テーブルのデータをクリアする
+            subClearTable(enumTab.List);
 
             if (getMode)
             {
@@ -137,9 +144,8 @@ namespace Administration.Rooms
             // テーブルを作成する
             subCreatetable(target, enumTab.Room);
 
-            // 上のsubCreatetable()で同様のことをしているので不要 2016.10.06
-            //// テーブルのデータをクリアする
-            //subClearTable(enumTab.Room);
+            // テーブルのデータをクリアする
+            subClearTable(enumTab.Room);
 
             if (getMode)
             {
@@ -938,6 +944,8 @@ namespace Administration.Rooms
                     //タブの表示を設定する
                     this.subSetDispTab(enumTab.Room);
                 }
+                // マニュアルモードエリアが閉じられるので、チェックも外しておく
+                chkManualMode.Checked = false;
             }
             catch (Exception ex)
             {

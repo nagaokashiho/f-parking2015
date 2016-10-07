@@ -17,8 +17,8 @@
             <div class="container">
                 <div id="reserve_bg" role="tabpanel">
                     <ul class="nav nav-tabs">
-                        <li id="li1" runat="server" ClientIDMode="Static" class="active"><a href="#tabList" class="nav-link" data-toggle="tab">一　覧</a></li>
-                        <li id="li2" runat="server" ClientIDMode="Static" ><a href="#tabRoom" class="nav-link" data-toggle="tab">会議室</a></li>
+                        <li class="active"><a href="#tabList" class="nav-link" data-toggle="tab">一　覧</a></li>
+                        <li><a href="#tabRoom" class="nav-link" data-toggle="tab">会議室</a></li>
                     </ul>
                     <div class="tab-content">
                         <%-- 一覧タブ --%>

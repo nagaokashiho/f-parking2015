@@ -22,6 +22,22 @@ function pageLoad() {
     Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(pageLoaded);
 }
 
+$(function () {
+    // タブの切り替え時にスクロールバーを設定する
+    $('[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if (e.target.hash == "#tabList") {
+            // スクロールバーを設定する
+            table_scroll_List();                // 一覧タブ
+            document.getElementById("hid_selected_tab").value = "1";
+        }
+        else {
+            // スクロールバーを設定する
+            table_scroll_Shisetsu();            // 会議室タブ
+            document.getElementById("hid_selected_tab").value = "2";
+        }
+    });
+});
+
 function pageLoaded(sender, args) {
 
     // スクロールバーを設定する
@@ -256,9 +272,9 @@ function table_scroll_List() {
     var div = document.getElementById("divRight1");
     var tbl = document.getElementById("tblBooking1");
     var scroll = document.getElementById("hid_scrollLeft1").value;
-    var startTime = 8;                      // 表示開始時刻(時)
-    var endTime = 21;                       // 表示終了時刻(時)
-    var CellDuration = 15;                  // 1列の時間(分)
+    var startTime = 7;                      // 表示開始時刻(時)
+    var endTime = 22;                       // 表示終了時刻(時)
+    var CellDuration = 30;                  // 1列の時間(分)
     var cellWidth = 30;                     // 列幅(px)
     var today = new Date();
     var nowtime = today.getHours();
@@ -292,9 +308,9 @@ function table_scroll_Shisetsu() {
     var div = document.getElementById("divRight2");
     var tbl = document.getElementById("tblBooking2");
     var scroll = document.getElementById("hid_scrollLeft2").value;
-    var startTime = 8;                      // 表示開始時刻(時)
-    var endTime = 21;                       // 表示終了時刻(時)
-    var CellDuration = 15;                  // 1列の時間(分)
+    var startTime = 7;                      // 表示開始時刻(時)
+    var endTime = 22;                       // 表示終了時刻(時)
+    var CellDuration = 30;                  // 1列の時間(分)
     var cellWidth = 30;                     // 列幅(px)
     var today = new Date();
     var nowtime = today.getHours();

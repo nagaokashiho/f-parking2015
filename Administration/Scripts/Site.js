@@ -54,16 +54,19 @@ $(function () {
         //width: 'fit',
     });
 
-    // Bootstrap Popover
-    $('[data-toggle="popover"]').popover({
-        container: 'body',
-        trigger: 'hover',
-        html: true,
-        placement: 'auto',
-    });
+    // UpdatePanelを使用しているため、ポストバック時にPopooverを再登録する必要があるため
+    // 常にコードビハインドで設定するようにした。
+    //// Bootstrap Popover
+    //$('[data-toggle="popover"]').popover({
+    //    container: 'body',
+    //    trigger: 'hover',
+    //    html: true,
+    //    placement: 'auto',
+    //});
 });
 
-// UpdatePanelを使用しているため、ポストバック時にPopoberを再登録するためのファンクション
+// UpdatePanelを使用しているため、ポストバック時にPopooverを再登録する必要があるため
+// 常にコードビハインドで設定するようにした。
 // Page_Loadで呼ばれる
 function openPopover() {
     $('[data-toggle="popover"]').popover({

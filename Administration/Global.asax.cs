@@ -19,5 +19,31 @@ namespace Administration
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
         }
+
+        void Session_OnStart(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            //Session.Remove("RoomId");
+            //Session.Remove("Rooms");
+            //Session.Remove("targetDateList");
+            //Session.Remove("targetDateRoom");
+            //Session.Remove("ReservationLists");
+            //Session.Remove("ReservationRooms");
+            //Session.Remove("ReservationsForList");
+            //Session.Remove("ReservationsForRoom");
+        }
+
+        void Session_OnEnd(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            //Session.Remove("RoomId");
+            //Session.Remove("Rooms");
+            //Session.Remove("targetDateList");
+            //Session.Remove("targetDateRoom");
+            //Session.Remove("ReservationLists");
+            //Session.Remove("ReservationRooms");
+            //Session.Remove("ReservationsForList");
+            //Session.Remove("ReservationsForRoom");
+        }
     }
 }
